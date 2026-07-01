@@ -5,4 +5,50 @@ const PERGUNTAS_ALL = [...PERGUNTAS_NATURAL, ...PERGUNTAS_ADAPTADO];
 const ITEM_MAP = Object.fromEntries(PERGUNTAS_ALL.map(q => [q.id, {
   id: q.id, fator: q.fator, bloco: q.bloco, reversed: q.reversed, ipip_source: q.ipip_source,
 } ]));
-const TOTAL_POR_BLOCO = 30;
+const TOTAL_POR_BLOCO = 45;  // ~90 itens no total (expansão para suportar facets)
+
+// Itens adicionais para facets (para atingir ~90 itens totais)
+// Estes são exemplos representativos traduzidos/adaptados do IPIP-NEO
+const PERGUNTAS_FACETS = [
+  // O facets
+  {id:'f01',texto:"Gosto de sonhar acordado e imaginar cenários fantásticos.",fator:'O',bloco:'facet',reversed:false,facet:'O1'},
+  {id:'f02',texto:"A arte e a beleza me emocionam profundamente.",fator:'O',bloco:'facet',reversed:false,facet:'O2'},
+  {id:'f03',texto:"Sinto as emoções com muita intensidade.",fator:'O',bloco:'facet',reversed:false,facet:'O3'},
+  {id:'f04',texto:"Adoro experimentar coisas novas e diferentes.",fator:'O',bloco:'facet',reversed:false,facet:'O4'},
+  {id:'f05',texto:"Gosto de discutir ideias filosóficas e abstratas.",fator:'O',bloco:'facet',reversed:false,facet:'O5'},
+  {id:'f06',texto:"Acho que as tradições e valores antigos devem ser questionados.",fator:'O',bloco:'facet',reversed:false,facet:'O6'},
+  // C facets
+  {id:'f07',texto:"Acredito que sou muito competente no que faço.",fator:'C',bloco:'facet',reversed:false,facet:'C1'},
+  {id:'f08',texto:"Gosto de manter minha casa e meu trabalho muito organizados.",fator:'C',bloco:'facet',reversed:false,facet:'C2'},
+  {id:'f09',texto:"Sinto que tenho o dever de cumprir minhas promessas.",fator:'C',bloco:'facet',reversed:false,facet:'C3'},
+  {id:'f10',texto:"Trabalho duro para alcançar meus objetivos de carreira.",fator:'C',bloco:'facet',reversed:false,facet:'C4'},
+  {id:'f11',texto:"Consigo me concentrar em tarefas longas sem desistir.",fator:'C',bloco:'facet',reversed:false,facet:'C5'},
+  {id:'f12',texto:"Penso cuidadosamente antes de tomar decisões importantes.",fator:'C',bloco:'facet',reversed:false,facet:'C6'},
+  // E facets
+  {id:'f13',texto:"Faço amigos com facilidade.",fator:'E',bloco:'facet',reversed:false,facet:'E1'},
+  {id:'f14',texto:"Gosto de estar rodeado de muitas pessoas.",fator:'E',bloco:'facet',reversed:false,facet:'E2'},
+  {id:'f15',texto:"Costumo assumir a liderança em grupos.",fator:'E',bloco:'facet',reversed:false,facet:'E3'},
+  {id:'f16',texto:"Tenho muita energia e faço muitas coisas ao mesmo tempo.",fator:'E',bloco:'facet',reversed:false,facet:'E4'},
+  {id:'f17',texto:"Busco emoções fortes e situações estimulantes.",fator:'E',bloco:'facet',reversed:false,facet:'E5'},
+  {id:'f18',texto:"Costumo me sentir feliz e otimista.",fator:'E',bloco:'facet',reversed:false,facet:'E6'},
+  // A facets
+  {id:'f19',texto:"Acredito que as pessoas geralmente são honestas.",fator:'A',bloco:'facet',reversed:false,facet:'A1'},
+  {id:'f20',texto:"Prefiro ser honesto mesmo quando é difícil.",fator:'A',bloco:'facet',reversed:false,facet:'A2'},
+  {id:'f21',texto:"Gosto de ajudar os outros sem esperar nada em troca.",fator:'A',bloco:'facet',reversed:false,facet:'A3'},
+  {id:'f22',texto:"Tento evitar discussões e buscar acordos.",fator:'A',bloco:'facet',reversed:false,facet:'A4'},
+  {id:'f23',texto:"Não gosto de me gabar das minhas conquistas.",fator:'A',bloco:'facet',reversed:false,facet:'A5'},
+  {id:'f24',texto:"Sinto empatia quando vejo alguém sofrendo.",fator:'A',bloco:'facet',reversed:false,facet:'A6'},
+  // N facets (para SE invertido)
+  {id:'f25',texto:"Fico ansioso com frequência.",fator:'N',bloco:'facet',reversed:false,facet:'N1'},
+  {id:'f26',texto:"Fico irritado facilmente.",fator:'N',bloco:'facet',reversed:false,facet:'N2'},
+  {id:'f27',texto:"Às vezes me sinto deprimido sem motivo aparente.",fator:'N',bloco:'facet',reversed:false,facet:'N3'},
+  {id:'f28',texto:"Sinto-me constrangido facilmente em situações sociais.",fator:'N',bloco:'facet',reversed:false,facet:'N4'},
+  {id:'f29',texto:"Tenho dificuldade para resistir a impulsos.",fator:'N',bloco:'facet',reversed:false,facet:'N5'},
+  {id:'f30',texto:"Fico abalado facilmente com problemas.",fator:'N',bloco:'facet',reversed:false,facet:'N6'},
+];
+
+const PERGUNTAS_ALL = [...PERGUNTAS_NATURAL, ...PERGUNTAS_ADAPTADO, ...PERGUNTAS_FACETS];
+const ITEM_MAP = Object.fromEntries(PERGUNTAS_ALL.map(q => [q.id, {
+  id: q.id, fator: q.fator, bloco: q.bloco, reversed: q.reversed, ipip_source: q.ipip_source, facet: q.facet || null,
+}]));
+const TOTAL_QUESTOES = PERGUNTAS_NATURAL.length + PERGUNTAS_ADAPTADO.length + PERGUNTAS_FACETS.length; // ~90

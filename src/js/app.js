@@ -8,8 +8,8 @@ const state = {
   sessionId: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36),
 };
 
-const TOTAL_QUESTOES = TOTAL_POR_BLOCO * 2;
-const PAUSA_EM = TOTAL_POR_BLOCO;
+const TOTAL_QUESTOES = 90; // Versão única aproximada de 90 itens (domínios + facets)
+const PAUSA_EM = 45; // Pausa na metade
 
 const LIKERT_LABELS = [
   { val: 1, short: '1', label: 'Discordo totalmente' },
@@ -32,10 +32,11 @@ function prepararQuestao(q) {
 }
 
 function perguntasEmbaralhadas() {
-  // Randomização completa de todas as 60 perguntas (melhor prática psicométrica para reduzir efeitos de ordem, fadiga e viés)
+  // Randomização completa de ~90 perguntas (incluindo facets)
   const todas = [
     ...PERGUNTAS_NATURAL.map(q => prepararQuestao(q)),
-    ...PERGUNTAS_ADAPTADO.map(q => prepararQuestao(q))
+    ...PERGUNTAS_ADAPTADO.map(q => prepararQuestao(q)),
+    ...PERGUNTAS_FACETS.map(q => prepararQuestao(q))
   ];
   return shuffleArray(todas);
 }
@@ -59,7 +60,7 @@ function iniciar() {
 function atualizarPausaCopy() {
   const el = document.getElementById('pausaCopy');
   if (el) {
-    el.textContent = `Você completou ${TOTAL_POR_BLOCO} de ${TOTAL_QUESTOES} afirmações. Faça uma pausa breve se precisar — suas respostas anteriores estão salvas.`;
+    el.textContent = `Você completou ${Math.min(state.passo, PAUSA_EM)} de ${TOTAL_QUESTOES} afirmações. Faça uma pausa breve se precisar — suas respostas anteriores estão salvas.`;
   }
 }
 

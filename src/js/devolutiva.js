@@ -80,6 +80,29 @@ function gerarExplicacaoFatores(dual) {
   `);
 }
 
+function gerarFacetsSection(dual) {
+  if (!dual.facetMeans) return '';
+  let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">';
+  Object.keys(FACETS).forEach(domain => {
+    const domLabel = DISPLAY_LABELS[domain === 'N' ? 'SE' : domain];
+    html += `<div class="p-3 bg-white dark:bg-gray-900 rounded-lg border">
+      <div class="font-bold mb-2" style="color:${CORES[domain==='N'?'SE':domain]}">${domLabel} - Facets</div>`;
+    FACETS[domain].forEach(f => {
+      const mean = dual.facetMeans[f.code] || 3;
+      const ui = normalizeForUI(mean);
+      const t = Math.round((mean - 3) * 10 + 50); // approx
+      html += `<div class="text-xs mb-1 flex justify-between"><span>${f.name}</span> <span class="font-mono">UI ${ui>0?'+':''}${ui} · ~T${t}</span></div>`;
+    });
+    html += '</div>';
+  });
+  html += '</div>';
+  return cardSecao(3, 'Detalhamento por Facets (30 subtraços)', `
+    <p class="text-sm text-gray-500 mb-3">Cada domínio é composto por 6 facets mais específicos do modelo IPIP-NEO. Aqui estão seus scores aproximados (baseados na média das respostas relacionadas a cada facet).</p>
+    ${html}
+    <p class="text-xs text-gray-400 mt-2">Facets ajudam a entender nuances dentro de cada traço principal.</p>
+  `);
+}
+
 function gerarAutoImagem(perfilCtx, seed, blocoLabel) {
   const { internal, display } = perfilCtx;
   const textos = FACTORES_INTERNOS.map((f, i) =>
@@ -198,6 +221,7 @@ function renderizarRelatorio(nome, dual, apiResult) {
 
   let html = gerarSumario(nome, hoje, dominante, dual);
   html += gerarExplicacaoFatores(dual);
+  html += gerarFacetsSection(dual);
   html += gerarGraficosOCEAN(dual);
   html += gerarAutoImagem(dual.natural, seed, 'Natural');
   html += gerarPalavrasDescritivas(dual, seed);
@@ -224,8 +248,8 @@ function renderizarRelatorio(nome, dual, apiResult) {
 
 async function calcularERenderizar(nome, dualPrecomputed, apiDataPre) {
   const respostas = respostasLikertFromState();
-  if (respostas.length < TOTAL_POR_BLOCO * 2 && !dualPrecomputed) {
-    alert('Respostas incompletas. Complete todas as 60 afirmações.');
+  if (respostas.length < 70 && !dualPrecomputed) {
+    alert('Respostas incompletas. Complete todas as ~90 afirmações.');
     return;
   }
   const dual = dualPrecomputed || calcularScoresDual(respostas);

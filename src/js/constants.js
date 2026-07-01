@@ -149,6 +149,58 @@ function invertForDisplay(f, scores) {
 
 const FLAGS = {
   enableAPI: !!API_BASE,
-  enableFacets: false,
+  enableFacets: true,  // Agora implementado todos os 30 facets
   enablePDFExport: true,
 };
+
+// 30 Facets do IPIP-NEO (6 por domínio)
+const FACETS = {
+  O: [
+    { code: 'O1', name: 'Imaginação', desc: 'Tendência a ter uma imaginação vívida e a fantasiar.' },
+    { code: 'O2', name: 'Interesses Artísticos', desc: 'Apreciação pela arte, beleza e experiências estéticas.' },
+    { code: 'O3', name: 'Emocionalidade', desc: 'Consciência e expressão profunda das próprias emoções.' },
+    { code: 'O4', name: 'Aventureirismo', desc: 'Abertura a novas experiências, viagens e mudanças.' },
+    { code: 'O5', name: 'Intelecto', desc: 'Curiosidade intelectual, gosto por ideias abstratas e debates.' },
+    { code: 'O6', name: 'Liberalismo', desc: 'Abertura a valores não tradicionais e diversidade.' },
+  ],
+  C: [
+    { code: 'C1', name: 'Autoeficácia', desc: 'Confiança na própria capacidade de realizar tarefas.' },
+    { code: 'C2', name: 'Organização', desc: 'Preferência por ordem, limpeza e estrutura.' },
+    { code: 'C3', name: 'Diligência', desc: 'Senso de dever e cumprimento de obrigações.' },
+    { code: 'C4', name: 'Busca por Realização', desc: 'Motivação para alcançar metas e excelência.' },
+    { code: 'C5', name: 'Autodisciplina', desc: 'Capacidade de persistir em tarefas apesar de distrações.' },
+    { code: 'C6', name: 'Deliberação', desc: 'Tendência a pensar antes de agir, cautela.' },
+  ],
+  E: [
+    { code: 'E1', name: 'Amabilidade', desc: 'Calor e facilidade em fazer amigos.' },
+    { code: 'E2', name: 'Gregariedade', desc: 'Gosto por companhia de outras pessoas e eventos sociais.' },
+    { code: 'E3', name: 'Assertividade', desc: 'Facilidade em tomar a liderança e expressar opiniões.' },
+    { code: 'E4', name: 'Nível de Atividade', desc: 'Energia e ritmo acelerado nas atividades.' },
+    { code: 'E5', name: 'Busca por Excitação', desc: 'Procura por estímulos fortes e aventuras.' },
+    { code: 'E6', name: 'Alegria', desc: 'Experiência frequente de emoções positivas.' },
+  ],
+  A: [
+    { code: 'A1', name: 'Confiança', desc: 'Crença na boa intenção das pessoas.' },
+    { code: 'A2', name: 'Moralidade', desc: 'Honestidade e integridade nas interações.' },
+    { code: 'A3', name: 'Altruísmo', desc: 'Preocupação genuína com o bem-estar dos outros.' },
+    { code: 'A4', name: 'Cooperação', desc: 'Disposição para ceder e evitar conflitos.' },
+    { code: 'A5', name: 'Modéstia', desc: 'Humildade e baixa necessidade de atenção.' },
+    { code: 'A6', name: 'Compaixão', desc: 'Empatia e sensibilidade aos sentimentos alheios.' },
+  ],
+  N: [
+    { code: 'N1', name: 'Ansiedade', desc: 'Tendência a se preocupar e sentir tensão.' },
+    { code: 'N2', name: 'Raiva', desc: 'Facilidade em se irritar ou sentir hostilidade.' },
+    { code: 'N3', name: 'Depressão', desc: 'Experiência de tristeza e desânimo.' },
+    { code: 'N4', name: 'Autoconsciência', desc: 'Vergonha e desconforto social fácil.' },
+    { code: 'N5', name: 'Impulsividade', desc: 'Dificuldade em controlar desejos e impulsos.' },
+    { code: 'N6', name: 'Vulnerabilidade', desc: 'Dificuldade em lidar com estresse e pressão.' },
+  ],
+};
+
+// Mapeamento de facet code para domínio (para scoring)
+const FACET_TO_DOMAIN = {};
+Object.keys(FACETS).forEach(domain => {
+  FACETS[domain].forEach(f => {
+    FACET_TO_DOMAIN[f.code] = domain;
+  });
+});

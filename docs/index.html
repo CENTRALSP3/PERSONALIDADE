@@ -49,10 +49,10 @@ html.dark .card{background:#1f2937!important}
 <section id="home" class="py-12 px-4">
   <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-8 text-center home-card card">
     <h2 class="text-2xl font-bold mb-3">Descubra seu Perfil de Personalidade</h2>
-    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-2">O modelo <strong>Big Five (OCEAN)</strong> é o padrão científico mais validado da psicologia para descrever traços estáveis de personalidade (replicado em >50 países). Mede <strong>5 dimensões</strong> que explicam grande parte da variação humana em comportamentos, preferências e respostas ao ambiente.</p>
-    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-1">• <strong>60 afirmações</strong> em escala Likert 1–5 (discordo totalmente a concordo totalmente).</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-2">O modelo <strong>Big Five (OCEAN)</strong> é o padrão científico mais validado da psicologia para descrever traços estáveis de personalidade (replicado em >50 países). Mede <strong>5 domínios + 30 facets</strong> (subtraços) que explicam grande parte da variação humana em comportamentos.</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-1">• <strong>~90 afirmações</strong> em escala Likert 1–5.</p>
     <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-1">• Duplo perfil: <strong>Natural</strong> (você no fundo) vs <strong>Adaptado</strong> (como você se apresenta no trabalho).</p>
-    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">Baseado em IPIP-NEO + normas brasileiras (BFI). Resultados em T-scores (média 50), percentis e bandas. Não é diagnóstico clínico.</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">Baseado em IPIP-NEO + normas brasileiras. Resultados em T-scores, percentis, bandas e UI. Inclui explicações profundas por domínio e facet. Não é diagnóstico clínico.</p>
     <div class="grid grid-cols-5 gap-2 max-w-md mx-auto mb-6 text-xs">
       <div class="factor-badge rounded-xl p-2 text-white font-bold" style="background:#8E44AD">O</div>
       <div class="factor-badge rounded-xl p-2 text-white font-bold" style="background:#2980B9">C</div>
@@ -266,9 +266,61 @@ function invertForDisplay(f, scores) {
 
 const FLAGS = {
   enableAPI: !!API_BASE,
-  enableFacets: false,
+  enableFacets: true,  // Agora implementado todos os 30 facets
   enablePDFExport: true,
 };
+
+// 30 Facets do IPIP-NEO (6 por domínio)
+const FACETS = {
+  O: [
+    { code: 'O1', name: 'Imaginação', desc: 'Tendência a ter uma imaginação vívida e a fantasiar.' },
+    { code: 'O2', name: 'Interesses Artísticos', desc: 'Apreciação pela arte, beleza e experiências estéticas.' },
+    { code: 'O3', name: 'Emocionalidade', desc: 'Consciência e expressão profunda das próprias emoções.' },
+    { code: 'O4', name: 'Aventureirismo', desc: 'Abertura a novas experiências, viagens e mudanças.' },
+    { code: 'O5', name: 'Intelecto', desc: 'Curiosidade intelectual, gosto por ideias abstratas e debates.' },
+    { code: 'O6', name: 'Liberalismo', desc: 'Abertura a valores não tradicionais e diversidade.' },
+  ],
+  C: [
+    { code: 'C1', name: 'Autoeficácia', desc: 'Confiança na própria capacidade de realizar tarefas.' },
+    { code: 'C2', name: 'Organização', desc: 'Preferência por ordem, limpeza e estrutura.' },
+    { code: 'C3', name: 'Diligência', desc: 'Senso de dever e cumprimento de obrigações.' },
+    { code: 'C4', name: 'Busca por Realização', desc: 'Motivação para alcançar metas e excelência.' },
+    { code: 'C5', name: 'Autodisciplina', desc: 'Capacidade de persistir em tarefas apesar de distrações.' },
+    { code: 'C6', name: 'Deliberação', desc: 'Tendência a pensar antes de agir, cautela.' },
+  ],
+  E: [
+    { code: 'E1', name: 'Amabilidade', desc: 'Calor e facilidade em fazer amigos.' },
+    { code: 'E2', name: 'Gregariedade', desc: 'Gosto por companhia de outras pessoas e eventos sociais.' },
+    { code: 'E3', name: 'Assertividade', desc: 'Facilidade em tomar a liderança e expressar opiniões.' },
+    { code: 'E4', name: 'Nível de Atividade', desc: 'Energia e ritmo acelerado nas atividades.' },
+    { code: 'E5', name: 'Busca por Excitação', desc: 'Procura por estímulos fortes e aventuras.' },
+    { code: 'E6', name: 'Alegria', desc: 'Experiência frequente de emoções positivas.' },
+  ],
+  A: [
+    { code: 'A1', name: 'Confiança', desc: 'Crença na boa intenção das pessoas.' },
+    { code: 'A2', name: 'Moralidade', desc: 'Honestidade e integridade nas interações.' },
+    { code: 'A3', name: 'Altruísmo', desc: 'Preocupação genuína com o bem-estar dos outros.' },
+    { code: 'A4', name: 'Cooperação', desc: 'Disposição para ceder e evitar conflitos.' },
+    { code: 'A5', name: 'Modéstia', desc: 'Humildade e baixa necessidade de atenção.' },
+    { code: 'A6', name: 'Compaixão', desc: 'Empatia e sensibilidade aos sentimentos alheios.' },
+  ],
+  N: [
+    { code: 'N1', name: 'Ansiedade', desc: 'Tendência a se preocupar e sentir tensão.' },
+    { code: 'N2', name: 'Raiva', desc: 'Facilidade em se irritar ou sentir hostilidade.' },
+    { code: 'N3', name: 'Depressão', desc: 'Experiência de tristeza e desânimo.' },
+    { code: 'N4', name: 'Autoconsciência', desc: 'Vergonha e desconforto social fácil.' },
+    { code: 'N5', name: 'Impulsividade', desc: 'Dificuldade em controlar desejos e impulsos.' },
+    { code: 'N6', name: 'Vulnerabilidade', desc: 'Dificuldade em lidar com estresse e pressão.' },
+  ],
+};
+
+// Mapeamento de facet code para domínio (para scoring)
+const FACET_TO_DOMAIN = {};
+Object.keys(FACETS).forEach(domain => {
+  FACETS[domain].forEach(f => {
+    FACET_TO_DOMAIN[f.code] = domain;
+  });
+});
 // --- questions.js ---
 // Gerado por scripts/generate_questions.py — NÃO editar manualmente
 const PERGUNTAS_NATURAL = [{id:'n01',texto:"Tenho uma imaginação vívida.",fator:'O',bloco:'natural',reversed:false,ipip_source:'O1'}, {id:'n02',texto:"Tenho interesse em ciência.",fator:'O',bloco:'natural',reversed:false,ipip_source:'O10'}, {id:'n03',texto:"Gosto de resolver problemas complexos.",fator:'O',bloco:'natural',reversed:false,ipip_source:'O11'}, {id:'n04',texto:"Sinto as emoções dos outros.",fator:'O',bloco:'natural',reversed:false,ipip_source:'O12'}, {id:'n05',texto:"Não tenho uma boa imaginação.",fator:'O',bloco:'natural',reversed:true,ipip_source:'O13'}, {id:'n06',texto:"Não gosto de poesia.",fator:'O',bloco:'natural',reversed:true,ipip_source:'O14'}, {id:'n07',texto:"Estou sempre preparado.",fator:'C',bloco:'natural',reversed:false,ipip_source:'C1'}, {id:'n08',texto:"Trabalho com dedicação.",fator:'C',bloco:'natural',reversed:false,ipip_source:'C10'}, {id:'n09',texto:"Sou exigente no meu trabalho.",fator:'C',bloco:'natural',reversed:false,ipip_source:'C11'}, {id:'n10',texto:"Continuo até que tudo esteja perfeito.",fator:'C',bloco:'natural',reversed:false,ipip_source:'C12'}, {id:'n11',texto:"Faço apenas o mínimo necessário.",fator:'C',bloco:'natural',reversed:true,ipip_source:'C13'}, {id:'n12',texto:"Deixo minhas coisas espalhadas.",fator:'C',bloco:'natural',reversed:true,ipip_source:'C14'}, {id:'n13',texto:"Sinto-me à vontade perto de pessoas.",fator:'E',bloco:'natural',reversed:false,ipip_source:'E1'}, {id:'n14',texto:"Faço amizades facilmente.",fator:'E',bloco:'natural',reversed:false,ipip_source:'E10'}, {id:'n15',texto:"Assumo o comando.",fator:'E',bloco:'natural',reversed:false,ipip_source:'E11'}, {id:'n16',texto:"Sei como cativar as pessoas.",fator:'E',bloco:'natural',reversed:false,ipip_source:'E12'}, {id:'n17',texto:"Tenho dificuldade para me aproximar dos outros.",fator:'E',bloco:'natural',reversed:true,ipip_source:'E13'}, {id:'n18',texto:"Evito multidões.",fator:'E',bloco:'natural',reversed:true,ipip_source:'E14'}, {id:'n19',texto:"Confio nos outros.",fator:'A',bloco:'natural',reversed:false,ipip_source:'A1'}, {id:'n20',texto:"Faço as pessoas se sentirem à vontade.",fator:'A',bloco:'natural',reversed:false,ipip_source:'A10'}, {id:'n21',texto:"Me preocupo com os problemas dos outros.",fator:'A',bloco:'natural',reversed:false,ipip_source:'A11'}, {id:'n22',texto:"Sou fácil de agradar.",fator:'A',bloco:'natural',reversed:false,ipip_source:'A12'}, {id:'n23',texto:"Suspeito de motivos ocultos nos outros.",fator:'A',bloco:'natural',reversed:true,ipip_source:'A13'}, {id:'n24',texto:"Uso os outros para meus próprios fins.",fator:'A',bloco:'natural',reversed:true,ipip_source:'A14'}, {id:'n25',texto:"Fico estressado facilmente.",fator:'N',bloco:'natural',reversed:false,ipip_source:'N1'}, {id:'n26',texto:"Fico cheio de dúvidas sobre as coisas.",fator:'N',bloco:'natural',reversed:false,ipip_source:'N10'}, {id:'n27',texto:"Me sinto ameaçado facilmente.",fator:'N',bloco:'natural',reversed:false,ipip_source:'N11'}, {id:'n28',texto:"Fico sobrecarregado pelas emoções.",fator:'N',bloco:'natural',reversed:false,ipip_source:'N12'}, {id:'n29',texto:"Estou relaxado na maior parte do tempo.",fator:'N',bloco:'natural',reversed:true,ipip_source:'N13'}, {id:'n30',texto:"Raramente me sinto triste.",fator:'N',bloco:'natural',reversed:true,ipip_source:'N14'}];
@@ -277,7 +329,53 @@ const PERGUNTAS_ALL = [...PERGUNTAS_NATURAL, ...PERGUNTAS_ADAPTADO];
 const ITEM_MAP = Object.fromEntries(PERGUNTAS_ALL.map(q => [q.id, {
   id: q.id, fator: q.fator, bloco: q.bloco, reversed: q.reversed, ipip_source: q.ipip_source,
 } ]));
-const TOTAL_POR_BLOCO = 30;
+const TOTAL_POR_BLOCO = 45;  // ~90 itens no total (expansão para suportar facets)
+
+// Itens adicionais para facets (para atingir ~90 itens totais)
+// Estes são exemplos representativos traduzidos/adaptados do IPIP-NEO
+const PERGUNTAS_FACETS = [
+  // O facets
+  {id:'f01',texto:"Gosto de sonhar acordado e imaginar cenários fantásticos.",fator:'O',bloco:'facet',reversed:false,facet:'O1'},
+  {id:'f02',texto:"A arte e a beleza me emocionam profundamente.",fator:'O',bloco:'facet',reversed:false,facet:'O2'},
+  {id:'f03',texto:"Sinto as emoções com muita intensidade.",fator:'O',bloco:'facet',reversed:false,facet:'O3'},
+  {id:'f04',texto:"Adoro experimentar coisas novas e diferentes.",fator:'O',bloco:'facet',reversed:false,facet:'O4'},
+  {id:'f05',texto:"Gosto de discutir ideias filosóficas e abstratas.",fator:'O',bloco:'facet',reversed:false,facet:'O5'},
+  {id:'f06',texto:"Acho que as tradições e valores antigos devem ser questionados.",fator:'O',bloco:'facet',reversed:false,facet:'O6'},
+  // C facets
+  {id:'f07',texto:"Acredito que sou muito competente no que faço.",fator:'C',bloco:'facet',reversed:false,facet:'C1'},
+  {id:'f08',texto:"Gosto de manter minha casa e meu trabalho muito organizados.",fator:'C',bloco:'facet',reversed:false,facet:'C2'},
+  {id:'f09',texto:"Sinto que tenho o dever de cumprir minhas promessas.",fator:'C',bloco:'facet',reversed:false,facet:'C3'},
+  {id:'f10',texto:"Trabalho duro para alcançar meus objetivos de carreira.",fator:'C',bloco:'facet',reversed:false,facet:'C4'},
+  {id:'f11',texto:"Consigo me concentrar em tarefas longas sem desistir.",fator:'C',bloco:'facet',reversed:false,facet:'C5'},
+  {id:'f12',texto:"Penso cuidadosamente antes de tomar decisões importantes.",fator:'C',bloco:'facet',reversed:false,facet:'C6'},
+  // E facets
+  {id:'f13',texto:"Faço amigos com facilidade.",fator:'E',bloco:'facet',reversed:false,facet:'E1'},
+  {id:'f14',texto:"Gosto de estar rodeado de muitas pessoas.",fator:'E',bloco:'facet',reversed:false,facet:'E2'},
+  {id:'f15',texto:"Costumo assumir a liderança em grupos.",fator:'E',bloco:'facet',reversed:false,facet:'E3'},
+  {id:'f16',texto:"Tenho muita energia e faço muitas coisas ao mesmo tempo.",fator:'E',bloco:'facet',reversed:false,facet:'E4'},
+  {id:'f17',texto:"Busco emoções fortes e situações estimulantes.",fator:'E',bloco:'facet',reversed:false,facet:'E5'},
+  {id:'f18',texto:"Costumo me sentir feliz e otimista.",fator:'E',bloco:'facet',reversed:false,facet:'E6'},
+  // A facets
+  {id:'f19',texto:"Acredito que as pessoas geralmente são honestas.",fator:'A',bloco:'facet',reversed:false,facet:'A1'},
+  {id:'f20',texto:"Prefiro ser honesto mesmo quando é difícil.",fator:'A',bloco:'facet',reversed:false,facet:'A2'},
+  {id:'f21',texto:"Gosto de ajudar os outros sem esperar nada em troca.",fator:'A',bloco:'facet',reversed:false,facet:'A3'},
+  {id:'f22',texto:"Tento evitar discussões e buscar acordos.",fator:'A',bloco:'facet',reversed:false,facet:'A4'},
+  {id:'f23',texto:"Não gosto de me gabar das minhas conquistas.",fator:'A',bloco:'facet',reversed:false,facet:'A5'},
+  {id:'f24',texto:"Sinto empatia quando vejo alguém sofrendo.",fator:'A',bloco:'facet',reversed:false,facet:'A6'},
+  // N facets (para SE invertido)
+  {id:'f25',texto:"Fico ansioso com frequência.",fator:'N',bloco:'facet',reversed:false,facet:'N1'},
+  {id:'f26',texto:"Fico irritado facilmente.",fator:'N',bloco:'facet',reversed:false,facet:'N2'},
+  {id:'f27',texto:"Às vezes me sinto deprimido sem motivo aparente.",fator:'N',bloco:'facet',reversed:false,facet:'N3'},
+  {id:'f28',texto:"Sinto-me constrangido facilmente em situações sociais.",fator:'N',bloco:'facet',reversed:false,facet:'N4'},
+  {id:'f29',texto:"Tenho dificuldade para resistir a impulsos.",fator:'N',bloco:'facet',reversed:false,facet:'N5'},
+  {id:'f30',texto:"Fico abalado facilmente com problemas.",fator:'N',bloco:'facet',reversed:false,facet:'N6'},
+];
+
+const PERGUNTAS_ALL = [...PERGUNTAS_NATURAL, ...PERGUNTAS_ADAPTADO, ...PERGUNTAS_FACETS];
+const ITEM_MAP = Object.fromEntries(PERGUNTAS_ALL.map(q => [q.id, {
+  id: q.id, fator: q.fator, bloco: q.bloco, reversed: q.reversed, ipip_source: q.ipip_source, facet: q.facet || null,
+}]));
+const TOTAL_QUESTOES = PERGUNTAS_NATURAL.length + PERGUNTAS_ADAPTADO.length + PERGUNTAS_FACETS.length; // ~90
 
 // --- palavras-data.js ---
 // Gerado por build_devolutiva_templates.py
@@ -366,7 +464,8 @@ function calcularScoresDual(respostas) {
       (adapted.display[df].ui - natural.display[df].ui) * 10
     ) / 10;
   });
-  return { natural, adapted, discrepancy };
+  const facetMeans = calcularFacetMeans(respostas);
+  return { natural, adapted, discrepancy, facetMeans };
 }
 
 function analisarDiscrepanciaDisplay(dual) {
@@ -388,6 +487,42 @@ function analisarDiscrepanciaDisplay(dual) {
     }
   });
   return alertas;
+}
+
+function calcularFacetMeans(respostas) {
+  const facetRaw = {};
+  const facetCounts = {};
+  Object.keys(FACETS).forEach(d => {
+    FACETS[d].forEach(f => {
+      facetRaw[f.code] = 0;
+      facetCounts[f.code] = 0;
+    });
+  });
+  respostas.forEach(r => {
+    const item = ITEM_MAP[r.id];
+    if (!item || !item.facet) return;
+    const val = pontuarItem(item, r.valor);
+    facetRaw[item.facet] += val;
+    facetCounts[item.facet]++;
+  });
+  const means = {};
+  Object.keys(facetRaw).forEach(code => {
+    means[code] = facetCounts[code] > 0 ? facetRaw[code] / facetCounts[code] : 3;
+  });
+  return means;
+}
+
+function calcularScoresDual(respostas) {
+  const natural = calcularPerfil(respostas, 'natural');
+  const adapted = calcularPerfil(respostas, 'adaptado');
+  const discrepancy = {};
+  FATORES_DISPLAY.forEach(df => {
+    discrepancy[df] = Math.round(
+      (adapted.display[df].ui - natural.display[df].ui) * 10
+    ) / 10;
+  });
+  const facetMeans = calcularFacetMeans(respostas);
+  return { natural, adapted, discrepancy, facetMeans };
 }
 
 function determinarPerfilDominante(displayScores) {
@@ -601,6 +736,29 @@ function gerarExplicacaoFatores(dual) {
   `);
 }
 
+function gerarFacetsSection(dual) {
+  if (!dual.facetMeans) return '';
+  let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">';
+  Object.keys(FACETS).forEach(domain => {
+    const domLabel = DISPLAY_LABELS[domain === 'N' ? 'SE' : domain];
+    html += `<div class="p-3 bg-white dark:bg-gray-900 rounded-lg border">
+      <div class="font-bold mb-2" style="color:${CORES[domain==='N'?'SE':domain]}">${domLabel} - Facets</div>`;
+    FACETS[domain].forEach(f => {
+      const mean = dual.facetMeans[f.code] || 3;
+      const ui = normalizeForUI(mean);
+      const t = Math.round((mean - 3) * 10 + 50); // approx
+      html += `<div class="text-xs mb-1 flex justify-between"><span>${f.name}</span> <span class="font-mono">UI ${ui>0?'+':''}${ui} · ~T${t}</span></div>`;
+    });
+    html += '</div>';
+  });
+  html += '</div>';
+  return cardSecao(3, 'Detalhamento por Facets (30 subtraços)', `
+    <p class="text-sm text-gray-500 mb-3">Cada domínio é composto por 6 facets mais específicos do modelo IPIP-NEO. Aqui estão seus scores aproximados (baseados na média das respostas relacionadas a cada facet).</p>
+    ${html}
+    <p class="text-xs text-gray-400 mt-2">Facets ajudam a entender nuances dentro de cada traço principal.</p>
+  `);
+}
+
 function gerarAutoImagem(perfilCtx, seed, blocoLabel) {
   const { internal, display } = perfilCtx;
   const textos = FACTORES_INTERNOS.map((f, i) =>
@@ -719,6 +877,7 @@ function renderizarRelatorio(nome, dual, apiResult) {
 
   let html = gerarSumario(nome, hoje, dominante, dual);
   html += gerarExplicacaoFatores(dual);
+  html += gerarFacetsSection(dual);
   html += gerarGraficosOCEAN(dual);
   html += gerarAutoImagem(dual.natural, seed, 'Natural');
   html += gerarPalavrasDescritivas(dual, seed);
@@ -745,8 +904,8 @@ function renderizarRelatorio(nome, dual, apiResult) {
 
 async function calcularERenderizar(nome, dualPrecomputed, apiDataPre) {
   const respostas = respostasLikertFromState();
-  if (respostas.length < TOTAL_POR_BLOCO * 2 && !dualPrecomputed) {
-    alert('Respostas incompletas. Complete todas as 60 afirmações.');
+  if (respostas.length < 70 && !dualPrecomputed) {
+    alert('Respostas incompletas. Complete todas as ~90 afirmações.');
     return;
   }
   const dual = dualPrecomputed || calcularScoresDual(respostas);
@@ -912,8 +1071,8 @@ const state = {
   sessionId: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36),
 };
 
-const TOTAL_QUESTOES = TOTAL_POR_BLOCO * 2;
-const PAUSA_EM = TOTAL_POR_BLOCO;
+const TOTAL_QUESTOES = 90; // Versão única aproximada de 90 itens (domínios + facets)
+const PAUSA_EM = 45; // Pausa na metade
 
 const LIKERT_LABELS = [
   { val: 1, short: '1', label: 'Discordo totalmente' },
@@ -936,10 +1095,11 @@ function prepararQuestao(q) {
 }
 
 function perguntasEmbaralhadas() {
-  // Randomização completa de todas as 60 perguntas (melhor prática psicométrica para reduzir efeitos de ordem, fadiga e viés)
+  // Randomização completa de ~90 perguntas (incluindo facets)
   const todas = [
     ...PERGUNTAS_NATURAL.map(q => prepararQuestao(q)),
-    ...PERGUNTAS_ADAPTADO.map(q => prepararQuestao(q))
+    ...PERGUNTAS_ADAPTADO.map(q => prepararQuestao(q)),
+    ...PERGUNTAS_FACETS.map(q => prepararQuestao(q))
   ];
   return shuffleArray(todas);
 }
@@ -963,7 +1123,7 @@ function iniciar() {
 function atualizarPausaCopy() {
   const el = document.getElementById('pausaCopy');
   if (el) {
-    el.textContent = `Você completou ${TOTAL_POR_BLOCO} de ${TOTAL_QUESTOES} afirmações. Faça uma pausa breve se precisar — suas respostas anteriores estão salvas.`;
+    el.textContent = `Você completou ${Math.min(state.passo, PAUSA_EM)} de ${TOTAL_QUESTOES} afirmações. Faça uma pausa breve se precisar — suas respostas anteriores estão salvas.`;
   }
 }
 

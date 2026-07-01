@@ -76,7 +76,8 @@ function calcularScoresDual(respostas) {
       (adapted.display[df].ui - natural.display[df].ui) * 10
     ) / 10;
   });
-  return { natural, adapted, discrepancy };
+  const facetMeans = calcularFacetMeans(respostas);
+  return { natural, adapted, discrepancy, facetMeans };
 }
 
 function analisarDiscrepanciaDisplay(dual) {
@@ -98,6 +99,42 @@ function analisarDiscrepanciaDisplay(dual) {
     }
   });
   return alertas;
+}
+
+function calcularFacetMeans(respostas) {
+  const facetRaw = {};
+  const facetCounts = {};
+  Object.keys(FACETS).forEach(d => {
+    FACETS[d].forEach(f => {
+      facetRaw[f.code] = 0;
+      facetCounts[f.code] = 0;
+    });
+  });
+  respostas.forEach(r => {
+    const item = ITEM_MAP[r.id];
+    if (!item || !item.facet) return;
+    const val = pontuarItem(item, r.valor);
+    facetRaw[item.facet] += val;
+    facetCounts[item.facet]++;
+  });
+  const means = {};
+  Object.keys(facetRaw).forEach(code => {
+    means[code] = facetCounts[code] > 0 ? facetRaw[code] / facetCounts[code] : 3;
+  });
+  return means;
+}
+
+function calcularScoresDual(respostas) {
+  const natural = calcularPerfil(respostas, 'natural');
+  const adapted = calcularPerfil(respostas, 'adaptado');
+  const discrepancy = {};
+  FATORES_DISPLAY.forEach(df => {
+    discrepancy[df] = Math.round(
+      (adapted.display[df].ui - natural.display[df].ui) * 10
+    ) / 10;
+  });
+  const facetMeans = calcularFacetMeans(respostas);
+  return { natural, adapted, discrepancy, facetMeans };
 }
 
 function determinarPerfilDominante(displayScores) {
