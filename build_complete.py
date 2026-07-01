@@ -34,51 +34,58 @@ HTML_HEAD = """<!DOCTYPE html>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 *{font-family:'Inter',system-ui,sans-serif;scroll-behavior:smooth}
 .ocean-o{color:#8E44AD}.ocean-c{color:#2980B9}.ocean-e{color:#F39C12}.ocean-a{color:#27AE60}.ocean-se{color:#E74C3C}
-@keyframes fIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.fade-in{animation:fIn .35s ease}
-.progress-bar{transition:width .5s ease}
+@keyframes fIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 4px 18px rgba(26,26,46,.2)}50%{box-shadow:0 8px 28px rgba(142,68,173,.35)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.fade-in{animation:fIn .4s ease}
+.home-card{animation:fIn .55s ease}
+.btn-primary{animation:pulseGlow 2.8s ease-in-out infinite}
+.progress-bar{transition:width .5s ease;background:linear-gradient(90deg,#a855f7,#3b82f6,#a855f7);background-size:200% 100%;animation:shimmer 3s linear infinite}
+.factor-badge{transition:transform .2s ease,box-shadow .2s ease}
+.factor-badge:hover{transform:scale(1.06);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.likert-btn{cursor:pointer;transition:transform .15s ease,background .15s,box-shadow .15s}
+.likert-btn:hover{transform:scale(1.03)}
+.likert-btn.selected{animation:fIn .25s ease}
 html.dark body{background:#111827;color:#f3f4f6}
 html.dark .card{background:#1f2937!important}
-.likert-btn{cursor:pointer}
+.nav-pill{transition:all .2s ease}
+.nav-pill:hover{transform:translateY(-1px)}
 @media print{.no-print{display:none!important}}
 </style>
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
 
-<header class="bg-gradient-to-r from-[#1a1a2e] to-[#16213e] text-white py-6 px-4 text-center">
-  <h1 class="text-xl font-bold tracking-wider">Perfil de <span class="text-purple-400">Personalidade</span></h1>
-  <p class="text-sm text-white/60 mt-1">Big Five (OCEAN) | TeclaPonto</p>
+<header class="bg-gradient-to-r from-[#1a1a2e] to-[#16213e] text-white py-6 px-4 text-center relative">
+  <nav class="absolute top-3 left-3 right-3 flex justify-between items-center no-print" aria-label="Navegação entre testes">
+    <a href="https://centralsp3.github.io/central/" class="nav-pill text-xs text-white/50 hover:text-white/90">← Central</a>
+    <a href="https://centralsp3.github.io/TESTEDISC/" class="nav-pill text-xs font-semibold px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-amber-400/50 text-amber-200">Perfil DISC →</a>
+  </nav>
+  <h1 class="text-xl font-bold tracking-wider mt-6">Perfil de <span class="text-purple-400">Personalidade</span></h1>
+  <p class="text-sm text-white/60 mt-1">Traços de personalidade · Big Five (Likert 1–5)</p>
+  <p class="text-xs text-white/40 mt-1 max-w-md mx-auto">Mede <strong>O, C, E, A e Estabilidade</strong> — distinto do perfil comportamental DISC</p>
 </header>
 
 <main class="flex-1" id="app">
 
 <section id="home" class="py-12 px-4">
-  <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-8 text-center">
+  <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-8 text-center home-card card">
     <h2 class="text-2xl font-bold mb-3">Descubra seu Perfil de Personalidade</h2>
-    <p class="text-gray-500 text-sm leading-relaxed mb-2">O modelo <strong>Big Five (OCEAN)</strong> mapeia cinco dimensões estáveis da personalidade.</p>
-    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">São <strong>60 afirmações</strong> em escala de 1 a 5. Responda com sinceridade — não há respostas certas ou erradas.</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-2">O modelo <strong>Big Five (OCEAN)</strong> mapeia cinco <strong>traços estáveis de personalidade</strong> — não comportamento situacional como o DISC.</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">São <strong>60 afirmações</strong> em escala <strong>Likert 1–5</strong> (concordo/discordo). Metodologia distinta do teste DISC (mais/menos).</p>
     <div class="grid grid-cols-5 gap-2 max-w-md mx-auto mb-6 text-xs">
-      <div class="rounded-xl p-2 text-white font-bold" style="background:#8E44AD">O</div>
-      <div class="rounded-xl p-2 text-white font-bold" style="background:#2980B9">C</div>
-      <div class="rounded-xl p-2 text-white font-bold" style="background:#F39C12">E</div>
-      <div class="rounded-xl p-2 text-white font-bold" style="background:#27AE60">A</div>
-      <div class="rounded-xl p-2 text-white font-bold" style="background:#E74C3C">SE</div>
+      <div class="factor-badge rounded-xl p-2 text-white font-bold" style="background:#8E44AD">O</div>
+      <div class="factor-badge rounded-xl p-2 text-white font-bold" style="background:#2980B9">C</div>
+      <div class="factor-badge rounded-xl p-2 text-white font-bold" style="background:#F39C12">E</div>
+      <div class="factor-badge rounded-xl p-2 text-white font-bold" style="background:#27AE60">A</div>
+      <div class="factor-badge rounded-xl p-2 text-white font-bold" style="background:#E74C3C">SE</div>
     </div>
-    <button onclick="iniciar()" class="bg-[#1a1a2e] text-white px-12 py-3.5 rounded-full font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all">Iniciar Teste</button>
+    <button onclick="iniciar()" class="btn-primary bg-[#1a1a2e] text-white px-12 py-3.5 rounded-full font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all">Iniciar Teste OCEAN</button>
     <div class="flex justify-center gap-3 mt-5 flex-wrap">
       <span class="bg-white dark:bg-gray-800 border rounded-full px-4 py-1.5 text-xs text-gray-500"><strong>60</strong> afirmações</span>
       <span class="bg-white dark:bg-gray-800 border rounded-full px-4 py-1.5 text-xs text-gray-500"><strong>~12</strong> min</span>
       <span class="bg-white dark:bg-gray-800 border rounded-full px-4 py-1.5 text-xs text-gray-500">v<strong>1.0</strong></span>
     </div>
     <button onclick="toggleDarkMode()" class="mt-4 text-xs text-gray-400 underline">Alternar modo escuro</button>
-    <div class="mt-8 pt-6 border-t border-gray-100 dark:border-gray-700">
-      <p class="text-xs text-gray-400 mb-3 uppercase tracking-wider">Instrumentos TeclaPonto</p>
-      <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto">
-        <a href="https://centralsp3.github.io/TESTEDISC/" class="flex-1 px-6 py-3 rounded-full font-semibold text-sm bg-white dark:bg-gray-700 border-2 border-amber-400 text-amber-700 dark:text-amber-300 hover:bg-amber-50 dark:hover:bg-gray-600 text-center transition-all">Perfil DISC</a>
-        <a href="https://centralsp3.github.io/PERSONALIDADE/" class="flex-1 px-6 py-3 rounded-full font-semibold text-sm bg-[#1a1a2e] text-white shadow-lg text-center transition-all ring-2 ring-purple-400 ring-offset-2 dark:ring-offset-gray-800">Personalidade OCEAN</a>
-      </div>
-      <a href="https://centralsp3.github.io/central/" class="inline-block mt-4 text-xs text-gray-400 underline hover:text-gray-600">← Hub CENTRAL SP3</a>
-    </div>
   </div>
 </section>
 
