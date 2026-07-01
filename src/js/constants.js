@@ -1,7 +1,7 @@
 // ===== CONSTANTES OCEAN — TESTEPERSONALIDADE v1.0.0 =====
 
 const INSTRUMENT_VERSION = '1.0.0';
-const API_BASE = '';  // vazio = offline; configurar URL da API em produção
+const API_BASE = 'https://backend-price3.vercel.app';  // Vercel backend URL from project prj_um9kVqtggku2ozLM6J3lVsrgsJS9 (token provided for auth)
 const HUB_URL = 'https://centralsp3.github.io/central/';
 const URL_DISC = 'https://centralsp3.github.io/TESTEDISC/';
 const URL_PERSONALIDADE = 'https://centralsp3.github.io/PERSONALIDADE/';
@@ -9,6 +9,10 @@ const URL_PERSONALIDADE = 'https://centralsp3.github.io/PERSONALIDADE/';
 const FACTORES_INTERNOS = ['O', 'C', 'E', 'A', 'N'];
 const FACTORES = FACTORES_INTERNOS;
 const FATORES_DISPLAY = ['O', 'C', 'E', 'A', 'SE'];
+
+// Lógica para habilitar backend: desabilita só em hosts puramente estáticos sem API_BASE configurada
+const IS_PURE_STATIC_HOST = window.location.hostname.includes('github.io') || window.location.hostname.includes('pages.dev');
+const EFFECTIVE_ENABLE_API = (typeof API_BASE !== 'undefined' && API_BASE) || !IS_PURE_STATIC_HOST && (typeof FLAGS !== 'undefined' ? FLAGS.enableAPI : true);
 
 const DISPLAY_LABELS = {
   O: 'Abertura à Experiência',
@@ -148,8 +152,8 @@ function invertForDisplay(f, scores) {
 }
 
 const FLAGS = {
-  enableAPI: !!API_BASE,
-  enableFacets: true,  // Agora implementado todos os 30 facets
+  enableAPI: true,  // backend habilitado para coleta, normas dinâmicas e PDF servidor (pode ser sobrescrito em hosts estáticos)
+  enableFacets: true,
   enablePDFExport: true,
 };
 

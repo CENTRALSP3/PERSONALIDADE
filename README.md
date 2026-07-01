@@ -12,7 +12,7 @@ python scripts/translate_items.py    # gera artifacts/items.json (120 IPIP)
 python build_all.py                  # pipeline completo (8 etapas)
 ```
 
-Abra `index.html` no navegador ou publique `docs/` via GitHub Pages.
+Abra `index.html` no navegador ou publique via Vercel (recomendado para frontend + backend) ou GitHub Pages (`docs/`).
 
 ## Pipeline (8 etapas)
 
@@ -55,6 +55,18 @@ uvicorn api.main:app --reload
 pytest tests/ -q
 python verify_structure.py
 ```
+
+## Deployment
+
+### Vercel (recomendado)
+1. Conecte o repositório GitHub no seu projeto Vercel (use o ID `prj_um9kVqtggku2ozLM6J3lVsrgsJS9` se for o do backend).
+2. Build Command: `python build_complete.py`
+3. Output Directory: `.`
+4. Defina variável de ambiente `API_BASE` para a URL do seu backend no Vercel (ex: `https://seu-api.vercel.app`).
+5. O frontend estática será servido, chamadas de API vão para o backend.
+
+### GitHub Pages
+Use `docs/` (configurado no workflow).
 
 ## Disclaimer
 

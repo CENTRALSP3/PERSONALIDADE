@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Bundle index.html self-contained + injeta sw.js + copia docs/."""
+import os
 import re
 from pathlib import Path
 
@@ -177,13 +178,29 @@ def build() -> None:
     m = re.search(r"INSTRUMENT_VERSION = '([^']+)'", constants)
     version = m.group(1) if m else "1.0.0"
 
+    # Inject API_BASE from environment (for Vercel or other deploys)
+    api_base = os.environ.get('API_BASE', '')
+    if api_base:
+        constants = re.sub(
+            r"const API_BASE = '.*?'",
+            f"const API_BASE = '{api_base}'",
+            constants
+        )
+
     parts = [HTML_HEAD]
     for fname in JS_ORDER:
         path = JS_DIR / fname
         if not path.exists():
             raise FileNotFoundError(f"Módulo ausente: {path}")
+        js_content = path.read_text(encoding="utf-8")
+        if fname == "constants.js" and api_base:
+            js_content = re.sub(
+                r"const API_BASE = '.*?'",
+                f"const API_BASE = '{api_base}'",
+                js_content
+            )
         parts.append(f"\n// --- {fname} ---\n")
-        parts.append(path.read_text(encoding="utf-8"))
+        parts.append(js_content)
     parts.append(HTML_TAIL)
     content = "".join(parts)
     OUTPUT.write_text(content, encoding="utf-8")
