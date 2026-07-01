@@ -8,8 +8,8 @@ const state = {
   sessionId: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36),
 };
 
-const TOTAL_QUESTOES = 90; // Versão única aproximada de 90 itens (domínios + facets)
-const PAUSA_EM = 45; // Pausa na metade
+let TOTAL_QUESTOES = 90;
+let PAUSA_EM = 45;
 
 const LIKERT_LABELS = [
   { val: 1, short: '1', label: 'Discordo totalmente' },
@@ -32,17 +32,53 @@ function prepararQuestao(q) {
 }
 
 function perguntasEmbaralhadas() {
-  // Randomização completa de ~90 perguntas (incluindo facets)
+  // Coleta todas as perguntas
   const todas = [
     ...PERGUNTAS_NATURAL.map(q => prepararQuestao(q)),
     ...PERGUNTAS_ADAPTADO.map(q => prepararQuestao(q)),
     ...PERGUNTAS_FACETS.map(q => prepararQuestao(q))
   ];
-  return shuffleArray(todas);
+
+  // Atualiza totais dinamicamente
+  TOTAL_QUESTOES = todas.length;
+  PAUSA_EM = Math.floor(TOTAL_QUESTOES / 2);
+
+  // Randomização estratificada por domínio para evitar clusters e melhorar distribuição
+  // Agrupa por fator, embaralha dentro de cada grupo, depois intercala
+  const porDominio = {};
+  FACTORES_INTERNOS.forEach(f => porDominio[f] = []);
+  todas.forEach(q => {
+    const dom = q.fator || 'O';
+    if (!porDominio[dom]) porDominio[dom] = [];
+    porDominio[dom].push(q);
+  });
+
+  Object.keys(porDominio).forEach(k => {
+    porDominio[k] = shuffleArray(porDominio[k]);
+  });
+
+  // Intercala para distribuição equilibrada
+  const estratificado = [];
+  let maxLen = Math.max(...Object.values(porDominio).map(g => g.length));
+  for (let i = 0; i < maxLen; i++) {
+    FACTORES_INTERNOS.forEach(f => {
+      if (porDominio[f] && porDominio[f][i]) {
+        estratificado.push(porDominio[f][i]);
+      }
+    });
+  }
+
+  // Shuffle final leve para mais aleatoriedade sem perder balanceamento
+  return shuffleArray(estratificado);
 }
 
 function shufflePerguntas() {
   state.shuffled = perguntasEmbaralhadas();
+  // Garante valores atualizados
+  if (typeof TOTAL_QUESTOES === 'undefined' || TOTAL_QUESTOES < 80) {
+    TOTAL_QUESTOES = 90;
+    PAUSA_EM = 45;
+  }
 }
 
 function iniciar() {

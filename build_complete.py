@@ -95,7 +95,7 @@ html.dark .card{background:#1f2937!important}
   <div class="max-w-2xl mx-auto">
     <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-5 mb-5">
       <div class="flex justify-end items-center mb-3">
-        <span id="progressText" class="text-sm font-semibold text-gray-400">1 de 60</span>
+        <span id="progressText" class="text-sm font-semibold text-gray-400">1 de ~90</span>
       </div>
       <div class="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
         <div id="progressBar" class="progress-bar h-full bg-gradient-to-r from-purple-400 to-blue-500 rounded-full" style="width:0%"></div>
@@ -108,7 +108,7 @@ html.dark .card{background:#1f2937!important}
 <section id="pausaBloco" class="py-12 px-4" style="display:none">
   <div class="max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-8 text-center fade-in card">
     <h2 class="text-xl font-bold mb-2">Metade do questionário!</h2>
-    <p id="pausaCopy" class="text-gray-500 dark:text-gray-400 text-sm mb-6">Você completou 30 de 60 afirmações. Faça uma pausa breve se precisar — suas respostas anteriores estão salvas.</p>
+    <p id="pausaCopy" class="text-gray-500 dark:text-gray-400 text-sm mb-6">Você completou metade das afirmações. Faça uma pausa breve se precisar — suas respostas anteriores estão salvas.</p>
     <button onclick="continuarAposPausa()" class="bg-[#1a1a2e] text-white px-10 py-3 rounded-full font-semibold shadow-lg">Continuar →</button>
   </div>
 </section>
@@ -130,7 +130,7 @@ html.dark .card{background:#1f2937!important}
 </main>
 
 <footer class="bg-[#1a1a2e] text-white/60 text-center py-4 text-xs mt-auto">
-  <p>TeclaPonto — Perfil de Personalidade OCEAN. Instrumento de autoconhecimento. Não substitui avaliação psicológica profissional.</p>
+  <p>Perfil de Personalidade OCEAN • Baseado no modelo Big Five (IPIP-NEO) • Instrumento de autoconhecimento. Não substitui avaliação psicológica profissional.</p>
 </footer>
 
 <script>

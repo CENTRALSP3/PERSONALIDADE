@@ -96,7 +96,7 @@ function gerarFacetsSection(dual) {
     html += '</div>';
   });
   html += '</div>';
-  return cardSecao(3, 'Detalhamento por Facets (30 subtraços)', `
+  return cardSecao(2, 'Detalhamento por Facets (30 subtraços)', `
     <p class="text-sm text-gray-500 mb-3">Cada domínio é composto por 6 facets mais específicos do modelo IPIP-NEO. Aqui estão seus scores aproximados (baseados na média das respostas relacionadas a cada facet).</p>
     ${html}
     <p class="text-xs text-gray-400 mt-2">Facets ajudam a entender nuances dentro de cada traço principal.</p>
@@ -108,8 +108,11 @@ function gerarAutoImagem(perfilCtx, seed, blocoLabel) {
   const textos = FACTORES_INTERNOS.map((f, i) =>
     formatParagrafos(pickFactorTemplate(f, 'auto_imagem', seed, internal, display, i))
   ).join('');
-  return cardSecao(2, `Autoimagem — Perfil ${blocoLabel}`, `
-    <p class="text-xs text-gray-400 mb-3 uppercase">Comportamento ${blocoLabel.toLowerCase()}</p>${textos}`);
+  const extra = `<p class="text-sm text-gray-500 mt-2">A autoimagem é moldada pelos facets dominantes. Por exemplo, alta Imaginação (O1) e Aventureirismo (O4) costumam gerar uma visão de si como pessoa criativa e aberta a mudanças, enquanto alta Organização (C2) e Autodisciplina (C5) reforçam a sensação de ser confiável e estruturado.</p>`;
+  return cardSecao(3, `Autoimagem — Perfil ${blocoLabel}`, `
+    <p class="text-xs text-gray-400 mb-3 uppercase">Como você se vê e se comporta no dia a dia (${blocoLabel.toLowerCase()})</p>
+    ${textos}
+    ${extra}`);
 }
 
 function gerarPalavrasDescritivas(dual, seed) {
@@ -121,16 +124,19 @@ function gerarPalavrasDescritivas(dual, seed) {
     palavras.push(...list.slice(0, 2));
   });
   const unicas = [...new Set(palavras)].slice(0, 16);
-  return cardSecao(3, 'Palavras Descritivas', `
+  const facetWords = `<p class="text-xs text-gray-500 mt-2">Essas palavras derivam dos facets mais salientes. Ex: alta Assertividade (E3) + Busca por Excitação (E5) pode evocar termos como "dinâmico" e "corajoso"; baixa Ansiedade (N1) + Vulnerabilidade (N6) reforça "calmo" e "resiliente".</p>`;
+  return cardSecao(4, 'Palavras Descritivas', `
     <div class="flex flex-wrap gap-2">${unicas.map(p =>
-      `<span class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm">${p}</span>`).join('')}</div>`);
+      `<span class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm">${p}</span>`).join('')}</div>
+    ${facetWords}`);
 }
 
 function gerarMotivacao(dual, seed) {
   const textos = FACTORES_INTERNOS.slice(0, 3).map((f, i) =>
     formatParagrafos(pickFactorTemplate(f, 'trabalho', seed, dual.natural.internal, dual.natural.display, i))
   ).join('');
-  return cardSecao(4, 'Motivação e Energia', textos);
+  const extra = `<p class="text-sm text-gray-500 mt-2">A motivação é impulsionada por facets como Busca por Realização (C4) e Alegria (E6) para energia positiva, ou Intelecto (O5) para curiosidade intrínseca. Perfis com baixa Impulsividade (N5) mantêm foco mais sustentável.</p>`;
+  return cardSecao(5, 'Motivação e Energia', textos + extra);
 }
 
 function gerarPontosFortes(dual, seed) {
@@ -140,42 +146,47 @@ function gerarPontosFortes(dual, seed) {
     const tpl = DEVOLUTIVA_TEMPLATES?.fatores?.[cod]?.pontos_fortes || [];
     return tpl.slice(0, 2);
   }).flat();
-  return cardSecao(5, 'Pontos Fortes', `
+  const extra = `<p class="text-sm text-gray-500 mt-2">Pontos fortes se concretizam via facets: ex. alta Autoeficácia (C1) + Assertividade (E3) gera liderança natural; alta Com paixão (A6) + Altruísmo (A3) favorece trabalho em equipe empático. Use seus facets dominantes como alavancas.</p>`;
+  return cardSecao(6, 'Pontos Fortes', `
     <ul class="list-disc pl-5 text-sm text-gray-600 dark:text-gray-300 space-y-1">
       ${[...new Set(items)].map(i => `<li>${i}</li>`).join('')}
-    </ul>`);
+    </ul>${extra}`);
 }
 
 function gerarDesafios(dual, seed) {
   const bottom = dual.natural.display[determinarPerfilDominante(dual.natural.display).ordenacao[4]];
   const cod = 'N';
   const tpl = DEVOLUTIVA_TEMPLATES?.fatores?.[cod]?.desafios || ['Atenção a reações emocionais'];
-  return cardSecao(6, 'Desafios e Pontos de Atenção', `
+  const extra = `<p class="text-sm text-gray-500 mt-2">Desafios comuns incluem excesso em facets como Impulsividade (N5) levando a decisões precipitadas, ou baixa Deliber ação (C6) gerando rigidez. O perfil adaptado pode mascarar alguns; observe discrepâncias.</p>`;
+  return cardSecao(7, 'Desafios e Pontos de Atenção', `
     <ul class="list-disc pl-5 text-sm text-gray-600 dark:text-gray-300 space-y-1">
       ${FACTORES_INTERNOS.map(f => {
         const d = DEVOLUTIVA_TEMPLATES?.fatores?.[f]?.desafios || [];
         return d.slice(0, 1).map(x => `<li>${x}</li>`).join('');
       }).join('')}
-    </ul>`);
+    </ul>${extra}`);
 }
 
 function gerarRelacionamentos(dual, seed) {
   const textos = ['E', 'A', 'O'].map((f, i) =>
     formatParagrafos(pickFactorTemplate(f, 'relacoes', seed, dual.natural.internal, dual.natural.display, i))
   ).join('');
-  return cardSecao(7, 'Relacionamentos', textos);
+  const extra = `<p class="text-sm text-gray-500 mt-2">Relacionamentos são influenciados por facets como Gregariedade (E2) + Com paixão (A6) para conexões calorosas, ou baixa Confiança (A1) podendo gerar cautela inicial. Alta Modéstia (A5) favorece relacionamentos autênticos sem competição.</p>`;
+  return cardSecao(8, 'Relacionamentos', textos + extra);
 }
 
 function gerarCarreira(dual, seed) {
   const textos = ['C', 'E', 'O'].map((f, i) =>
     formatParagrafos(pickFactorTemplate(f, 'trabalho', seed, dual.adapted.internal, dual.adapted.display, i))
   ).join('');
-  return cardSecao(8, 'Carreira e Trabalho', textos);
+  const extra = `<p class="text-sm text-gray-500 mt-2">Na carreira, facets como Busca por Realização (C4) + Intelecto (O5) impulsionam inovação em papéis estratégicos. Alta Assertividade (E3) ajuda em liderança; baixa Deliber ação (C6) pode ser desafio em ambientes de alta pressão. O perfil adaptado mostra como você se ajusta ao contexto profissional.</p>`;
+  return cardSecao(9, 'Carreira e Trabalho', textos + extra);
 }
 
 function gerarSobPressao(dual, seed) {
   const texto = pickFactorTemplate('N', 'sob_pressao', seed, dual.natural.internal, dual.natural.display);
-  return cardSecao(9, 'Sob Pressão e Estresse', formatParagrafos(texto));
+  const extra = `<p class="text-sm text-gray-500 mt-2">Sob estresse, facets como Vulnerabilidade (N6) amplificam reações, enquanto alta Alegria (E6) e Autodisciplina (C5) promovem resiliência. Perfis com baixa Raiva (N2) recuperam mais rápido. Monitore como o perfil adaptado difere do natural em situações de pressão.</p>`;
+  return cardSecao(10, 'Sob Pressão e Estresse', formatParagrafos(texto) + extra);
 }
 
 function gerarPercepcaoAdaptada(dual) {
@@ -190,18 +201,20 @@ function gerarPercepcaoAdaptada(dual) {
   if (alertas.some(a => a.tipo === 'hiperadaptacao')) {
     html += formatParagrafos((tpl.hiperadaptacao || [])[0]);
   }
-  return cardSecao(10, 'Percepção Adaptada', html);
+  const extra = `<p class="text-sm text-gray-500 mt-2">Discrepâncias entre natural e adaptado revelam facets onde há supressão (ex. alta Aventura natural mas baixa no trabalho) ou hiperadaptação. Use isso para alinhar ambiente profissional aos seus traços centrais.</p>`;
+  return cardSecao(11, 'Percepção Adaptada', html + extra);
 }
 
 function gerarCrescimento(dual, seed) {
   const textos = FACTORES_INTERNOS.map((f, i) =>
     formatParagrafos(pickFactorTemplate(f, 'crescimento', seed, dual.natural.internal, dual.natural.display, i))
   ).join('');
-  return cardSecao(11, 'Crescimento e Desenvolvimento', textos);
+  const extra = `<p class="text-sm text-gray-500 mt-2">Para desenvolvimento, foque facets específicos: canalize alta Imaginação (O1) em projetos com prazos (C5); desenvolva Assertividade (E3) com prática de feedback. Baixa Ansiedade (N1) é vantagem; alta pode ser gerenciada com técnicas de regulação emocional ligadas a Deliber ação (C6).</p>`;
+  return cardSecao(12, 'Crescimento e Desenvolvimento', textos + extra);
 }
 
 function gerarSintese(disclaimer) {
-  return cardSecao(12, 'Síntese e Próximos Passos', `
+  return cardSecao(13, 'Síntese e Próximos Passos', `
     <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">
       Este relatório oferece um panorama profundo do seu perfil Big Five. Os fatores são estáveis ao longo da vida adulta (herdabilidade ~40-60%), mas comportamentos podem ser desenvolvidos com consciência e prática.
     </p>
@@ -210,7 +223,8 @@ function gerarSintese(disclaimer) {
       <li><strong>Perfil Duplo:</strong> Natural reflete sua essência; Adaptado mostra ajustes no contexto profissional. Grandes deltas podem indicar oportunidades de alinhamento ou autoconhecimento.</li>
       <li><strong>Próximos passos:</strong> Reflita sobre 1-2 áreas de desenvolvimento. Experimente comportamentos de "alto" em fatores que deseja fortalecer. Considere feedback 360º ou coaching.</li>
     </ul>
-    <p class="text-xs text-gray-400 italic">${disclaimer || 'Instrumento de autoconhecimento baseado em IPIP-NEO e pesquisas brasileiras. Não substitui avaliação psicológica profissional.'}</p>`);
+    <p class="text-xs text-gray-400 italic">${disclaimer || 'Instrumento de autoconhecimento baseado em IPIP-NEO e pesquisas brasileiras. Não substitui avaliação psicológica profissional.'}</p>
+    <p class="text-xs text-gray-500 mt-2">Nota: Este é um instrumento de autorrelato. Resultados podem ser influenciados por desejabilidade social ou momento atual. Use como ponto de partida para reflexão, não como diagnóstico.</p>`);
 }
 
 function renderizarRelatorio(nome, dual, apiResult) {
