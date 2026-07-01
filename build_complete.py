@@ -51,6 +51,26 @@ html.dark .card{background:#1f2937!important}
 .nav-pill{transition:all .2s ease}
 .nav-pill:hover{transform:translateY(-1px)}
 @media print{.no-print{display:none!important}}
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  body, .card, header, footer, .bg-white, .bg-gray-50, .bg-gray-800 {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+  .card {
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+  }
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  .progress-bar, .factor-badge {
+    -webkit-print-color-adjust: exact !important;
+  }
 </style>
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
@@ -83,7 +103,7 @@ html.dark .card{background:#1f2937!important}
     </div>
     <button onclick="iniciar()" class="btn-primary bg-[#1a1a2e] text-white px-12 py-3.5 rounded-full font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all">Iniciar Teste OCEAN</button>
     <div class="flex justify-center gap-3 mt-5 flex-wrap">
-      <span class="bg-white dark:bg-gray-800 border rounded-full px-4 py-1.5 text-xs text-gray-500"><strong>60</strong> afirmações</span>
+      <span class="bg-white dark:bg-gray-800 border rounded-full px-4 py-1.5 text-xs text-gray-500"><strong>~90</strong> afirmações</span>
       <span class="bg-white dark:bg-gray-800 border rounded-full px-4 py-1.5 text-xs text-gray-500"><strong>~12</strong> min</span>
       <span class="bg-white dark:bg-gray-800 border rounded-full px-4 py-1.5 text-xs text-gray-500">v<strong>1.0</strong></span>
     </div>

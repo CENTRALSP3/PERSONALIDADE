@@ -66,7 +66,19 @@ async function copiarLink(hash) {
 }
 
 function exportarPDF() {
+  // Prepare for full layout print with backgrounds and graphics
+  const resultEl = document.getElementById('resultado');
+  if (resultEl) {
+    resultEl.style.background = '#ffffff';
+    resultEl.style.color = '#111827';
+  }
+  // Add temporary print class for full fidelity
+  document.body.classList.add('print-mode');
+  const origTitle = document.title;
+  document.title = 'Relatorio_OCEAN_' + new Date().toISOString().slice(0,10).replace(/-/g,'');
   window.print();
+  document.body.classList.remove('print-mode');
+  document.title = origTitle;
 }
 
 async function carregarResultadoCompartilhado() {
