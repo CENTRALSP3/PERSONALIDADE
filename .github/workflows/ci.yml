@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ALLOW_INCOMPLETE: "1"
+      PYTHONPATH: .
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
