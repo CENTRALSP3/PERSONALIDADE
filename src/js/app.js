@@ -32,15 +32,12 @@ function prepararQuestao(q) {
 }
 
 function perguntasEmbaralhadas() {
-  const natural = shuffleArray(PERGUNTAS_NATURAL.map((q, i) => prepararQuestao(q, i)));
-  const adaptado = shuffleArray(PERGUNTAS_ADAPTADO.map((q, i) => prepararQuestao(q, i)));
-  const slots = shuffleArray([...Array(TOTAL_QUESTOES).keys()]);
-  const natSlots = slots.slice(0, TOTAL_POR_BLOCO).sort((a, b) => a - b);
-  const adpSlots = slots.slice(TOTAL_POR_BLOCO).sort((a, b) => a - b);
-  const merged = new Array(TOTAL_QUESTOES);
-  natural.forEach((q, i) => { merged[natSlots[i]] = q; });
-  adaptado.forEach((q, i) => { merged[adpSlots[i]] = q; });
-  return merged;
+  // Randomização completa de todas as 60 perguntas (melhor prática psicométrica para reduzir efeitos de ordem, fadiga e viés)
+  const todas = [
+    ...PERGUNTAS_NATURAL.map(q => prepararQuestao(q)),
+    ...PERGUNTAS_ADAPTADO.map(q => prepararQuestao(q))
+  ];
+  return shuffleArray(todas);
 }
 
 function shufflePerguntas() {
@@ -93,7 +90,7 @@ function mostrarPergunta() {
   container.innerHTML = `
     <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-sm p-5 sm:p-8 fade-in card">
       <p class="text-base sm:text-lg font-semibold mb-6 leading-relaxed">${q.texto}</p>
-      <p class="text-sm text-gray-500 mb-4">Indique o quanto esta afirmação descreve você.</p>
+      <p class="text-sm text-gray-500 mb-4">Indique o quanto esta afirmação descreve você (seja honesto — não existe resposta "certa"). Suas respostas são usadas para calcular médias por fator, convertidas em T-scores comparados com normas brasileiras.</p>
       <div class="likert-scale flex justify-between gap-1" role="radiogroup" aria-label="Escala Likert">
         ${likertHtml}
       </div>

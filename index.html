@@ -49,8 +49,10 @@ html.dark .card{background:#1f2937!important}
 <section id="home" class="py-12 px-4">
   <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-8 text-center home-card card">
     <h2 class="text-2xl font-bold mb-3">Descubra seu Perfil de Personalidade</h2>
-    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-2">O modelo <strong>Big Five (OCEAN)</strong> mapeia cinco <strong>traços estáveis de personalidade</strong> — não comportamento situacional como o DISC.</p>
-    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">São <strong>60 afirmações</strong> em escala <strong>Likert 1–5</strong> (concordo/discordo). Metodologia distinta do teste DISC (mais/menos).</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-2">O modelo <strong>Big Five (OCEAN)</strong> é o padrão científico mais validado da psicologia para descrever traços estáveis de personalidade (replicado em >50 países). Mede <strong>5 dimensões</strong> que explicam grande parte da variação humana em comportamentos, preferências e respostas ao ambiente.</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-1">• <strong>60 afirmações</strong> em escala Likert 1–5 (discordo totalmente a concordo totalmente).</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-1">• Duplo perfil: <strong>Natural</strong> (você no fundo) vs <strong>Adaptado</strong> (como você se apresenta no trabalho).</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">Baseado em IPIP-NEO + normas brasileiras (BFI). Resultados em T-scores (média 50), percentis e bandas. Não é diagnóstico clínico.</p>
     <div class="grid grid-cols-5 gap-2 max-w-md mx-auto mb-6 text-xs">
       <div class="factor-badge rounded-xl p-2 text-white font-bold" style="background:#8E44AD">O</div>
       <div class="factor-badge rounded-xl p-2 text-white font-bold" style="background:#2980B9">C</div>
@@ -133,6 +135,55 @@ const DISPLAY_LABELS = {
   SE: 'Estabilidade Emocional',
 };
 
+// Descrições aprofundadas baseadas em pesquisa (IPIP-NEO, BFI brasileiro, literatura Costa/McCrae, Goldberg)
+const FACTOR_INFO = {
+  O: {
+    nome: 'Abertura à Experiência',
+    descricao: 'Reflete curiosidade intelectual, imaginação, apreciação estética, abertura a novas ideias e experiências. Pessoas altas valorizam variedade, criatividade e pensamento abstrato; baixas preferem o familiar, prático e convencional.',
+    altoComportamentos: 'Busca novidades, explora arte e ideias não convencionais, é inovador no trabalho, tolera ambiguidade, gosta de viajar e aprender coisas novas. No dia a dia: lê muito, experimenta hobbies variados, questiona o status quo.',
+    baixoComportamentos: 'Prefere rotinas estáveis, soluções comprovadas, ambientes previsíveis. Pode resistir a mudanças radicais ou ideias muito abstratas. No trabalho: excelente em papéis operacionais estruturados.',
+    trabalho: 'Alto: ideal para inovação, marketing criativo, pesquisa, design, estratégia. Baixo: forte em execução precisa, compliance, operações.',
+    relacoes: 'Alto: traz perspectivas frescas às conversas. Baixo: valoriza tradição e estabilidade compartilhada.',
+    sobPressao: 'Alto: gera soluções criativas mas pode dispersar. Baixo: mantém foco prático e direto.'
+  },
+  C: {
+    nome: 'Conscienciosidade',
+    descricao: 'Mede organização, responsabilidade, autodisciplina, persistência e orientação para metas. Alta: confiável, planejadora, detalhista. Baixa: mais flexível, espontânea, às vezes desorganizada.',
+    altoComportamentos: 'Planeja com antecedência, cumpre prazos, mantém ordem, é persistente e cuidadoso com detalhes. No dia a dia: agendas, listas, ambientes arrumados, decisões ponderadas.',
+    baixoComportamentos: 'Vive mais no momento, procrastina ocasionalmente, aceita desordem, é mais espontâneo. Pode ser visto como "boa vibe" mas menos confiável em entregas.',
+    trabalho: 'Alto: destaque em gestão de projetos, liderança executiva, finanças, qualidade. Risco de perfeccionismo. Baixo: bom em ambientes ágeis, criativos, que exigem flexibilidade.',
+    relacoes: 'Alto: parceiro confiável que cumpre promessas. Baixo: traz leveza mas pode frustrar em compromissos.',
+    sobPressao: 'Alto: mantém estrutura e avança passo a passo. Baixo: pode improvisar bem mas descuidar de detalhes.'
+  },
+  E: {
+    nome: 'Extroversão',
+    descricao: 'Reflete sociabilidade, energia, assertividade, busca por estímulos e expressividade emocional positiva. Alta: extrovertida, energética em grupos. Baixa: reservada (introvertida), prefere interações profundas ou solitude para recarregar.',
+    altoComportamentos: 'Adora socializar, faz amigos facilmente, fala com entusiasmo, busca atividades estimulantes, brilha em grupos. No dia a dia: eventos, conversas longas, liderança natural.',
+    baixoComportamentos: 'Prefere tempo sozinho ou com poucos, pensa antes de falar, evita holofotes, recarrega em silêncio. Excelente ouvinte e pensador profundo.',
+    trabalho: 'Alto: vendas, RH, liderança de equipes, apresentação, networking. Baixo: pesquisa profunda, programação, escrita, análise independente.',
+    relacoes: 'Alto: centro de atenções, energiza grupos. Baixo: conexões autênticas e profundas.',
+    sobPressao: 'Alto: usa rede social para apoio. Baixo: processa internamente, precisa de espaço.'
+  },
+  A: {
+    nome: 'Amabilidade',
+    descricao: 'Mede compaixão, cooperação, confiança, gentileza e altruísmo. Alta: empática, harmoniosa, generosa. Baixa: mais direta, cética, competitiva, assertiva em conflitos.',
+    altoComportamentos: 'Confia nas pessoas, ajuda sem esperar retorno, evita conflitos desnecessários, é diplomático e atencioso. No dia a dia: mediação, voluntariado, bom ouvinte.',
+    baixoComportamentos: 'É franco, prioriza própria visão, questiona intenções alheias, compete quando necessário. Pode ser visto como "direto" ou "duro".',
+    trabalho: 'Alto: excelente em equipes, customer success, educação, saúde, mediação. Baixo: bom em negociação dura, vendas competitivas, tomada de decisão impopular.',
+    relacoes: 'Alto: constrói confiança e harmonia. Baixo: traz honestidade crua (pode precisar aprender diplomacia).',
+    sobPressao: 'Alto: busca consenso e apoia outros. Baixo: defende posição com firmeza.'
+  },
+  N: {
+    nome: 'Neuroticismo (inverso: Estabilidade Emocional)',
+    descricao: 'Tendência a vivenciar emoções negativas (ansiedade, raiva, tristeza, vulnerabilidade). Alto N = baixa estabilidade: mais reativo. Baixo N / Alta SE: calmo, resiliente, emocionalmente estável.',
+    altoComportamentos: ' (para N alto / SE baixo) Preocupa-se facilmente, sente estresse com mais intensidade, humor oscila, demora a se recuperar de contratempos. No dia a dia: ruminação, evitação de riscos.',
+    baixoComportamentos: ' (SE alto) Mantém calma sob pressão, recupera rápido, raro de se abalar, pensa positivo mesmo em adversidade. Excelente em crises.',
+    trabalho: 'SE alto: liderança em crise, ambientes voláteis, atendimento de alto estresse. N alto pode trazer sensibilidade útil em profissões empáticas mas exige estratégias de regulação.',
+    relacoes: 'SE alto: porto seguro emocional. N alto: pode precisar de suporte extra; alta empatia em alguns casos.',
+    sobPressao: 'SE alto: analisa friamente e age. N alto: pode entrar em loop de preocupação mas também ser mais vigilante a riscos.'
+  }
+};
+
 const CORES = {
   O: '#8E44AD',
   C: '#2980B9',
@@ -153,13 +204,13 @@ const BANDA_T_LIMIARES = {
 const DISCREPANCY_THRESHOLD = 3;
 
 const NORMS = {
-  meta: { version: '1.0.0', sample_size: 500, source: 'bootstrap_literature_2026' },
+  meta: { version: '2.0.0', sample_size: 3565, source: 'BFI_Brasil_2023_Roiz_CostaMastrascusa (adaptado para referência IPIP-like)' },
   domains: {
-    O: { mean: 3.35, sd: 0.72 },
-    C: { mean: 3.52, sd: 0.68 },
-    E: { mean: 3.18, sd: 0.75 },
-    A: { mean: 3.61, sd: 0.65 },
-    N: { mean: 2.89, sd: 0.78 },
+    O: { mean: 3.78, sd: 0.59 },
+    C: { mean: 3.74, sd: 0.64 },
+    E: { mean: 3.30, sd: 0.74 },
+    A: { mean: 3.68, sd: 0.54 },
+    N: { mean: 2.95, sd: 0.81 },
   },
 };
 
@@ -524,6 +575,32 @@ function gerarSumario(nome, hoje, dominante, dual) {
   </div>`;
 }
 
+function gerarExplicacaoFatores(dual) {
+  const explicacoes = FACTORES_INTERNOS.map((f, i) => {
+    const info = FACTOR_INFO[f] || {};
+    const displayF = f === 'N' ? 'SE' : f;
+    const scores = dual.natural.display[displayF];
+    const t = scores.tScore;
+    const nivel = scores.banda;
+    const ui = scores.ui;
+    return `
+      <div class="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border-l-4" style="border-color:${CORES[displayF]}">
+        <h4 class="font-bold text-base mb-1" style="color:${CORES[displayF]}">${info.nome || DISPLAY_LABELS[displayF]} <span class="text-xs font-normal text-gray-500">(${nivel} · T=${t} · UI=${ui > 0 ? '+' : ''}${ui})</span></h4>
+        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">${info.descricao || ''}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          <div><strong class="text-green-600">Alto:</strong> ${info.altoComportamentos || ''}</div>
+          <div><strong class="text-amber-600">Baixo:</strong> ${info.baixoComportamentos || ''}</div>
+        </div>
+        <div class="mt-2 text-xs text-gray-500">Trabalho: ${info.trabalho || ''} | Relações: ${info.relacoes || ''} | Sob pressão: ${info.sobPressao || ''}</div>
+      </div>`;
+  }).join('');
+  return cardSecao(1, 'Entendendo os 5 Fatores do Big Five (OCEAN)', `
+    <p class="text-sm text-gray-500 mb-4">O modelo Big Five é o padrão-ouro da psicologia científica da personalidade (validado em dezenas de culturas e >1000 estudos). Cada fator é um continuum. Suas pontuações são comparadas com normas da população brasileira (BFI adaptado). T-score 50 = média da população. Cada 10 pontos ≈ 1 desvio-padrão. A escala UI (-10 a +10) mostra o desvio normalizado da média (0 = exatamente na média).</p>
+    ${explicacoes}
+    <p class="text-xs italic text-gray-400 mt-3">Perfil Natural = quem você é no fundo. Perfil Adaptado = como você se ajusta no contexto profissional. Discrepâncias grandes podem indicar supressão ou hiperadaptação.</p>
+  `);
+}
+
 function gerarAutoImagem(perfilCtx, seed, blocoLabel) {
   const { internal, display } = perfilCtx;
   const textos = FACTORES_INTERNOS.map((f, i) =>
@@ -623,11 +700,15 @@ function gerarCrescimento(dual, seed) {
 
 function gerarSintese(disclaimer) {
   return cardSecao(12, 'Síntese e Próximos Passos', `
-    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-      Este relatório oferece um panorama do seu perfil de personalidade nos cinco grandes domínios.
-      Use estas informações como ponto de partida para autoconhecimento e desenvolvimento.
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">
+      Este relatório oferece um panorama profundo do seu perfil Big Five. Os fatores são estáveis ao longo da vida adulta (herdabilidade ~40-60%), mas comportamentos podem ser desenvolvidos com consciência e prática.
     </p>
-    <p class="text-xs text-gray-400 italic">${disclaimer}</p>`);
+    <ul class="text-sm text-gray-600 dark:text-gray-300 list-disc pl-5 space-y-1 mb-4">
+      <li><strong>Métricas usadas:</strong> Média por fator → T-score (população ref. brasileira) → Percentil + banda + UI (-10 a +10). Randomização completa das perguntas a cada sessão para maior validade.</li>
+      <li><strong>Perfil Duplo:</strong> Natural reflete sua essência; Adaptado mostra ajustes no contexto profissional. Grandes deltas podem indicar oportunidades de alinhamento ou autoconhecimento.</li>
+      <li><strong>Próximos passos:</strong> Reflita sobre 1-2 áreas de desenvolvimento. Experimente comportamentos de "alto" em fatores que deseja fortalecer. Considere feedback 360º ou coaching.</li>
+    </ul>
+    <p class="text-xs text-gray-400 italic">${disclaimer || 'Instrumento de autoconhecimento baseado em IPIP-NEO e pesquisas brasileiras. Não substitui avaliação psicológica profissional.'}</p>`);
 }
 
 function renderizarRelatorio(nome, dual, apiResult) {
@@ -637,6 +718,7 @@ function renderizarRelatorio(nome, dual, apiResult) {
   const disclaimer = DEVOLUTIVA_TEMPLATES?.disclaimer || '';
 
   let html = gerarSumario(nome, hoje, dominante, dual);
+  html += gerarExplicacaoFatores(dual);
   html += gerarGraficosOCEAN(dual);
   html += gerarAutoImagem(dual.natural, seed, 'Natural');
   html += gerarPalavrasDescritivas(dual, seed);
@@ -854,15 +936,12 @@ function prepararQuestao(q) {
 }
 
 function perguntasEmbaralhadas() {
-  const natural = shuffleArray(PERGUNTAS_NATURAL.map((q, i) => prepararQuestao(q, i)));
-  const adaptado = shuffleArray(PERGUNTAS_ADAPTADO.map((q, i) => prepararQuestao(q, i)));
-  const slots = shuffleArray([...Array(TOTAL_QUESTOES).keys()]);
-  const natSlots = slots.slice(0, TOTAL_POR_BLOCO).sort((a, b) => a - b);
-  const adpSlots = slots.slice(TOTAL_POR_BLOCO).sort((a, b) => a - b);
-  const merged = new Array(TOTAL_QUESTOES);
-  natural.forEach((q, i) => { merged[natSlots[i]] = q; });
-  adaptado.forEach((q, i) => { merged[adpSlots[i]] = q; });
-  return merged;
+  // Randomização completa de todas as 60 perguntas (melhor prática psicométrica para reduzir efeitos de ordem, fadiga e viés)
+  const todas = [
+    ...PERGUNTAS_NATURAL.map(q => prepararQuestao(q)),
+    ...PERGUNTAS_ADAPTADO.map(q => prepararQuestao(q))
+  ];
+  return shuffleArray(todas);
 }
 
 function shufflePerguntas() {
@@ -915,7 +994,7 @@ function mostrarPergunta() {
   container.innerHTML = `
     <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-sm p-5 sm:p-8 fade-in card">
       <p class="text-base sm:text-lg font-semibold mb-6 leading-relaxed">${q.texto}</p>
-      <p class="text-sm text-gray-500 mb-4">Indique o quanto esta afirmação descreve você.</p>
+      <p class="text-sm text-gray-500 mb-4">Indique o quanto esta afirmação descreve você (seja honesto — não existe resposta "certa"). Suas respostas são usadas para calcular médias por fator, convertidas em T-scores comparados com normas brasileiras.</p>
       <div class="likert-scale flex justify-between gap-1" role="radiogroup" aria-label="Escala Likert">
         ${likertHtml}
       </div>

@@ -70,8 +70,10 @@ html.dark .card{background:#1f2937!important}
 <section id="home" class="py-12 px-4">
   <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-8 text-center home-card card">
     <h2 class="text-2xl font-bold mb-3">Descubra seu Perfil de Personalidade</h2>
-    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-2">O modelo <strong>Big Five (OCEAN)</strong> mapeia cinco <strong>traços estáveis de personalidade</strong> — não comportamento situacional como o DISC.</p>
-    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">São <strong>60 afirmações</strong> em escala <strong>Likert 1–5</strong> (concordo/discordo). Metodologia distinta do teste DISC (mais/menos).</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-2">O modelo <strong>Big Five (OCEAN)</strong> é o padrão científico mais validado da psicologia para descrever traços estáveis de personalidade (replicado em >50 países). Mede <strong>5 dimensões</strong> que explicam grande parte da variação humana em comportamentos, preferências e respostas ao ambiente.</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-1">• <strong>60 afirmações</strong> em escala Likert 1–5 (discordo totalmente a concordo totalmente).</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-1">• Duplo perfil: <strong>Natural</strong> (você no fundo) vs <strong>Adaptado</strong> (como você se apresenta no trabalho).</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">Baseado em IPIP-NEO + normas brasileiras (BFI). Resultados em T-scores (média 50), percentis e bandas. Não é diagnóstico clínico.</p>
     <div class="grid grid-cols-5 gap-2 max-w-md mx-auto mb-6 text-xs">
       <div class="factor-badge rounded-xl p-2 text-white font-bold" style="background:#8E44AD">O</div>
       <div class="factor-badge rounded-xl p-2 text-white font-bold" style="background:#2980B9">C</div>

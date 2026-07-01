@@ -54,6 +54,32 @@ function gerarSumario(nome, hoje, dominante, dual) {
   </div>`;
 }
 
+function gerarExplicacaoFatores(dual) {
+  const explicacoes = FACTORES_INTERNOS.map((f, i) => {
+    const info = FACTOR_INFO[f] || {};
+    const displayF = f === 'N' ? 'SE' : f;
+    const scores = dual.natural.display[displayF];
+    const t = scores.tScore;
+    const nivel = scores.banda;
+    const ui = scores.ui;
+    return `
+      <div class="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border-l-4" style="border-color:${CORES[displayF]}">
+        <h4 class="font-bold text-base mb-1" style="color:${CORES[displayF]}">${info.nome || DISPLAY_LABELS[displayF]} <span class="text-xs font-normal text-gray-500">(${nivel} · T=${t} · UI=${ui > 0 ? '+' : ''}${ui})</span></h4>
+        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">${info.descricao || ''}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          <div><strong class="text-green-600">Alto:</strong> ${info.altoComportamentos || ''}</div>
+          <div><strong class="text-amber-600">Baixo:</strong> ${info.baixoComportamentos || ''}</div>
+        </div>
+        <div class="mt-2 text-xs text-gray-500">Trabalho: ${info.trabalho || ''} | Relações: ${info.relacoes || ''} | Sob pressão: ${info.sobPressao || ''}</div>
+      </div>`;
+  }).join('');
+  return cardSecao(1, 'Entendendo os 5 Fatores do Big Five (OCEAN)', `
+    <p class="text-sm text-gray-500 mb-4">O modelo Big Five é o padrão-ouro da psicologia científica da personalidade (validado em dezenas de culturas e >1000 estudos). Cada fator é um continuum. Suas pontuações são comparadas com normas da população brasileira (BFI adaptado). T-score 50 = média da população. Cada 10 pontos ≈ 1 desvio-padrão. A escala UI (-10 a +10) mostra o desvio normalizado da média (0 = exatamente na média).</p>
+    ${explicacoes}
+    <p class="text-xs italic text-gray-400 mt-3">Perfil Natural = quem você é no fundo. Perfil Adaptado = como você se ajusta no contexto profissional. Discrepâncias grandes podem indicar supressão ou hiperadaptação.</p>
+  `);
+}
+
 function gerarAutoImagem(perfilCtx, seed, blocoLabel) {
   const { internal, display } = perfilCtx;
   const textos = FACTORES_INTERNOS.map((f, i) =>
@@ -153,11 +179,15 @@ function gerarCrescimento(dual, seed) {
 
 function gerarSintese(disclaimer) {
   return cardSecao(12, 'Síntese e Próximos Passos', `
-    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
-      Este relatório oferece um panorama do seu perfil de personalidade nos cinco grandes domínios.
-      Use estas informações como ponto de partida para autoconhecimento e desenvolvimento.
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">
+      Este relatório oferece um panorama profundo do seu perfil Big Five. Os fatores são estáveis ao longo da vida adulta (herdabilidade ~40-60%), mas comportamentos podem ser desenvolvidos com consciência e prática.
     </p>
-    <p class="text-xs text-gray-400 italic">${disclaimer}</p>`);
+    <ul class="text-sm text-gray-600 dark:text-gray-300 list-disc pl-5 space-y-1 mb-4">
+      <li><strong>Métricas usadas:</strong> Média por fator → T-score (população ref. brasileira) → Percentil + banda + UI (-10 a +10). Randomização completa das perguntas a cada sessão para maior validade.</li>
+      <li><strong>Perfil Duplo:</strong> Natural reflete sua essência; Adaptado mostra ajustes no contexto profissional. Grandes deltas podem indicar oportunidades de alinhamento ou autoconhecimento.</li>
+      <li><strong>Próximos passos:</strong> Reflita sobre 1-2 áreas de desenvolvimento. Experimente comportamentos de "alto" em fatores que deseja fortalecer. Considere feedback 360º ou coaching.</li>
+    </ul>
+    <p class="text-xs text-gray-400 italic">${disclaimer || 'Instrumento de autoconhecimento baseado em IPIP-NEO e pesquisas brasileiras. Não substitui avaliação psicológica profissional.'}</p>`);
 }
 
 function renderizarRelatorio(nome, dual, apiResult) {
@@ -167,6 +197,7 @@ function renderizarRelatorio(nome, dual, apiResult) {
   const disclaimer = DEVOLUTIVA_TEMPLATES?.disclaimer || '';
 
   let html = gerarSumario(nome, hoje, dominante, dual);
+  html += gerarExplicacaoFatores(dual);
   html += gerarGraficosOCEAN(dual);
   html += gerarAutoImagem(dual.natural, seed, 'Natural');
   html += gerarPalavrasDescritivas(dual, seed);
