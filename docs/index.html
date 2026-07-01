@@ -138,7 +138,7 @@ html.dark .card{background:#1f2937!important}
 // ===== CONSTANTES OCEAN — TESTEPERSONALIDADE v1.0.0 =====
 
 const INSTRUMENT_VERSION = '1.0.0';
-const API_BASE = '';  // vazio = offline; configurar URL da API em produção
+const API_BASE = 'https://backend-price3.vercel.app';  // Vercel backend URL from project prj_um9kVqtggku2ozLM6J3lVsrgsJS9 (token provided for auth)
 const HUB_URL = 'https://centralsp3.github.io/central/';
 const URL_DISC = 'https://centralsp3.github.io/TESTEDISC/';
 const URL_PERSONALIDADE = 'https://centralsp3.github.io/PERSONALIDADE/';
@@ -146,6 +146,10 @@ const URL_PERSONALIDADE = 'https://centralsp3.github.io/PERSONALIDADE/';
 const FACTORES_INTERNOS = ['O', 'C', 'E', 'A', 'N'];
 const FACTORES = FACTORES_INTERNOS;
 const FATORES_DISPLAY = ['O', 'C', 'E', 'A', 'SE'];
+
+// Lógica para habilitar backend: desabilita só em hosts puramente estáticos sem API_BASE configurada
+const IS_PURE_STATIC_HOST = window.location.hostname.includes('github.io') || window.location.hostname.includes('pages.dev');
+const EFFECTIVE_ENABLE_API = (typeof API_BASE !== 'undefined' && API_BASE) || !IS_PURE_STATIC_HOST && (typeof FLAGS !== 'undefined' ? FLAGS.enableAPI : true);
 
 const DISPLAY_LABELS = {
   O: 'Abertura à Experiência',
@@ -285,8 +289,8 @@ function invertForDisplay(f, scores) {
 }
 
 const FLAGS = {
-  enableAPI: !!API_BASE,
-  enableFacets: true,  // Agora implementado todos os 30 facets
+  enableAPI: true,  // backend habilitado para coleta, normas dinâmicas e PDF servidor (pode ser sobrescrito em hosts estáticos)
+  enableFacets: true,
   enablePDFExport: true,
 };
 
@@ -938,10 +942,17 @@ async function calcularERenderizar(nome, dualPrecomputed, apiDataPre) {
   const dual = dualPrecomputed || calcularScoresDual(respostas);
   let apiResult = apiDataPre || null;
 
-  if (FLAGS.enableAPI && !apiResult) {
+  if (EFFECTIVE_ENABLE_API && !apiResult) {
     apiResult = await inferirViaAPI(dual);
     await salvarRespostasBatch(dual);
   }
+
+  // Expose for server PDF
+  window._lastDual = dual;
+  window._lastTScores = {
+    natural: extractTScores ? extractTScores(dual.natural.internal) : {},
+    adapted: extractTScores ? extractTScores(dual.adapted.internal) : {},
+  };
 
   const container = document.getElementById('resultadoContainer');
   container.innerHTML = renderizarRelatorio(nome, dual, apiResult);
@@ -965,9 +976,9 @@ function toggleDarkMode() {
 }
 
 async function salvarRespostasBatch(dual) {
-  if (!API_BASE) return;
+  if (!EFFECTIVE_ENABLE_API) return;
   try {
-    await fetch(`${API_BASE}/responses`, {
+    await fetch(`${API_BASE || ''}/responses`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -985,13 +996,13 @@ async function salvarRespostasBatch(dual) {
 }
 
 async function inferirViaAPI(dual) {
-  if (!API_BASE) return null;
+  if (!EFFECTIVE_ENABLE_API) return null;
   try {
     const t_scores = {
       natural: extractTScores(dual.natural.internal),
       adapted: extractTScores(dual.adapted.internal),
     };
-    const resp = await fetch(`${API_BASE}/infer`, {
+    const resp = await fetch(`${API_BASE || ''}/infer`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ t_scores, share: true }),
@@ -1017,14 +1028,50 @@ async function copiarLink(hash) {
   }
 }
 
-function exportarPDF() {
-  // Prepare for full layout print with backgrounds and graphics
+async function exportarPDF() {
+  const nomeEl = document.getElementById('userName');
+  const name = (nomeEl && nomeEl.value.trim()) || 'Usuário';
+  const container = document.getElementById('resultadoContainer');
+  if (!container) {
+    alert('Relatório não encontrado.');
+    return;
+  }
+  if (EFFECTIVE_ENABLE_API) {
+    try {
+      // Build dual from global or last computed (assume window._lastDual or from container, but simple pass from state)
+      // For demo, use last scores if available, else fallback
+      const dual = window._lastDual || { natural: {}, adapted: {} };
+      const resp = await fetch(`${API_BASE || ''}/pdf`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          dual,
+          t_scores: window._lastTScores || {},
+        }),
+      });
+      if (resp.ok) {
+        const blob = await resp.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `relatorio_ocean_${name.replace(/\s+/g, '_')}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        return;
+      }
+    } catch (e) {
+      console.warn('Server PDF failed, using client print', e);
+    }
+  }
+  // Fallback client print with layout prep
   const resultEl = document.getElementById('resultado');
   if (resultEl) {
     resultEl.style.background = '#ffffff';
     resultEl.style.color = '#111827';
   }
-  // Add temporary print class for full fidelity
   document.body.classList.add('print-mode');
   const origTitle = document.title;
   document.title = 'Relatorio_OCEAN_' + new Date().toISOString().slice(0,10).replace(/-/g,'');
@@ -1036,7 +1083,7 @@ function exportarPDF() {
 async function carregarResultadoCompartilhado() {
   const params = new URLSearchParams(window.location.search);
   const hash = params.get('r');
-  if (!hash || !API_BASE) return false;
+  if (!hash || !EFFECTIVE_ENABLE_API) return false;
   try {
     const resp = await fetch(`${API_BASE}/result/${hash}`);
     if (!resp.ok) return false;
