@@ -1,7 +1,7 @@
 // ===== CONSTANTES OCEAN — TESTEPERSONALIDADE v1.0.0 =====
 
 const INSTRUMENT_VERSION = '1.0.0';
-const API_BASE = 'https://personalidade-api.vercel.app';  // Vercel API deployed with the token (personalidade-api project)
+const API_BASE = 'https://personalidade-3i2q4mspi-price3.vercel.app';  // Latest deployed Vercel API (personalidade-api)
 const HUB_URL = 'https://centralsp3.github.io/central/';
 const URL_DISC = 'https://centralsp3.github.io/TESTEDISC/';
 const URL_PERSONALIDADE = 'https://centralsp3.github.io/PERSONALIDADE/';
