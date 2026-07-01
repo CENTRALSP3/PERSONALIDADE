@@ -1,0 +1,46 @@
+Abertura:
+  codigo: O
+  facetas:
+  - Fantasia
+  - Estética
+  - Sentimentos
+  - Ações
+  - Ideias
+  - Valores
+Conscienciosidade:
+  codigo: C
+  facetas:
+  - Competência
+  - Ordem
+  - Dever
+  - Esforço
+  - Autodisciplina
+  - Deliberação
+Extroversão:
+  codigo: E
+  facetas:
+  - Cordialidade
+  - Sociabilidade
+  - Assertividade
+  - Atividade
+  - BuscaExcitação
+  - EmoçõesPositivas
+Amabilidade:
+  codigo: A
+  facetas:
+  - Confiança
+  - Franqueza
+  - Altruísmo
+  - Complacência
+  - Modéstia
+  - Sensibilidade
+Neuroticismo:
+  codigo: N
+  display: Estabilidade Emocional
+  facetas:
+  - Ansiedade
+  - Hostilidade
+  - Depressão
+  - Autoconsciência
+  - Impulsividade
+  - Vulnerabilidade

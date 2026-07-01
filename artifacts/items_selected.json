@@ -1,0 +1,610 @@
+{
+  "meta": {
+    "instrument_version": "1.0.0",
+    "source": "IPIP-NEO-120 + custom",
+    "total_items": 60,
+    "items_per_factor_per_context": 6
+  },
+  "items": [
+    {
+      "id": "n01",
+      "bloco": "natural",
+      "texto": "Tenho uma imaginação vívida.",
+      "fator": "O",
+      "faceta": "Fantasia",
+      "reversed": false,
+      "ipip_source": "O1",
+      "theme": "fantasia"
+    },
+    {
+      "id": "n02",
+      "bloco": "natural",
+      "texto": "Tenho interesse em ciência.",
+      "fator": "O",
+      "faceta": "Valores",
+      "reversed": false,
+      "ipip_source": "O10",
+      "theme": "valores"
+    },
+    {
+      "id": "n03",
+      "bloco": "natural",
+      "texto": "Gosto de resolver problemas complexos.",
+      "fator": "O",
+      "faceta": "Valores",
+      "reversed": false,
+      "ipip_source": "O11",
+      "theme": "valores"
+    },
+    {
+      "id": "n04",
+      "bloco": "natural",
+      "texto": "Sinto as emoções dos outros.",
+      "fator": "O",
+      "faceta": "Sentimentos",
+      "reversed": false,
+      "ipip_source": "O12",
+      "theme": "sentimentos"
+    },
+    {
+      "id": "n05",
+      "bloco": "natural",
+      "texto": "Não tenho uma boa imaginação.",
+      "fator": "O",
+      "faceta": "Fantasia",
+      "reversed": true,
+      "ipip_source": "O13",
+      "theme": "fantasia"
+    },
+    {
+      "id": "n06",
+      "bloco": "natural",
+      "texto": "Não gosto de poesia.",
+      "fator": "O",
+      "faceta": "Estética",
+      "reversed": true,
+      "ipip_source": "O14",
+      "theme": "estética"
+    },
+    {
+      "id": "n07",
+      "bloco": "natural",
+      "texto": "Estou sempre preparado.",
+      "fator": "C",
+      "faceta": "Competência",
+      "reversed": false,
+      "ipip_source": "C1",
+      "theme": "competência"
+    },
+    {
+      "id": "n08",
+      "bloco": "natural",
+      "texto": "Trabalho com dedicação.",
+      "fator": "C",
+      "faceta": "Esforço",
+      "reversed": false,
+      "ipip_source": "C10",
+      "theme": "esforço"
+    },
+    {
+      "id": "n09",
+      "bloco": "natural",
+      "texto": "Sou exigente no meu trabalho.",
+      "fator": "C",
+      "faceta": "Autodisciplina",
+      "reversed": false,
+      "ipip_source": "C11",
+      "theme": "autodisciplina"
+    },
+    {
+      "id": "n10",
+      "bloco": "natural",
+      "texto": "Continuo até que tudo esteja perfeito.",
+      "fator": "C",
+      "faceta": "Deliberação",
+      "reversed": false,
+      "ipip_source": "C12",
+      "theme": "deliberação"
+    },
+    {
+      "id": "n11",
+      "bloco": "natural",
+      "texto": "Faço apenas o mínimo necessário.",
+      "fator": "C",
+      "faceta": "Competência",
+      "reversed": true,
+      "ipip_source": "C13",
+      "theme": "competência"
+    },
+    {
+      "id": "n12",
+      "bloco": "natural",
+      "texto": "Deixo minhas coisas espalhadas.",
+      "fator": "C",
+      "faceta": "Ordem",
+      "reversed": true,
+      "ipip_source": "C14",
+      "theme": "ordem"
+    },
+    {
+      "id": "n13",
+      "bloco": "natural",
+      "texto": "Sinto-me à vontade perto de pessoas.",
+      "fator": "E",
+      "faceta": "Cordialidade",
+      "reversed": false,
+      "ipip_source": "E1",
+      "theme": "cordialidade"
+    },
+    {
+      "id": "n14",
+      "bloco": "natural",
+      "texto": "Faço amizades facilmente.",
+      "fator": "E",
+      "faceta": "Atividade",
+      "reversed": false,
+      "ipip_source": "E10",
+      "theme": "atividade"
+    },
+    {
+      "id": "n15",
+      "bloco": "natural",
+      "texto": "Assumo o comando.",
+      "fator": "E",
+      "faceta": "BuscaExcitação",
+      "reversed": false,
+      "ipip_source": "E11",
+      "theme": "buscaexcitação"
+    },
+    {
+      "id": "n16",
+      "bloco": "natural",
+      "texto": "Sei como cativar as pessoas.",
+      "fator": "E",
+      "faceta": "EmoçõesPositivas",
+      "reversed": false,
+      "ipip_source": "E12",
+      "theme": "emoçõespositivas"
+    },
+    {
+      "id": "n17",
+      "bloco": "natural",
+      "texto": "Tenho dificuldade para me aproximar dos outros.",
+      "fator": "E",
+      "faceta": "Cordialidade",
+      "reversed": true,
+      "ipip_source": "E13",
+      "theme": "cordialidade"
+    },
+    {
+      "id": "n18",
+      "bloco": "natural",
+      "texto": "Evito multidões.",
+      "fator": "E",
+      "faceta": "Sociabilidade",
+      "reversed": true,
+      "ipip_source": "E14",
+      "theme": "sociabilidade"
+    },
+    {
+      "id": "n19",
+      "bloco": "natural",
+      "texto": "Confio nos outros.",
+      "fator": "A",
+      "faceta": "Confiança",
+      "reversed": false,
+      "ipip_source": "A1",
+      "theme": "confiança"
+    },
+    {
+      "id": "n20",
+      "bloco": "natural",
+      "texto": "Faço as pessoas se sentirem à vontade.",
+      "fator": "A",
+      "faceta": "Complacência",
+      "reversed": false,
+      "ipip_source": "A10",
+      "theme": "complacência"
+    },
+    {
+      "id": "n21",
+      "bloco": "natural",
+      "texto": "Me preocupo com os problemas dos outros.",
+      "fator": "A",
+      "faceta": "Modéstia",
+      "reversed": false,
+      "ipip_source": "A11",
+      "theme": "modéstia"
+    },
+    {
+      "id": "n22",
+      "bloco": "natural",
+      "texto": "Sou fácil de agradar.",
+      "fator": "A",
+      "faceta": "Sensibilidade",
+      "reversed": false,
+      "ipip_source": "A12",
+      "theme": "sensibilidade"
+    },
+    {
+      "id": "n23",
+      "bloco": "natural",
+      "texto": "Suspeito de motivos ocultos nos outros.",
+      "fator": "A",
+      "faceta": "Confiança",
+      "reversed": true,
+      "ipip_source": "A13",
+      "theme": "confiança"
+    },
+    {
+      "id": "n24",
+      "bloco": "natural",
+      "texto": "Uso os outros para meus próprios fins.",
+      "fator": "A",
+      "faceta": "Franqueza",
+      "reversed": true,
+      "ipip_source": "A14",
+      "theme": "franqueza"
+    },
+    {
+      "id": "n25",
+      "bloco": "natural",
+      "texto": "Fico estressado facilmente.",
+      "fator": "N",
+      "faceta": "Ansiedade",
+      "reversed": false,
+      "ipip_source": "N1",
+      "theme": "ansiedade"
+    },
+    {
+      "id": "n26",
+      "bloco": "natural",
+      "texto": "Fico cheio de dúvidas sobre as coisas.",
+      "fator": "N",
+      "faceta": "Autoconsciência",
+      "reversed": false,
+      "ipip_source": "N10",
+      "theme": "autoconsciência"
+    },
+    {
+      "id": "n27",
+      "bloco": "natural",
+      "texto": "Me sinto ameaçado facilmente.",
+      "fator": "N",
+      "faceta": "Impulsividade",
+      "reversed": false,
+      "ipip_source": "N11",
+      "theme": "impulsividade"
+    },
+    {
+      "id": "n28",
+      "bloco": "natural",
+      "texto": "Fico sobrecarregado pelas emoções.",
+      "fator": "N",
+      "faceta": "Vulnerabilidade",
+      "reversed": false,
+      "ipip_source": "N12",
+      "theme": "vulnerabilidade"
+    },
+    {
+      "id": "n29",
+      "bloco": "natural",
+      "texto": "Estou relaxado na maior parte do tempo.",
+      "fator": "N",
+      "faceta": "Ansiedade",
+      "reversed": true,
+      "ipip_source": "N13",
+      "theme": "ansiedade"
+    },
+    {
+      "id": "n30",
+      "bloco": "natural",
+      "texto": "Raramente me sinto triste.",
+      "fator": "N",
+      "faceta": "Hostilidade",
+      "reversed": true,
+      "ipip_source": "N14",
+      "theme": "hostilidade"
+    },
+    {
+      "id": "a01",
+      "bloco": "adaptado",
+      "texto": "No trabalho, busco abordagens criativas para resolver problemas.",
+      "fator": "O",
+      "faceta": "Ideias",
+      "reversed": true,
+      "ipip_source": "O15",
+      "theme": "ideias_profissional"
+    },
+    {
+      "id": "a02",
+      "bloco": "adaptado",
+      "texto": "Valorizo inovação e novas perspectivas na equipe.",
+      "fator": "O",
+      "faceta": "Ações",
+      "reversed": true,
+      "ipip_source": "O16",
+      "theme": "ações_profissional"
+    },
+    {
+      "id": "a03",
+      "bloco": "adaptado",
+      "texto": "Gosto de explorar métodos não convencionais no ambiente profissional.",
+      "fator": "O",
+      "faceta": "Valores",
+      "reversed": true,
+      "ipip_source": "O17",
+      "theme": "valores_profissional"
+    },
+    {
+      "id": "a04",
+      "bloco": "adaptado",
+      "texto": "Prefiro rotinas estabelecidas no escritório.",
+      "fator": "O",
+      "faceta": "Sentimentos",
+      "reversed": true,
+      "ipip_source": "O18",
+      "theme": "sentimentos_profissional"
+    },
+    {
+      "id": "a05",
+      "bloco": "adaptado",
+      "texto": "Evito experimentar novas ferramentas no trabalho.",
+      "fator": "O",
+      "faceta": "Fantasia",
+      "reversed": false,
+      "ipip_source": "O19",
+      "theme": "fantasia_profissional"
+    },
+    {
+      "id": "a06",
+      "bloco": "adaptado",
+      "texto": "Não me interesso por tendências do setor.",
+      "fator": "O",
+      "faceta": "Fantasia",
+      "reversed": false,
+      "ipip_source": "O2",
+      "theme": "fantasia_profissional"
+    },
+    {
+      "id": "a07",
+      "bloco": "adaptado",
+      "texto": "Cumpro prazos e compromissos profissionais com rigor.",
+      "fator": "C",
+      "faceta": "Dever",
+      "reversed": true,
+      "ipip_source": "C15",
+      "theme": "dever_profissional"
+    },
+    {
+      "id": "a08",
+      "bloco": "adaptado",
+      "texto": "Organizo minhas tarefas de forma sistemática no trabalho.",
+      "fator": "C",
+      "faceta": "Esforço",
+      "reversed": true,
+      "ipip_source": "C16",
+      "theme": "esforço_profissional"
+    },
+    {
+      "id": "a09",
+      "bloco": "adaptado",
+      "texto": "Assumo responsabilidade pelos resultados da equipe.",
+      "fator": "C",
+      "faceta": "Autodisciplina",
+      "reversed": true,
+      "ipip_source": "C17",
+      "theme": "autodisciplina_profissional"
+    },
+    {
+      "id": "a10",
+      "bloco": "adaptado",
+      "texto": "Negligencio detalhes quando estou sob pressão no trabalho.",
+      "fator": "C",
+      "faceta": "Deliberação",
+      "reversed": true,
+      "ipip_source": "C18",
+      "theme": "deliberação_profissional"
+    },
+    {
+      "id": "a11",
+      "bloco": "adaptado",
+      "texto": "Mantenho minha área de trabalho arrumada e funcional.",
+      "fator": "C",
+      "faceta": "Competência",
+      "reversed": false,
+      "ipip_source": "C19",
+      "theme": "competência_profissional"
+    },
+    {
+      "id": "a12",
+      "bloco": "adaptado",
+      "texto": "Deixo tarefas pendentes para depois no ambiente profissional.",
+      "fator": "C",
+      "faceta": "Ordem",
+      "reversed": false,
+      "ipip_source": "C2",
+      "theme": "ordem_profissional"
+    },
+    {
+      "id": "a13",
+      "bloco": "adaptado",
+      "texto": "Sinto-me energizado em reuniões com muitas pessoas.",
+      "fator": "E",
+      "faceta": "Assertividade",
+      "reversed": true,
+      "ipip_source": "E15",
+      "theme": "assertividade_profissional"
+    },
+    {
+      "id": "a14",
+      "bloco": "adaptado",
+      "texto": "Tomo a iniciativa de apresentar ideias em grupo.",
+      "fator": "E",
+      "faceta": "Atividade",
+      "reversed": true,
+      "ipip_source": "E16",
+      "theme": "atividade_profissional"
+    },
+    {
+      "id": "a15",
+      "bloco": "adaptado",
+      "texto": "Construo redes de contato no ambiente profissional.",
+      "fator": "E",
+      "faceta": "BuscaExcitação",
+      "reversed": true,
+      "ipip_source": "E17",
+      "theme": "buscaexcitação_profissional"
+    },
+    {
+      "id": "a16",
+      "bloco": "adaptado",
+      "texto": "Prefiro trabalhar sozinho a interagir com a equipe.",
+      "fator": "E",
+      "faceta": "EmoçõesPositivas",
+      "reversed": true,
+      "ipip_source": "E18",
+      "theme": "emoçõespositivas_profissional"
+    },
+    {
+      "id": "a17",
+      "bloco": "adaptado",
+      "texto": "Evito participar de eventos corporativos sociais.",
+      "fator": "E",
+      "faceta": "Cordialidade",
+      "reversed": false,
+      "ipip_source": "E19",
+      "theme": "cordialidade_profissional"
+    },
+    {
+      "id": "a18",
+      "bloco": "adaptado",
+      "texto": "Mantenho-me reservado em reuniões de equipe.",
+      "fator": "E",
+      "faceta": "Sociabilidade",
+      "reversed": false,
+      "ipip_source": "E2",
+      "theme": "sociabilidade_profissional"
+    },
+    {
+      "id": "a19",
+      "bloco": "adaptado",
+      "texto": "Confio nas intenções dos meus colegas de trabalho.",
+      "fator": "A",
+      "faceta": "Altruísmo",
+      "reversed": true,
+      "ipip_source": "A15",
+      "theme": "altruísmo_profissional"
+    },
+    {
+      "id": "a20",
+      "bloco": "adaptado",
+      "texto": "Colaboro de forma harmoniosa com a equipe.",
+      "fator": "A",
+      "faceta": "Complacência",
+      "reversed": true,
+      "ipip_source": "A16",
+      "theme": "complacência_profissional"
+    },
+    {
+      "id": "a21",
+      "bloco": "adaptado",
+      "texto": "Me preocupo com o bem-estar dos colegas.",
+      "fator": "A",
+      "faceta": "Modéstia",
+      "reversed": true,
+      "ipip_source": "A17",
+      "theme": "modéstia_profissional"
+    },
+    {
+      "id": "a22",
+      "bloco": "adaptado",
+      "texto": "Priorizo meus interesses sobre os da equipe.",
+      "fator": "A",
+      "faceta": "Sensibilidade",
+      "reversed": true,
+      "ipip_source": "A18",
+      "theme": "sensibilidade_profissional"
+    },
+    {
+      "id": "a23",
+      "bloco": "adaptado",
+      "texto": "Sou direto mesmo quando isso pode incomodar colegas.",
+      "fator": "A",
+      "faceta": "Confiança",
+      "reversed": false,
+      "ipip_source": "A19",
+      "theme": "confiança_profissional"
+    },
+    {
+      "id": "a24",
+      "bloco": "adaptado",
+      "texto": "Tenho dificuldade em fazer concessões no trabalho.",
+      "fator": "A",
+      "faceta": "Franqueza",
+      "reversed": false,
+      "ipip_source": "A2",
+      "theme": "franqueza_profissional"
+    },
+    {
+      "id": "a25",
+      "bloco": "adaptado",
+      "texto": "Fico ansioso com prazos apertados no trabalho.",
+      "fator": "N",
+      "faceta": "Depressão",
+      "reversed": true,
+      "ipip_source": "N15",
+      "theme": "depressão_profissional"
+    },
+    {
+      "id": "a26",
+      "bloco": "adaptado",
+      "texto": "Me preocupo excessivamente com erros profissionais.",
+      "fator": "N",
+      "faceta": "Autoconsciência",
+      "reversed": true,
+      "ipip_source": "N16",
+      "theme": "autoconsciência_profissional"
+    },
+    {
+      "id": "a27",
+      "bloco": "adaptado",
+      "texto": "Fico abalado com críticas no ambiente de trabalho.",
+      "fator": "N",
+      "faceta": "Impulsividade",
+      "reversed": true,
+      "ipip_source": "N17",
+      "theme": "impulsividade_profissional"
+    },
+    {
+      "id": "a28",
+      "bloco": "adaptado",
+      "texto": "Mantenho calma mesmo em situações de alta pressão.",
+      "fator": "N",
+      "faceta": "Vulnerabilidade",
+      "reversed": true,
+      "ipip_source": "N18",
+      "theme": "vulnerabilidade_profissional"
+    },
+    {
+      "id": "a29",
+      "bloco": "adaptado",
+      "texto": "Raramente me sinto estressado no trabalho.",
+      "fator": "N",
+      "faceta": "Ansiedade",
+      "reversed": false,
+      "ipip_source": "N19",
+      "theme": "ansiedade_profissional"
+    },
+    {
+      "id": "a30",
+      "bloco": "adaptado",
+      "texto": "Lido bem com incertezas profissionais.",
+      "fator": "N",
+      "faceta": "Hostilidade",
+      "reversed": false,
+      "ipip_source": "N2",
+      "theme": "hostilidade_profissional"
+    }
+  ]
+}

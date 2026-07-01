@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "sample_size": 500,
+    "source": "bootstrap_literature_2026",
+    "population": "adultos_brasil_18_65",
+    "updated_at": "2026-07-01T08:56:33.306056+00:00"
+  },
+  "domains": {
+    "O": {
+      "mean": 3.35,
+      "sd": 0.72
+    },
+    "C": {
+      "mean": 3.52,
+      "sd": 0.68
+    },
+    "E": {
+      "mean": 3.18,
+      "sd": 0.75
+    },
+    "A": {
+      "mean": 3.61,
+      "sd": 0.65
+    },
+    "N": {
+      "mean": 2.89,
+      "sd": 0.78
+    }
+  }
+}

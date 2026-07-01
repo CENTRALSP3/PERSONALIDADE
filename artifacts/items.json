@@ -1,0 +1,1090 @@
+{
+  "meta": {
+    "source": "IPIP-NEO-120",
+    "version": "1.0.0",
+    "total_items": 120,
+    "items_per_domain": 24
+  },
+  "items": [
+    {
+      "ipip_source": "O1",
+      "domain": "O",
+      "facet": "Fantasia",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Have a rich vocabulary.",
+      "text_pt": "Tenho uma imaginação vívida."
+    },
+    {
+      "ipip_source": "O2",
+      "domain": "O",
+      "facet": "Fantasia",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Have excellent ideas.",
+      "text_pt": "Tenho ideias excelentes."
+    },
+    {
+      "ipip_source": "O3",
+      "domain": "O",
+      "facet": "Estética",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Believe in the importance of art.",
+      "text_pt": "Acredito na importância da arte."
+    },
+    {
+      "ipip_source": "O4",
+      "domain": "O",
+      "facet": "Estética",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "See beauty in things others might not notice.",
+      "text_pt": "Vejo beleza em coisas que outros podem não notar."
+    },
+    {
+      "ipip_source": "O5",
+      "domain": "O",
+      "facet": "Sentimentos",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Experience my emotions intensely.",
+      "text_pt": "Experimento minhas emoções intensamente."
+    },
+    {
+      "ipip_source": "O6",
+      "domain": "O",
+      "facet": "Ideias",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Have difficulty understanding abstract ideas.",
+      "text_pt": "Não me interesso por ideias abstratas."
+    },
+    {
+      "ipip_source": "O7",
+      "domain": "O",
+      "facet": "Ações",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Prefer variety to routine.",
+      "text_pt": "Prefiro variedade à rotina."
+    },
+    {
+      "ipip_source": "O8",
+      "domain": "O",
+      "facet": "Ações",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am willing to try something new.",
+      "text_pt": "Estou disposto a tentar algo novo."
+    },
+    {
+      "ipip_source": "O9",
+      "domain": "O",
+      "facet": "Ideias",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Love to think up new ways of doing things.",
+      "text_pt": "Adoro inventar novas formas de fazer as coisas."
+    },
+    {
+      "ipip_source": "O10",
+      "domain": "O",
+      "facet": "Valores",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am interested in science.",
+      "text_pt": "Tenho interesse em ciência."
+    },
+    {
+      "ipip_source": "O11",
+      "domain": "O",
+      "facet": "Valores",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Like to solve complex problems.",
+      "text_pt": "Gosto de resolver problemas complexos."
+    },
+    {
+      "ipip_source": "O12",
+      "domain": "O",
+      "facet": "Sentimentos",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Feel others' emotions.",
+      "text_pt": "Sinto as emoções dos outros."
+    },
+    {
+      "ipip_source": "O13",
+      "domain": "O",
+      "facet": "Fantasia",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Do not have a good imagination.",
+      "text_pt": "Não tenho uma boa imaginação."
+    },
+    {
+      "ipip_source": "O14",
+      "domain": "O",
+      "facet": "Estética",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Do not like poetry.",
+      "text_pt": "Não gosto de poesia."
+    },
+    {
+      "ipip_source": "O15",
+      "domain": "O",
+      "facet": "Ideias",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Avoid philosophical discussions.",
+      "text_pt": "Evito discussões filosóficas."
+    },
+    {
+      "ipip_source": "O16",
+      "domain": "O",
+      "facet": "Ações",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Do not like art.",
+      "text_pt": "Não gosto de arte."
+    },
+    {
+      "ipip_source": "O17",
+      "domain": "O",
+      "facet": "Valores",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Am not interested in theoretical discussions.",
+      "text_pt": "Não me interesso por discussões teóricas."
+    },
+    {
+      "ipip_source": "O18",
+      "domain": "O",
+      "facet": "Sentimentos",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Rarely notice my emotional reactions.",
+      "text_pt": "Raramente noto minhas reações emocionais."
+    },
+    {
+      "ipip_source": "O19",
+      "domain": "O",
+      "facet": "Fantasia",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Enjoy wild flights of fantasy.",
+      "text_pt": "Gosto de voos de fantasia."
+    },
+    {
+      "ipip_source": "O20",
+      "domain": "O",
+      "facet": "Estética",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Get deeply immersed in music.",
+      "text_pt": "Me envolvo profundamente com música."
+    },
+    {
+      "ipip_source": "O21",
+      "domain": "O",
+      "facet": "Ideias",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am full of ideas.",
+      "text_pt": "Sou cheio de ideias."
+    },
+    {
+      "ipip_source": "O22",
+      "domain": "O",
+      "facet": "Ações",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Carry the conversation to a higher level.",
+      "text_pt": "Elevo a conversa a um nível mais profundo."
+    },
+    {
+      "ipip_source": "O23",
+      "domain": "O",
+      "facet": "Valores",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Spend time reflecting on things.",
+      "text_pt": "Passo tempo refletindo sobre as coisas."
+    },
+    {
+      "ipip_source": "O24",
+      "domain": "O",
+      "facet": "Sentimentos",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Am not easily affected by my emotions.",
+      "text_pt": "Não sou facilmente afetado pelas minhas emoções."
+    },
+    {
+      "ipip_source": "C1",
+      "domain": "C",
+      "facet": "Competência",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am always prepared.",
+      "text_pt": "Estou sempre preparado."
+    },
+    {
+      "ipip_source": "C2",
+      "domain": "C",
+      "facet": "Ordem",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Pay attention to details.",
+      "text_pt": "Presto atenção aos detalhes."
+    },
+    {
+      "ipip_source": "C3",
+      "domain": "C",
+      "facet": "Dever",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Get chores done right away.",
+      "text_pt": "Faço as tarefas imediatamente."
+    },
+    {
+      "ipip_source": "C4",
+      "domain": "C",
+      "facet": "Esforço",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Like order.",
+      "text_pt": "Gosto de ordem."
+    },
+    {
+      "ipip_source": "C5",
+      "domain": "C",
+      "facet": "Autodisciplina",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Follow a schedule.",
+      "text_pt": "Sigo uma agenda."
+    },
+    {
+      "ipip_source": "C6",
+      "domain": "C",
+      "facet": "Deliberação",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Shirk my duties.",
+      "text_pt": "Negligencio minhas obrigações."
+    },
+    {
+      "ipip_source": "C7",
+      "domain": "C",
+      "facet": "Competência",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Excel in what I do.",
+      "text_pt": "Me destaco no que faço."
+    },
+    {
+      "ipip_source": "C8",
+      "domain": "C",
+      "facet": "Ordem",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Often forget to put things back in their proper place.",
+      "text_pt": "Esqueço de guardar as coisas no lugar."
+    },
+    {
+      "ipip_source": "C9",
+      "domain": "C",
+      "facet": "Dever",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Like to tidy up.",
+      "text_pt": "Gosto de arrumar as coisas."
+    },
+    {
+      "ipip_source": "C10",
+      "domain": "C",
+      "facet": "Esforço",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Work hard.",
+      "text_pt": "Trabalho com dedicação."
+    },
+    {
+      "ipip_source": "C11",
+      "domain": "C",
+      "facet": "Autodisciplina",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am exacting in my work.",
+      "text_pt": "Sou exigente no meu trabalho."
+    },
+    {
+      "ipip_source": "C12",
+      "domain": "C",
+      "facet": "Deliberação",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Continue until everything is perfect.",
+      "text_pt": "Continuo até que tudo esteja perfeito."
+    },
+    {
+      "ipip_source": "C13",
+      "domain": "C",
+      "facet": "Competência",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Do just enough work to get by.",
+      "text_pt": "Faço apenas o mínimo necessário."
+    },
+    {
+      "ipip_source": "C14",
+      "domain": "C",
+      "facet": "Ordem",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Leave my belongings around.",
+      "text_pt": "Deixo minhas coisas espalhadas."
+    },
+    {
+      "ipip_source": "C15",
+      "domain": "C",
+      "facet": "Dever",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Break rules.",
+      "text_pt": "Quebro regras."
+    },
+    {
+      "ipip_source": "C16",
+      "domain": "C",
+      "facet": "Esforço",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Waste my time.",
+      "text_pt": "Desperdiço meu tempo."
+    },
+    {
+      "ipip_source": "C17",
+      "domain": "C",
+      "facet": "Autodisciplina",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Find it difficult to get down to work.",
+      "text_pt": "Tenho dificuldade para começar a trabalhar."
+    },
+    {
+      "ipip_source": "C18",
+      "domain": "C",
+      "facet": "Deliberação",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Do things according to a plan.",
+      "text_pt": "Faço as coisas sem planejamento."
+    },
+    {
+      "ipip_source": "C19",
+      "domain": "C",
+      "facet": "Competência",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Handle tasks smoothly.",
+      "text_pt": "Lido com tarefas com facilidade."
+    },
+    {
+      "ipip_source": "C20",
+      "domain": "C",
+      "facet": "Ordem",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Want everything to be just right.",
+      "text_pt": "Quero que tudo fique perfeito."
+    },
+    {
+      "ipip_source": "C21",
+      "domain": "C",
+      "facet": "Dever",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Do more than what's expected of me.",
+      "text_pt": "Faço mais do que se espera de mim."
+    },
+    {
+      "ipip_source": "C22",
+      "domain": "C",
+      "facet": "Esforço",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Set high standards for myself and others.",
+      "text_pt": "Estabeleço padrões elevados para mim e outros."
+    },
+    {
+      "ipip_source": "C23",
+      "domain": "C",
+      "facet": "Autodisciplina",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Am not easily distracted.",
+      "text_pt": "Não me distraio facilmente."
+    },
+    {
+      "ipip_source": "C24",
+      "domain": "C",
+      "facet": "Deliberação",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Think before acting.",
+      "text_pt": "Penso antes de agir."
+    },
+    {
+      "ipip_source": "E1",
+      "domain": "E",
+      "facet": "Cordialidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Feel comfortable around people.",
+      "text_pt": "Sinto-me à vontade perto de pessoas."
+    },
+    {
+      "ipip_source": "E2",
+      "domain": "E",
+      "facet": "Sociabilidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Don't mind being the center of attention.",
+      "text_pt": "Não me importo de ser o centro das atenções."
+    },
+    {
+      "ipip_source": "E3",
+      "domain": "E",
+      "facet": "Assertividade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Start conversations.",
+      "text_pt": "Inicio conversas."
+    },
+    {
+      "ipip_source": "E4",
+      "domain": "E",
+      "facet": "Atividade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Talk to a lot of different people at parties.",
+      "text_pt": "Converso com muitas pessoas em festas."
+    },
+    {
+      "ipip_source": "E5",
+      "domain": "E",
+      "facet": "BuscaExcitação",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Don't talk a lot.",
+      "text_pt": "Não falo muito."
+    },
+    {
+      "ipip_source": "E6",
+      "domain": "E",
+      "facet": "EmoçõesPositivas",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Keep in the background.",
+      "text_pt": "Fico em segundo plano."
+    },
+    {
+      "ipip_source": "E7",
+      "domain": "E",
+      "facet": "Cordialidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Sympathize with others' feelings.",
+      "text_pt": "Simpatizo com os sentimentos dos outros."
+    },
+    {
+      "ipip_source": "E8",
+      "domain": "E",
+      "facet": "Sociabilidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Feel others' emotions.",
+      "text_pt": "Sinto as emoções dos outros."
+    },
+    {
+      "ipip_source": "E9",
+      "domain": "E",
+      "facet": "Assertividade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am not really interested in others.",
+      "text_pt": "Tenho interesse genuíno nos outros."
+    },
+    {
+      "ipip_source": "E10",
+      "domain": "E",
+      "facet": "Atividade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Make friends easily.",
+      "text_pt": "Faço amizades facilmente."
+    },
+    {
+      "ipip_source": "E11",
+      "domain": "E",
+      "facet": "BuscaExcitação",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Take charge.",
+      "text_pt": "Assumo o comando."
+    },
+    {
+      "ipip_source": "E12",
+      "domain": "E",
+      "facet": "EmoçõesPositivas",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Know how to captivate people.",
+      "text_pt": "Sei como cativar as pessoas."
+    },
+    {
+      "ipip_source": "E13",
+      "domain": "E",
+      "facet": "Cordialidade",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Find it difficult to approach others.",
+      "text_pt": "Tenho dificuldade para me aproximar dos outros."
+    },
+    {
+      "ipip_source": "E14",
+      "domain": "E",
+      "facet": "Sociabilidade",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Avoid crowds.",
+      "text_pt": "Evito multidões."
+    },
+    {
+      "ipip_source": "E15",
+      "domain": "E",
+      "facet": "Assertividade",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Have little to say.",
+      "text_pt": "Tenho pouco a dizer."
+    },
+    {
+      "ipip_source": "E16",
+      "domain": "E",
+      "facet": "Atividade",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Don't like to draw attention to myself.",
+      "text_pt": "Não gosto de chamar atenção."
+    },
+    {
+      "ipip_source": "E17",
+      "domain": "E",
+      "facet": "BuscaExcitação",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Am quiet around strangers.",
+      "text_pt": "Sou quieto perto de estranhos."
+    },
+    {
+      "ipip_source": "E18",
+      "domain": "E",
+      "facet": "EmoçõesPositivas",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Seldom feel joyous.",
+      "text_pt": "Raramente me sinto alegre."
+    },
+    {
+      "ipip_source": "E19",
+      "domain": "E",
+      "facet": "Cordialidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Warm up quickly to others.",
+      "text_pt": "Me aproximo rapidamente dos outros."
+    },
+    {
+      "ipip_source": "E20",
+      "domain": "E",
+      "facet": "Sociabilidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Love large parties.",
+      "text_pt": "Adoro festas grandes."
+    },
+    {
+      "ipip_source": "E21",
+      "domain": "E",
+      "facet": "Assertividade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am skilled in handling social situations.",
+      "text_pt": "Sou habilidoso em situações sociais."
+    },
+    {
+      "ipip_source": "E22",
+      "domain": "E",
+      "facet": "Atividade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am always busy.",
+      "text_pt": "Estou sempre ocupado."
+    },
+    {
+      "ipip_source": "E23",
+      "domain": "E",
+      "facet": "BuscaExcitação",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Seek adventure.",
+      "text_pt": "Busco aventura."
+    },
+    {
+      "ipip_source": "E24",
+      "domain": "E",
+      "facet": "EmoçõesPositivas",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Radiate joy.",
+      "text_pt": "Irradio alegria."
+    },
+    {
+      "ipip_source": "A1",
+      "domain": "A",
+      "facet": "Confiança",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Trust others.",
+      "text_pt": "Confio nos outros."
+    },
+    {
+      "ipip_source": "A2",
+      "domain": "A",
+      "facet": "Franqueza",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Believe that others have good intentions.",
+      "text_pt": "Acredito que os outros têm boas intenções."
+    },
+    {
+      "ipip_source": "A3",
+      "domain": "A",
+      "facet": "Altruísmo",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am interested in people.",
+      "text_pt": "Tenho interesse nas pessoas."
+    },
+    {
+      "ipip_source": "A4",
+      "domain": "A",
+      "facet": "Complacência",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Sympathize with others' feelings.",
+      "text_pt": "Simpatizo com os sentimentos dos outros."
+    },
+    {
+      "ipip_source": "A5",
+      "domain": "A",
+      "facet": "Modéstia",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Am not interested in other people's problems.",
+      "text_pt": "Não me interesso pelos problemas dos outros."
+    },
+    {
+      "ipip_source": "A6",
+      "domain": "A",
+      "facet": "Sensibilidade",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Insult people.",
+      "text_pt": "Insulto as pessoas."
+    },
+    {
+      "ipip_source": "A7",
+      "domain": "A",
+      "facet": "Confiança",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Have a good word for everyone.",
+      "text_pt": "Tenho uma palavra boa para todos."
+    },
+    {
+      "ipip_source": "A8",
+      "domain": "A",
+      "facet": "Franqueza",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am on good terms with nearly everyone.",
+      "text_pt": "Tenho boas relações com quase todos."
+    },
+    {
+      "ipip_source": "A9",
+      "domain": "A",
+      "facet": "Altruísmo",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Feel others' emotions.",
+      "text_pt": "Sinto as emoções dos outros."
+    },
+    {
+      "ipip_source": "A10",
+      "domain": "A",
+      "facet": "Complacência",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Make people feel at ease.",
+      "text_pt": "Faço as pessoas se sentirem à vontade."
+    },
+    {
+      "ipip_source": "A11",
+      "domain": "A",
+      "facet": "Modéstia",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am not interested in other people's problems.",
+      "text_pt": "Me preocupo com os problemas dos outros."
+    },
+    {
+      "ipip_source": "A12",
+      "domain": "A",
+      "facet": "Sensibilidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am easy to satisfy.",
+      "text_pt": "Sou fácil de agradar."
+    },
+    {
+      "ipip_source": "A13",
+      "domain": "A",
+      "facet": "Confiança",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Suspect hidden motives in others.",
+      "text_pt": "Suspeito de motivos ocultos nos outros."
+    },
+    {
+      "ipip_source": "A14",
+      "domain": "A",
+      "facet": "Franqueza",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Use others for my own ends.",
+      "text_pt": "Uso os outros para meus próprios fins."
+    },
+    {
+      "ipip_source": "A15",
+      "domain": "A",
+      "facet": "Altruísmo",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Am not really interested in others.",
+      "text_pt": "Não tenho interesse genuíno nos outros."
+    },
+    {
+      "ipip_source": "A16",
+      "domain": "A",
+      "facet": "Complacência",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Am hard to get along with.",
+      "text_pt": "Sou difícil de conviver."
+    },
+    {
+      "ipip_source": "A17",
+      "domain": "A",
+      "facet": "Modéstia",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Think highly of myself.",
+      "text_pt": "Tenho alta opinião de mim mesmo."
+    },
+    {
+      "ipip_source": "A18",
+      "domain": "A",
+      "facet": "Sensibilidade",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Get back at others.",
+      "text_pt": "Me vingo dos outros."
+    },
+    {
+      "ipip_source": "A19",
+      "domain": "A",
+      "facet": "Confiança",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Believe others are basically honest.",
+      "text_pt": "Acredito que os outros são basicamente honestos."
+    },
+    {
+      "ipip_source": "A20",
+      "domain": "A",
+      "facet": "Franqueza",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Treat all people equally.",
+      "text_pt": "Trato todas as pessoas igualmente."
+    },
+    {
+      "ipip_source": "A21",
+      "domain": "A",
+      "facet": "Altruísmo",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Love to help others.",
+      "text_pt": "Adoro ajudar os outros."
+    },
+    {
+      "ipip_source": "A22",
+      "domain": "A",
+      "facet": "Complacência",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am willing to compromise.",
+      "text_pt": "Estou disposto a fazer concessões."
+    },
+    {
+      "ipip_source": "A23",
+      "domain": "A",
+      "facet": "Modéstia",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am modest about my achievements.",
+      "text_pt": "Sou modesto sobre minhas conquistas."
+    },
+    {
+      "ipip_source": "A24",
+      "domain": "A",
+      "facet": "Sensibilidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am sensitive to the needs of others.",
+      "text_pt": "Sou sensível às necessidades dos outros."
+    },
+    {
+      "ipip_source": "N1",
+      "domain": "N",
+      "facet": "Ansiedade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Get stressed out easily.",
+      "text_pt": "Fico estressado facilmente."
+    },
+    {
+      "ipip_source": "N2",
+      "domain": "N",
+      "facet": "Hostilidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Worry about things.",
+      "text_pt": "Me preocupo com as coisas."
+    },
+    {
+      "ipip_source": "N3",
+      "domain": "N",
+      "facet": "Depressão",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am easily disturbed.",
+      "text_pt": "Sou facilmente perturbado."
+    },
+    {
+      "ipip_source": "N4",
+      "domain": "N",
+      "facet": "Autoconsciência",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Get upset easily.",
+      "text_pt": "Fico abalado facilmente."
+    },
+    {
+      "ipip_source": "N5",
+      "domain": "N",
+      "facet": "Impulsividade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Change my mood a lot.",
+      "text_pt": "Mudo de humor com frequência."
+    },
+    {
+      "ipip_source": "N6",
+      "domain": "N",
+      "facet": "Vulnerabilidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Have frequent mood swings.",
+      "text_pt": "Tenho oscilações de humor frequentes."
+    },
+    {
+      "ipip_source": "N7",
+      "domain": "N",
+      "facet": "Ansiedade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Get irritated easily.",
+      "text_pt": "Fico irritado facilmente."
+    },
+    {
+      "ipip_source": "N8",
+      "domain": "N",
+      "facet": "Hostilidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Often feel blue.",
+      "text_pt": "Frequentemente me sinto triste."
+    },
+    {
+      "ipip_source": "N9",
+      "domain": "N",
+      "facet": "Depressão",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Panic easily.",
+      "text_pt": "Entro em pânico facilmente."
+    },
+    {
+      "ipip_source": "N10",
+      "domain": "N",
+      "facet": "Autoconsciência",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am filled with doubts about things.",
+      "text_pt": "Fico cheio de dúvidas sobre as coisas."
+    },
+    {
+      "ipip_source": "N11",
+      "domain": "N",
+      "facet": "Impulsividade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Feel threatened easily.",
+      "text_pt": "Me sinto ameaçado facilmente."
+    },
+    {
+      "ipip_source": "N12",
+      "domain": "N",
+      "facet": "Vulnerabilidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Get overwhelmed by emotions.",
+      "text_pt": "Fico sobrecarregado pelas emoções."
+    },
+    {
+      "ipip_source": "N13",
+      "domain": "N",
+      "facet": "Ansiedade",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Am relaxed most of the time.",
+      "text_pt": "Estou relaxado na maior parte do tempo."
+    },
+    {
+      "ipip_source": "N14",
+      "domain": "N",
+      "facet": "Hostilidade",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Seldom feel blue.",
+      "text_pt": "Raramente me sinto triste."
+    },
+    {
+      "ipip_source": "N15",
+      "domain": "N",
+      "facet": "Depressão",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Am not easily bothered by things.",
+      "text_pt": "Não me incomodo facilmente com as coisas."
+    },
+    {
+      "ipip_source": "N16",
+      "domain": "N",
+      "facet": "Autoconsciência",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Rarely get irritated.",
+      "text_pt": "Raramente fico irritado."
+    },
+    {
+      "ipip_source": "N17",
+      "domain": "N",
+      "facet": "Impulsividade",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Am not easily frustrated.",
+      "text_pt": "Não me frustro facilmente."
+    },
+    {
+      "ipip_source": "N18",
+      "domain": "N",
+      "facet": "Vulnerabilidade",
+      "keyed": "-",
+      "reversed": true,
+      "text_en": "Remain calm under pressure.",
+      "text_pt": "Permaneço calmo sob pressão."
+    },
+    {
+      "ipip_source": "N19",
+      "domain": "N",
+      "facet": "Ansiedade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Fear for the worst.",
+      "text_pt": "Temo o pior."
+    },
+    {
+      "ipip_source": "N20",
+      "domain": "N",
+      "facet": "Hostilidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am often in a bad mood.",
+      "text_pt": "Frequentemente estou de mau humor."
+    },
+    {
+      "ipip_source": "N21",
+      "domain": "N",
+      "facet": "Depressão",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Dislike myself.",
+      "text_pt": "Não gosto de mim mesmo."
+    },
+    {
+      "ipip_source": "N22",
+      "domain": "N",
+      "facet": "Autoconsciência",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Am easily intimidated.",
+      "text_pt": "Sou facilmente intimidado."
+    },
+    {
+      "ipip_source": "N23",
+      "domain": "N",
+      "facet": "Impulsividade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Can't control my impulses.",
+      "text_pt": "Não consigo controlar meus impulsos."
+    },
+    {
+      "ipip_source": "N24",
+      "domain": "N",
+      "facet": "Vulnerabilidade",
+      "keyed": "+",
+      "reversed": false,
+      "text_en": "Feel vulnerable in stressful situations.",
+      "text_pt": "Me sinto vulnerável em situações estressantes."
+    }
+  ]
+}

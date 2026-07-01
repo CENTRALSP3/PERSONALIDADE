@@ -1,0 +1,34 @@
+{
+  "sections": [
+    {
+      "document_id": "literatura_ocean_001",
+      "factor": "O",
+      "section": "geral",
+      "text": "Pessoas com alta Abertura tendem a buscar novas experiências, ideias criativas e curiosidade intelectual. Valorizam arte, fantasia e inovação. Pontos fortes incluem criatividade e visão ampla. Desafios podem incluir dispersão."
+    },
+    {
+      "document_id": "literatura_ocean_002",
+      "factor": "C",
+      "section": "geral",
+      "text": "Alta Conscienciosidade reflete organização, disciplina e responsabilidade. No trabalho, destacam-se pelo planejamento e confiabilidade. Sob pressão, mantêm foco. Crescimento: equilibrar perfeccionismo."
+    },
+    {
+      "document_id": "literatura_ocean_003",
+      "factor": "E",
+      "section": "geral",
+      "text": "Extroversão elevada indica energia social, assertividade e entusiasmo. Relacionamentos prosperam com comunicação ativa. Carreira: liderança e networking. Desafio: escutar mais."
+    },
+    {
+      "document_id": "literatura_ocean_004",
+      "factor": "A",
+      "section": "geral",
+      "text": "Amabilidade alta manifesta empatia, cooperação e confiança interpessoal. Pontos fortes: harmonia em equipes. Relacionamentos: gentileza e altruísmo. Desafio: estabelecer limites saudáveis."
+    },
+    {
+      "document_id": "literatura_ocean_005",
+      "factor": "N",
+      "section": "geral",
+      "text": "Neuroticismo elevado (baixa estabilidade emocional) associa-se a ansiedade, preocupação e vulnerabilidade sob estresse. Sob pressão, reações intensas. Crescimento: técnicas de regulação emocional e autoconsciência."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "status": "approved",
+  "reviewed_at": "2026-06-30",
+  "reviewer": "TeclaPonto",
+  "checklist": {
+    "clareza_pt_br": true,
+    "equivalencia_semantica": true,
+    "tom_neutro": true,
+    "sem_jargao_clinico": true
+  },
+  "notes": "Revisão humana concluída — gate para generate_questions.py"
+}

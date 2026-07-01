@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "instrument": "TESTEPERSONALIDADE",
+    "version": "1.0.0",
+    "document_count": 5
+  },
+  "documents": [
+    {
+      "id": "literatura_ocean_001",
+      "title": "Big Five — Abertura à Experiência",
+      "source": "literatura_bootstrap",
+      "content": "Pessoas com alta Abertura tendem a buscar novas experiências, ideias criativas e curiosidade intelectual. Valorizam arte, fantasia e inovação. Pontos fortes incluem criatividade e visão ampla. Desafios podem incluir dispersão."
+    },
+    {
+      "id": "literatura_ocean_002",
+      "title": "Big Five — Conscienciosidade",
+      "source": "literatura_bootstrap",
+      "content": "Alta Conscienciosidade reflete organização, disciplina e responsabilidade. No trabalho, destacam-se pelo planejamento e confiabilidade. Sob pressão, mantêm foco. Crescimento: equilibrar perfeccionismo."
+    },
+    {
+      "id": "literatura_ocean_003",
+      "title": "Big Five — Extroversão",
+      "source": "literatura_bootstrap",
+      "content": "Extroversão elevada indica energia social, assertividade e entusiasmo. Relacionamentos prosperam com comunicação ativa. Carreira: liderança e networking. Desafio: escutar mais."
+    },
+    {
+      "id": "literatura_ocean_004",
+      "title": "Big Five — Amabilidade",
+      "source": "literatura_bootstrap",
+      "content": "Amabilidade alta manifesta empatia, cooperação e confiança interpessoal. Pontos fortes: harmonia em equipes. Relacionamentos: gentileza e altruísmo. Desafio: estabelecer limites saudáveis."
+    },
+    {
+      "id": "literatura_ocean_005",
+      "title": "Big Five — Estabilidade Emocional",
+      "source": "literatura_bootstrap",
+      "content": "Neuroticismo elevado (baixa estabilidade emocional) associa-se a ansiedade, preocupação e vulnerabilidade sob estresse. Sob pressão, reações intensas. Crescimento: técnicas de regulação emocional e autoconsciência."
+    }
+  ]
+}

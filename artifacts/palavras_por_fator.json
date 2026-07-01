@@ -1,0 +1,66 @@
+{
+  "O": {
+    "alto": [
+      "Criativo",
+      "Curioso",
+      "Imaginativo",
+      "Inovador"
+    ],
+    "baixo": [
+      "Prático",
+      "Convencional",
+      "Tradicional"
+    ]
+  },
+  "C": {
+    "alto": [
+      "Organizado",
+      "Disciplinado",
+      "Confiável",
+      "Metódico"
+    ],
+    "baixo": [
+      "Flexível",
+      "Espontâneo",
+      "Descontraído"
+    ]
+  },
+  "E": {
+    "alto": [
+      "Sociável",
+      "Energético",
+      "Assertivo",
+      "Comunicativo"
+    ],
+    "baixo": [
+      "Reservado",
+      "Reflexivo",
+      "Independente"
+    ]
+  },
+  "A": {
+    "alto": [
+      "Empático",
+      "Cooperativo",
+      "Gentil",
+      "Altruísta"
+    ],
+    "baixo": [
+      "Direto",
+      "Competitivo",
+      "Objetivo"
+    ]
+  },
+  "N": {
+    "alto": [
+      "Sensível",
+      "Vigilante",
+      "Intenso"
+    ],
+    "baixo": [
+      "Calmo",
+      "Estável",
+      "Resiliente"
+    ]
+  }
+}

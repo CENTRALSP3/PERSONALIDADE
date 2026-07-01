@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfil de Personalidade OCEAN - Big Five</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a1a2e">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class'}</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{font-family:'Inter',system-ui,sans-serif;scroll-behavior:smooth}
+.ocean-o{color:#8E44AD}.ocean-c{color:#2980B9}.ocean-e{color:#F39C12}.ocean-a{color:#27AE60}.ocean-se{color:#E74C3C}
+@keyframes fIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fIn .35s ease}
+.progress-bar{transition:width .5s ease}
+html.dark body{background:#111827;color:#f3f4f6}
+html.dark .card{background:#1f2937!important}
+.likert-btn{cursor:pointer}
+@media print{.no-print{display:none!important}}
+</style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+
+<header class="bg-gradient-to-r from-[#1a1a2e] to-[#16213e] text-white py-6 px-4 text-center">
+  <h1 class="text-xl font-bold tracking-wider">Perfil de <span class="text-purple-400">Personalidade</span></h1>
+  <p class="text-sm text-white/60 mt-1">Big Five (OCEAN) | TeclaPonto</p>
+</header>
+
+<main class="flex-1" id="app">
+
+<section id="home" class="py-12 px-4">
+  <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-8 text-center">
+    <h2 class="text-2xl font-bold mb-3">Descubra seu Perfil de Personalidade</h2>
+    <p class="text-gray-500 text-sm leading-relaxed mb-2">O modelo <strong>Big Five (OCEAN)</strong> mapeia cinco dimensões estáveis da personalidade.</p>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">São <strong>60 afirmações</strong> em escala de 1 a 5. Responda com sinceridade — não há respostas certas ou erradas.</p>
+    <div class="grid grid-cols-5 gap-2 max-w-md mx-auto mb-6 text-xs">
+      <div class="rounded-xl p-2 text-white font-bold" style="background:#8E44AD">O</div>
+      <div class="rounded-xl p-2 text-white font-bold" style="background:#2980B9">C</div>
+      <div class="rounded-xl p-2 text-white font-bold" style="background:#F39C12">E</div>
+      <div class="rounded-xl p-2 text-white font-bold" style="background:#27AE60">A</div>
+      <div class="rounded-xl p-2 text-white font-bold" style="background:#E74C3C">SE</div>
+    </div>
+    <button onclick="iniciar()" class="bg-[#1a1a2e] text-white px-12 py-3.5 rounded-full font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all">Iniciar Teste</button>
+    <div class="flex justify-center gap-3 mt-5 flex-wrap">
+      <span class="bg-white dark:bg-gray-800 border rounded-full px-4 py-1.5 text-xs text-gray-500"><strong>60</strong> afirmações</span>
+      <span class="bg-white dark:bg-gray-800 border rounded-full px-4 py-1.5 text-xs text-gray-500"><strong>~12</strong> min</span>
+      <span class="bg-white dark:bg-gray-800 border rounded-full px-4 py-1.5 text-xs text-gray-500">v<strong>1.0</strong></span>
+    </div>
+    <button onclick="toggleDarkMode()" class="mt-4 text-xs text-gray-400 underline">Alternar modo escuro</button>
+    <div class="mt-8 pt-6 border-t border-gray-100 dark:border-gray-700">
+      <p class="text-xs text-gray-400 mb-3 uppercase tracking-wider">Instrumentos TeclaPonto</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto">
+        <a href="https://centralsp3.github.io/TESTEDISC/" class="flex-1 px-6 py-3 rounded-full font-semibold text-sm bg-white dark:bg-gray-700 border-2 border-amber-400 text-amber-700 dark:text-amber-300 hover:bg-amber-50 dark:hover:bg-gray-600 text-center transition-all">Perfil DISC</a>
+        <a href="https://centralsp3.github.io/PERSONALIDADE/" class="flex-1 px-6 py-3 rounded-full font-semibold text-sm bg-[#1a1a2e] text-white shadow-lg text-center transition-all ring-2 ring-purple-400 ring-offset-2 dark:ring-offset-gray-800">Personalidade OCEAN</a>
+      </div>
+      <a href="https://centralsp3.github.io/central/" class="inline-block mt-4 text-xs text-gray-400 underline hover:text-gray-600">← Hub CENTRAL SP3</a>
+    </div>
+  </div>
+</section>
+
+<section id="quiz" class="py-8 px-4" style="display:none">
+  <div class="max-w-2xl mx-auto">
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-5 mb-5">
+      <div class="flex justify-end items-center mb-3">
+        <span id="progressText" class="text-sm font-semibold text-gray-400">1 de 60</span>
+      </div>
+      <div class="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+        <div id="progressBar" class="progress-bar h-full bg-gradient-to-r from-purple-400 to-blue-500 rounded-full" style="width:0%"></div>
+      </div>
+    </div>
+    <div id="quizContainer" class="min-h-[300px]"></div>
+  </div>
+</section>
+
+<section id="pausaBloco" class="py-12 px-4" style="display:none">
+  <div class="max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-8 text-center fade-in card">
+    <h2 class="text-xl font-bold mb-2">Metade do questionário!</h2>
+    <p id="pausaCopy" class="text-gray-500 dark:text-gray-400 text-sm mb-6">Você completou 30 de 60 afirmações. Faça uma pausa breve se precisar — suas respostas anteriores estão salvas.</p>
+    <button onclick="continuarAposPausa()" class="bg-[#1a1a2e] text-white px-10 py-3 rounded-full font-semibold shadow-lg">Continuar →</button>
+  </div>
+</section>
+
+<section id="nameForm" class="py-8 px-4" style="display:none">
+  <div class="max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-8 text-center fade-in">
+    <h2 class="text-xl font-bold mb-2">Teste Concluído!</h2>
+    <p class="text-gray-500 text-sm mb-6">Insira seu nome para gerar o relatório personalizado.</p>
+    <input id="userName" type="text" placeholder="Seu nome" class="w-full border rounded-xl px-4 py-3 text-center text-lg font-medium outline-none focus:border-[#1a1a2e] transition-colors mb-4 dark:bg-gray-700 dark:border-gray-600">
+    <div id="nameError" class="text-red-500 text-sm mb-3 hidden">Por favor, digite seu nome.</div>
+    <button onclick="gerarRelatorio()" class="bg-[#1a1a2e] text-white px-10 py-3 rounded-full font-semibold shadow-lg">Gerar meu Relatório</button>
+  </div>
+</section>
+
+<section id="resultado" class="py-8 px-4" style="display:none">
+  <div class="max-w-3xl mx-auto" id="resultadoContainer"></div>
+</section>
+
+</main>
+
+<footer class="bg-[#1a1a2e] text-white/60 text-center py-4 text-xs mt-auto">
+  <p>TeclaPonto — Perfil de Personalidade OCEAN. Instrumento de autoconhecimento. Não substitui avaliação psicológica profissional.</p>
+</footer>
+
+<script>
+
+// --- constants.js ---
+// ===== CONSTANTES OCEAN — TESTEPERSONALIDADE v1.0.0 =====
+
+const INSTRUMENT_VERSION = '1.0.0';
+const API_BASE = '';  // vazio = offline; configurar URL da API em produção
+const HUB_URL = 'https://centralsp3.github.io/central/';
+const URL_DISC = 'https://centralsp3.github.io/TESTEDISC/';
+const URL_PERSONALIDADE = 'https://centralsp3.github.io/PERSONALIDADE/';
+
+const FACTORES_INTERNOS = ['O', 'C', 'E', 'A', 'N'];
+const FACTORES = FACTORES_INTERNOS;
+const FATORES_DISPLAY = ['O', 'C', 'E', 'A', 'SE'];
+
+const DISPLAY_LABELS = {
+  O: 'Abertura à Experiência',
+  C: 'Conscienciosidade',
+  E: 'Extroversão',
+  A: 'Amabilidade',
+  SE: 'Estabilidade Emocional',
+};
+
+const CORES = {
+  O: '#8E44AD',
+  C: '#2980B9',
+  E: '#F39C12',
+  A: '#27AE60',
+  SE: '#E74C3C',
+  N: '#E74C3C',
+};
+
+const BANDA_T_LIMIARES = {
+  muito_baixo: { max: 37.9 },
+  baixo: { min: 38, max: 43.9 },
+  medio: { min: 44, max: 56.9 },
+  alto: { min: 57, max: 62.9 },
+  muito_alto: { min: 63 },
+};
+
+const DISCREPANCY_THRESHOLD = 3;
+
+const NORMS = {
+  meta: { version: '1.0.0', sample_size: 500, source: 'bootstrap_literature_2026' },
+  domains: {
+    O: { mean: 3.35, sd: 0.72 },
+    C: { mean: 3.52, sd: 0.68 },
+    E: { mean: 3.18, sd: 0.75 },
+    A: { mean: 3.61, sd: 0.65 },
+    N: { mean: 2.89, sd: 0.78 },
+  },
+};
+
+// Lookup table normalCDF: z ∈ [-3.0, +3.0], passo 0.06 (101 entradas)
+const NORMAL_CDF_TABLE = [
+  0.0013, 0.0015, 0.0017, 0.0020, 0.0023, 0.0027, 0.0032, 0.0037, 0.0043, 0.0050,
+  0.0059, 0.0069, 0.0080, 0.0093, 0.0107, 0.0124, 0.0143, 0.0164, 0.0188, 0.0216,
+  0.0247, 0.0282, 0.0322, 0.0366, 0.0416, 0.0472, 0.0534, 0.0603, 0.0680, 0.0764,
+  0.0856, 0.0957, 0.1066, 0.1184, 0.1312, 0.1449, 0.1596, 0.1753, 0.1919, 0.2094,
+  0.2278, 0.2469, 0.2667, 0.2871, 0.3078, 0.3289, 0.3500, 0.3712, 0.3922, 0.4130,
+  0.4334, 0.4532, 0.4722, 0.4904, 0.5076, 0.5240, 0.5394, 0.5538, 0.5672, 0.5796,
+  0.5910, 0.6014, 0.6109, 0.6195, 0.6273, 0.6343, 0.6406, 0.6463, 0.6514, 0.6560,
+  0.6602, 0.6640, 0.6675, 0.6707, 0.6736, 0.6764, 0.6790, 0.6814, 0.6837, 0.6859,
+  0.6880, 0.6900, 0.6920, 0.6939, 0.6957, 0.6975, 0.6993, 0.7010, 0.7027, 0.7044,
+  0.7060, 0.7076, 0.7092, 0.7108, 0.7123, 0.7138, 0.7153, 0.7168, 0.7182, 0.7197,
+  0.7211,
+];
+
+function normalCDF(z) {
+  const clamped = Math.max(-3, Math.min(3, z));
+  const idx = Math.round((clamped + 3) / 0.06);
+  return NORMAL_CDF_TABLE[Math.min(idx, NORMAL_CDF_TABLE.length - 1)];
+}
+
+function toDisplayFactor(f) {
+  return f === 'N' ? 'SE' : f;
+}
+
+function classificarBandaT(tScore) {
+  if (tScore < 38) return 'Muito Baixo';
+  if (tScore < 44) return 'Baixo';
+  if (tScore < 57) return 'Médio';
+  if (tScore < 63) return 'Alto';
+  return 'Muito Alto';
+}
+
+function classificarBandaDisplay(f, tScoreInterno) {
+  const tDisplay = f === 'N' ? (100 - tScoreInterno) : tScoreInterno;
+  return classificarBandaT(tDisplay);
+}
+
+function invertForDisplay(f, scores) {
+  if (f !== 'N') return { ...scores, displayFactor: f };
+  return {
+    mean: 6 - scores.mean,
+    tScore: 100 - scores.tScore,
+    percentil: 100 - scores.percentil,
+    ui: -scores.ui,
+    displayFactor: 'SE',
+    label: 'Estabilidade Emocional',
+  };
+}
+
+const FLAGS = {
+  enableAPI: !!API_BASE,
+  enableFacets: false,
+  enablePDFExport: true,
+};
+// --- questions.js ---
+// Gerado por scripts/generate_questions.py — NÃO editar manualmente
+const PERGUNTAS_NATURAL = [{id:'n01',texto:"Tenho uma imaginação vívida.",fator:'O',bloco:'natural',reversed:false,ipip_source:'O1'}, {id:'n02',texto:"Tenho interesse em ciência.",fator:'O',bloco:'natural',reversed:false,ipip_source:'O10'}, {id:'n03',texto:"Gosto de resolver problemas complexos.",fator:'O',bloco:'natural',reversed:false,ipip_source:'O11'}, {id:'n04',texto:"Sinto as emoções dos outros.",fator:'O',bloco:'natural',reversed:false,ipip_source:'O12'}, {id:'n05',texto:"Não tenho uma boa imaginação.",fator:'O',bloco:'natural',reversed:true,ipip_source:'O13'}, {id:'n06',texto:"Não gosto de poesia.",fator:'O',bloco:'natural',reversed:true,ipip_source:'O14'}, {id:'n07',texto:"Estou sempre preparado.",fator:'C',bloco:'natural',reversed:false,ipip_source:'C1'}, {id:'n08',texto:"Trabalho com dedicação.",fator:'C',bloco:'natural',reversed:false,ipip_source:'C10'}, {id:'n09',texto:"Sou exigente no meu trabalho.",fator:'C',bloco:'natural',reversed:false,ipip_source:'C11'}, {id:'n10',texto:"Continuo até que tudo esteja perfeito.",fator:'C',bloco:'natural',reversed:false,ipip_source:'C12'}, {id:'n11',texto:"Faço apenas o mínimo necessário.",fator:'C',bloco:'natural',reversed:true,ipip_source:'C13'}, {id:'n12',texto:"Deixo minhas coisas espalhadas.",fator:'C',bloco:'natural',reversed:true,ipip_source:'C14'}, {id:'n13',texto:"Sinto-me à vontade perto de pessoas.",fator:'E',bloco:'natural',reversed:false,ipip_source:'E1'}, {id:'n14',texto:"Faço amizades facilmente.",fator:'E',bloco:'natural',reversed:false,ipip_source:'E10'}, {id:'n15',texto:"Assumo o comando.",fator:'E',bloco:'natural',reversed:false,ipip_source:'E11'}, {id:'n16',texto:"Sei como cativar as pessoas.",fator:'E',bloco:'natural',reversed:false,ipip_source:'E12'}, {id:'n17',texto:"Tenho dificuldade para me aproximar dos outros.",fator:'E',bloco:'natural',reversed:true,ipip_source:'E13'}, {id:'n18',texto:"Evito multidões.",fator:'E',bloco:'natural',reversed:true,ipip_source:'E14'}, {id:'n19',texto:"Confio nos outros.",fator:'A',bloco:'natural',reversed:false,ipip_source:'A1'}, {id:'n20',texto:"Faço as pessoas se sentirem à vontade.",fator:'A',bloco:'natural',reversed:false,ipip_source:'A10'}, {id:'n21',texto:"Me preocupo com os problemas dos outros.",fator:'A',bloco:'natural',reversed:false,ipip_source:'A11'}, {id:'n22',texto:"Sou fácil de agradar.",fator:'A',bloco:'natural',reversed:false,ipip_source:'A12'}, {id:'n23',texto:"Suspeito de motivos ocultos nos outros.",fator:'A',bloco:'natural',reversed:true,ipip_source:'A13'}, {id:'n24',texto:"Uso os outros para meus próprios fins.",fator:'A',bloco:'natural',reversed:true,ipip_source:'A14'}, {id:'n25',texto:"Fico estressado facilmente.",fator:'N',bloco:'natural',reversed:false,ipip_source:'N1'}, {id:'n26',texto:"Fico cheio de dúvidas sobre as coisas.",fator:'N',bloco:'natural',reversed:false,ipip_source:'N10'}, {id:'n27',texto:"Me sinto ameaçado facilmente.",fator:'N',bloco:'natural',reversed:false,ipip_source:'N11'}, {id:'n28',texto:"Fico sobrecarregado pelas emoções.",fator:'N',bloco:'natural',reversed:false,ipip_source:'N12'}, {id:'n29',texto:"Estou relaxado na maior parte do tempo.",fator:'N',bloco:'natural',reversed:true,ipip_source:'N13'}, {id:'n30',texto:"Raramente me sinto triste.",fator:'N',bloco:'natural',reversed:true,ipip_source:'N14'}];
+const PERGUNTAS_ADAPTADO = [{id:'a01',texto:"No trabalho, busco abordagens criativas para resolver problemas.",fator:'O',bloco:'adaptado',reversed:true,ipip_source:'O15'}, {id:'a02',texto:"Valorizo inovação e novas perspectivas na equipe.",fator:'O',bloco:'adaptado',reversed:true,ipip_source:'O16'}, {id:'a03',texto:"Gosto de explorar métodos não convencionais no ambiente profissional.",fator:'O',bloco:'adaptado',reversed:true,ipip_source:'O17'}, {id:'a04',texto:"Prefiro rotinas estabelecidas no escritório.",fator:'O',bloco:'adaptado',reversed:true,ipip_source:'O18'}, {id:'a05',texto:"Evito experimentar novas ferramentas no trabalho.",fator:'O',bloco:'adaptado',reversed:false,ipip_source:'O19'}, {id:'a06',texto:"Não me interesso por tendências do setor.",fator:'O',bloco:'adaptado',reversed:false,ipip_source:'O2'}, {id:'a07',texto:"Cumpro prazos e compromissos profissionais com rigor.",fator:'C',bloco:'adaptado',reversed:true,ipip_source:'C15'}, {id:'a08',texto:"Organizo minhas tarefas de forma sistemática no trabalho.",fator:'C',bloco:'adaptado',reversed:true,ipip_source:'C16'}, {id:'a09',texto:"Assumo responsabilidade pelos resultados da equipe.",fator:'C',bloco:'adaptado',reversed:true,ipip_source:'C17'}, {id:'a10',texto:"Negligencio detalhes quando estou sob pressão no trabalho.",fator:'C',bloco:'adaptado',reversed:true,ipip_source:'C18'}, {id:'a11',texto:"Mantenho minha área de trabalho arrumada e funcional.",fator:'C',bloco:'adaptado',reversed:false,ipip_source:'C19'}, {id:'a12',texto:"Deixo tarefas pendentes para depois no ambiente profissional.",fator:'C',bloco:'adaptado',reversed:false,ipip_source:'C2'}, {id:'a13',texto:"Sinto-me energizado em reuniões com muitas pessoas.",fator:'E',bloco:'adaptado',reversed:true,ipip_source:'E15'}, {id:'a14',texto:"Tomo a iniciativa de apresentar ideias em grupo.",fator:'E',bloco:'adaptado',reversed:true,ipip_source:'E16'}, {id:'a15',texto:"Construo redes de contato no ambiente profissional.",fator:'E',bloco:'adaptado',reversed:true,ipip_source:'E17'}, {id:'a16',texto:"Prefiro trabalhar sozinho a interagir com a equipe.",fator:'E',bloco:'adaptado',reversed:true,ipip_source:'E18'}, {id:'a17',texto:"Evito participar de eventos corporativos sociais.",fator:'E',bloco:'adaptado',reversed:false,ipip_source:'E19'}, {id:'a18',texto:"Mantenho-me reservado em reuniões de equipe.",fator:'E',bloco:'adaptado',reversed:false,ipip_source:'E2'}, {id:'a19',texto:"Confio nas intenções dos meus colegas de trabalho.",fator:'A',bloco:'adaptado',reversed:true,ipip_source:'A15'}, {id:'a20',texto:"Colaboro de forma harmoniosa com a equipe.",fator:'A',bloco:'adaptado',reversed:true,ipip_source:'A16'}, {id:'a21',texto:"Me preocupo com o bem-estar dos colegas.",fator:'A',bloco:'adaptado',reversed:true,ipip_source:'A17'}, {id:'a22',texto:"Priorizo meus interesses sobre os da equipe.",fator:'A',bloco:'adaptado',reversed:true,ipip_source:'A18'}, {id:'a23',texto:"Sou direto mesmo quando isso pode incomodar colegas.",fator:'A',bloco:'adaptado',reversed:false,ipip_source:'A19'}, {id:'a24',texto:"Tenho dificuldade em fazer concessões no trabalho.",fator:'A',bloco:'adaptado',reversed:false,ipip_source:'A2'}, {id:'a25',texto:"Fico ansioso com prazos apertados no trabalho.",fator:'N',bloco:'adaptado',reversed:true,ipip_source:'N15'}, {id:'a26',texto:"Me preocupo excessivamente com erros profissionais.",fator:'N',bloco:'adaptado',reversed:true,ipip_source:'N16'}, {id:'a27',texto:"Fico abalado com críticas no ambiente de trabalho.",fator:'N',bloco:'adaptado',reversed:true,ipip_source:'N17'}, {id:'a28',texto:"Mantenho calma mesmo em situações de alta pressão.",fator:'N',bloco:'adaptado',reversed:true,ipip_source:'N18'}, {id:'a29',texto:"Raramente me sinto estressado no trabalho.",fator:'N',bloco:'adaptado',reversed:false,ipip_source:'N19'}, {id:'a30',texto:"Lido bem com incertezas profissionais.",fator:'N',bloco:'adaptado',reversed:false,ipip_source:'N2'}];
+const PERGUNTAS_ALL = [...PERGUNTAS_NATURAL, ...PERGUNTAS_ADAPTADO];
+const ITEM_MAP = Object.fromEntries(PERGUNTAS_ALL.map(q => [q.id, {
+  id: q.id, fator: q.fator, bloco: q.bloco, reversed: q.reversed, ipip_source: q.ipip_source,
+}));
+const TOTAL_POR_BLOCO = 30;
+
+// --- palavras-data.js ---
+// Gerado por build_devolutiva_templates.py
+const PALAVRAS_POR_FATOR = {"O": {"alto": ["Criativo", "Curioso", "Imaginativo", "Inovador"], "baixo": ["Prático", "Convencional", "Tradicional"]}, "C": {"alto": ["Organizado", "Disciplinado", "Confiável", "Metódico"], "baixo": ["Flexível", "Espontâneo", "Descontraído"]}, "E": {"alto": ["Sociável", "Energético", "Assertivo", "Comunicativo"], "baixo": ["Reservado", "Reflexivo", "Independente"]}, "A": {"alto": ["Empático", "Cooperativo", "Gentil", "Altruísta"], "baixo": ["Direto", "Competitivo", "Objetivo"]}, "N": {"alto": ["Sensível", "Vigilante", "Intenso"], "baixo": ["Calmo", "Estável", "Resiliente"]}};
+
+// --- devolutiva-templates.js ---
+// Gerado por build_devolutiva_templates.py
+const DEVOLUTIVA_TEMPLATES = {"meta": {"source_documents": 5, "version": "1.0.0", "instrument": "TESTEPERSONALIDADE", "sections": 12}, "fatores": {"O": {"auto_imagem": {"muito_alto": ["Você tende a buscar novas experiências e ideias com intensidade notável."], "alto": ["Você valoriza criatividade, curiosidade e abertura a perspectivas diferentes."], "medio": ["Você equilibra tradição e inovação de forma flexível."], "baixo": ["Você prefere o familiar e prático, valorizando estabilidade sobre novidade."], "muito_baixo": ["Você tende a ser conservador em suas preferências e abordagens."]}, "pontos_fortes": ["Criatividade", "Curiosidade intelectual", "Flexibilidade mental"], "desafios": ["Pode dispersar-se com excesso de opções", "Dificuldade com rotinas rígidas"], "relacoes": ["Traz perspectivas originais às conversas e valoriza diálogo profundo."], "trabalho": ["Prospera em ambientes que valorizam inovação e aprendizado contínuo."], "sob_pressao": ["Busca soluções criativas, mas pode perder foco com muitas alternativas."], "crescimento": ["Canalizar criatividade em projetos concretos com prazos definidos."]}, "C": {"auto_imagem": {"muito_alto": ["Você se define pela organização, disciplina e compromisso com resultados."], "alto": ["Você valoriza planejamento, responsabilidade e execução confiável."], "medio": ["Você equilibra estrutura e flexibilidade conforme a situação."], "baixo": ["Você prefere abordagens espontâneas e menos estruturadas."], "muito_baixo": ["Você tende a ser flexível com prazos e procedimentos formais."]}, "pontos_fortes": ["Organização", "Confiabilidade", "Persistência"], "desafios": ["Perfeccionismo excessivo", "Rigidez com mudanças"], "relacoes": ["É visto como pessoa confiável que cumpre compromissos."], "trabalho": ["Destaca-se em funções que exigem planejamento e atenção a detalhes."], "sob_pressao": ["Mantém foco e busca soluções estruturadas."], "crescimento": ["Delegar e aceitar que 'bom o suficiente' às vezes é adequado."]}, "E": {"auto_imagem": {"muito_alto": ["Você se energiza com interação social e busca o centro das atividades."], "alto": ["Você é sociável, assertivo e traz entusiasmo aos grupos."], "medio": ["Você equilibra momentos sociais e de introspecção."], "baixo": ["Você prefere ambientes tranquilos e interações em menor escala."], "muito_baixo": ["Você tende a ser reservado e valoriza tempo a sós."]}, "pontos_fortes": ["Comunicação", "Energia social", "Liderança interpessoal"], "desafios": ["Pode dominar conversas", "Dificuldade com tarefas solitárias"], "relacoes": ["Constrói redes amplas e mantém contatos ativos."], "trabalho": ["Prospera em funções com interação frequente e apresentações."], "sob_pressao": ["Busca apoio social e pode agir impulsivamente."], "crescimento": ["Desenvolver escuta ativa e momentos de reflexão solitária."]}, "A": {"auto_imagem": {"muito_alto": ["Você prioriza harmonia, empatia e cooperação nas relações."], "alto": ["Você valoriza gentileza, confiança e trabalho em equipe."], "medio": ["Você equilibra assertividade e consideração pelos outros."], "baixo": ["Você tende a ser direto e prioriza resultados sobre harmonia."], "muito_baixo": ["Você pode ser competitivo e menos inclinado a concessões."]}, "pontos_fortes": ["Empatia", "Cooperação", "Confiança interpessoal"], "desafios": ["Dificuldade em dizer não", "Evitar conflitos necessários"], "relacoes": ["Cria ambientes acolhedores e de suporte mútuo."], "trabalho": ["Excelente em equipes colaborativas e mediação."], "sob_pressao": ["Pode absorver estresse dos outros ou evitar confrontos."], "crescimento": ["Estabelecer limites saudáveis e praticar assertividade."]}, "N": {"_note": "Chaves em escala neuroticismo-interna; devolutiva.js usa selectTemplateKey()", "display_name": "Estabilidade Emocional", "auto_imagem": {"muito_alto_N": ["Tende a reagir com intensidade emocional a situações estressantes."], "alto_N": ["Pode experimentar ansiedade ou preocupação sob pressão."], "medio_N": ["Reações emocionais dentro da média populacional."], "baixo_N": ["Mantém equilíbrio em situações de pressão moderada."], "muito_baixo_N": ["Demonstra notável estabilidade emocional mesmo sob estresse intenso."]}, "pontos_fortes": ["Autoconsciência emocional", "Sensibilidade a nuances"], "desafios": ["Ansiedade em incertezas", "Reações intensas sob pressão"], "relacoes": ["Pode ser muito sensível a dinâmicas interpessoais."], "trabalho": ["Funciona melhor com previsibilidade e suporte claro."], "sob_pressao": ["Reações emocionais podem intensificar-se em crises."], "crescimento": ["Técnicas de regulação emocional e mindfulness."]}}, "combinacoes": {"O_alto_C_alto": {"titulo": "Visionário Disciplinado", "texto": "Combina criatividade com execução estruturada."}, "E_alto_A_alto": {"titulo": "Líder Relacional", "texto": "Une carisma social com empatia genuína."}}, "discrepancia": {"supressao": ["No ambiente profissional, você pode estar moderando traços naturais."], "hiperadaptacao": ["Você pode estar exibindo comportamentos que exigem esforço consciente."]}, "disclaimer": "Este relatório é um instrumento de autoconhecimento e desenvolvimento pessoal. Não constitui diagnóstico psicológico, psiquiátrico ou avaliação clínica."};
+
+// --- scoring.js ---
+// ===== SCORING OCEAN — Likert T-score + dual profile =====
+
+function pontuarItem(item, respostaLikert) {
+  const raw = item.reversed ? (6 - respostaLikert) : respostaLikert;
+  return raw;
+}
+
+function calcularRaw(respostas, bloco) {
+  const raw = { O: 0, C: 0, E: 0, A: 0, N: 0 };
+  const counts = { O: 0, C: 0, E: 0, A: 0, N: 0 };
+  respostas.filter(r => r.bloco === bloco).forEach(r => {
+    const item = ITEM_MAP[r.id];
+    if (!item) return;
+    raw[item.fator] += pontuarItem(item, r.valor);
+    counts[item.fator]++;
+  });
+  const means = {};
+  FACTORES_INTERNOS.forEach(f => {
+    means[f] = counts[f] > 0 ? raw[f] / counts[f] : 3;
+  });
+  return { raw, means, counts };
+}
+
+function toTScore(mean, fator) {
+  const { mean: mu, sd } = NORMS.domains[fator];
+  const z = (mean - mu) / sd;
+  return Math.round((50 + 10 * z) * 10) / 10;
+}
+
+function toPercentile(tScore) {
+  const z = (tScore - 50) / 10;
+  return Math.round(normalCDF(z) * 100);
+}
+
+function normalizeForUI(mean) {
+  const normalized = ((mean - 3) / 2) * 10;
+  return Math.max(-10, Math.min(10, Math.round(normalized * 10) / 10));
+}
+
+function calcularPerfil(respostas, bloco) {
+  const { means } = calcularRaw(respostas, bloco);
+  const internal = {};
+  FACTORES_INTERNOS.forEach(f => {
+    const tScore = toTScore(means[f], f);
+    internal[f] = {
+      mean: means[f],
+      tScore,
+      percentil: toPercentile(tScore),
+      ui: normalizeForUI(means[f]),
+      banda: classificarBandaT(tScore),
+    };
+  });
+  const display = {};
+  FATORES_DISPLAY.forEach(df => {
+    const f = df === 'SE' ? 'N' : df;
+    display[df] = invertForDisplay(f, internal[f]);
+    display[df].banda = classificarBandaDisplay(f, internal[f].tScore);
+  });
+  return { internal, display };
+}
+
+function respostasLikertFromState() {
+  return state.shuffled.map(q => ({
+    id: q.id,
+    bloco: q.bloco,
+    valor: state.likert[q.id],
+  })).filter(r => r.valor !== undefined && r.valor >= 1 && r.valor <= 5);
+}
+
+function calcularScoresDual(respostas) {
+  const natural = calcularPerfil(respostas, 'natural');
+  const adapted = calcularPerfil(respostas, 'adaptado');
+  const discrepancy = {};
+  FATORES_DISPLAY.forEach(df => {
+    discrepancy[df] = Math.round(
+      (adapted.display[df].ui - natural.display[df].ui) * 10
+    ) / 10;
+  });
+  return { natural, adapted, discrepancy };
+}
+
+function analisarDiscrepanciaDisplay(dual) {
+  const alertas = [];
+  FATORES_DISPLAY.forEach(df => {
+    const d = dual.discrepancy[df];
+    const nat = dual.natural.display[df].ui;
+    const adp = dual.adapted.display[df].ui;
+    if (d <= -DISCREPANCY_THRESHOLD && nat > 2) {
+      alertas.push({
+        fator: df, tipo: 'supressao', delta: d,
+        texto: `${DISPLAY_LABELS[df]}: possível supressão no trabalho (natural +${nat} → adaptado +${adp}).`,
+      });
+    } else if (d >= DISCREPANCY_THRESHOLD && adp > nat) {
+      alertas.push({
+        fator: df, tipo: 'hiperadaptacao', delta: d,
+        texto: `${DISPLAY_LABELS[df]}: possível hiperadaptação (+${d}).`,
+      });
+    }
+  });
+  return alertas;
+}
+
+function determinarPerfilDominante(displayScores) {
+  const sorted = FATORES_DISPLAY.slice().sort((a, b) => displayScores[b].ui - displayScores[a].ui);
+  return { primario: sorted[0], secundario: sorted[1], ordenacao: sorted };
+}
+
+function validarRespostaLikert(qid) {
+  const val = state.likert[qid];
+  if (val === undefined || val < 1 || val > 5) {
+    return { ok: false, msg: 'Selecione uma opção de 1 a 5 antes de continuar.' };
+  }
+  return { ok: true };
+}
+
+const BANDA_TO_TEMPLATE_N = {
+  'Muito Alto': 'muito_baixo_N',
+  'Alto': 'baixo_N',
+  'Médio': 'medio_N',
+  'Baixo': 'alto_N',
+  'Muito Baixo': 'muito_alto_N',
+};
+
+function selectTemplateKey(fator, internalScores, displayScores, campo) {
+  if (fator !== 'N') {
+    const banda = internalScores.banda;
+    return banda.toLowerCase().replace(/ /g, '_');
+  }
+  const displayBanda = displayScores.SE.banda;
+  return BANDA_TO_TEMPLATE_N[displayBanda] || 'medio_N';
+}
+
+function extractDisplayScores(dual) {
+  const out = { natural: {}, adapted: {} };
+  FATORES_DISPLAY.forEach(df => {
+    out.natural[df] = dual.natural.display[df].ui;
+    out.adapted[df] = dual.adapted.display[df].ui;
+  });
+  return out;
+}
+
+function extractTScores(internal) {
+  return {
+    O: internal.O.tScore,
+    C: internal.C.tScore,
+    E: internal.E.tScore,
+    A: internal.A.tScore,
+    N: internal.N.tScore,
+  };
+}
+// --- charts.js ---
+// ===== GRÁFICOS OCEAN — Radar + Barras Natural/Adaptado =====
+
+function gerarGraficosOCEAN(dual) {
+  return `
+    <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-sm p-5 sm:p-8 mb-6 fade-in card">
+      <h3 class="text-lg font-bold mb-6 text-center">Perfil OCEAN — Natural · Adaptado</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <p class="text-xs font-bold text-center mb-2 text-purple-700">Radar OCEAN (Natural)</p>
+          <div style="height:280px"><canvas id="chartRadar"></canvas></div>
+        </div>
+        <div>
+          <p class="text-xs font-bold text-center mb-2 text-blue-700">Barras Natural vs Adaptado</p>
+          <div style="height:280px"><canvas id="chartBars"></canvas></div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mt-6 text-center">
+        ${FATORES_DISPLAY.map(f => `
+          <div class="p-2 rounded-lg bg-gray-50 dark:bg-gray-800">
+            <div class="font-bold text-xs" style="color:${CORES[f]}">${DISPLAY_LABELS[f]}</div>
+            <div class="text-xs text-gray-500">Nat: ${dual.natural.display[f].ui > 0 ? '+' : ''}${dual.natural.display[f].ui}</div>
+            <div class="text-xs text-gray-500">Adp: ${dual.adapted.display[f].ui > 0 ? '+' : ''}${dual.adapted.display[f].ui}</div>
+            <div class="text-xs ${Math.abs(dual.discrepancy[f]) >= DISCREPANCY_THRESHOLD ? 'text-red-500 font-bold' : 'text-gray-400'}">Δ ${dual.discrepancy[f] > 0 ? '+' : ''}${dual.discrepancy[f]}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function initGraficosOCEAN(dual) {
+  const labels = FATORES_DISPLAY.map(f => DISPLAY_LABELS[f]);
+  const natData = FATORES_DISPLAY.map(f => dual.natural.display[f].ui);
+  const adpData = FATORES_DISPLAY.map(f => dual.adapted.display[f].ui);
+  const colors = FATORES_DISPLAY.map(f => CORES[f]);
+
+  const radarCtx = document.getElementById('chartRadar');
+  if (radarCtx) {
+    if (window._chartRadar) window._chartRadar.destroy();
+    window._chartRadar = new Chart(radarCtx, {
+      type: 'radar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Natural',
+          data: natData,
+          backgroundColor: 'rgba(142, 68, 173, 0.2)',
+          borderColor: '#8E44AD',
+          borderWidth: 2,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { r: { min: -10, max: 10, ticks: { stepSize: 5 } } },
+        plugins: { legend: { display: false } },
+      },
+    });
+  }
+
+  const barCtx = document.getElementById('chartBars');
+  if (barCtx) {
+    if (window._chartBars) window._chartBars.destroy();
+    window._chartBars = new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          { label: 'Natural', data: natData, backgroundColor: colors.map(c => c + '99'), borderColor: colors, borderWidth: 1 },
+          { label: 'Adaptado', data: adpData, backgroundColor: colors.map(c => c + '44'), borderColor: colors, borderWidth: 1 },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' } },
+        scales: { y: { min: -10, max: 10 } },
+      },
+    });
+  }
+}
+// --- devolutiva.js ---
+// ===== DEVOLUTIVA OCEAN — 12 seções =====
+
+function hashScores(scores) {
+  const s = FATORES_DISPLAY.map(f => scores[f]?.ui ?? 0).join('');
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+
+function pickFactorTemplate(fator, campo, seed, internal, display, offset = 0) {
+  const key = selectTemplateKey(fator, internal[fator], display, campo);
+  const tpl = DEVOLUTIVA_TEMPLATES?.fatores?.[fator]?.[campo];
+  if (!tpl) return '';
+  if (Array.isArray(tpl)) {
+    return tpl[(seed + offset) % tpl.length] || '';
+  }
+  if (typeof tpl === 'object' && tpl[key]) {
+    const arr = tpl[key];
+    return Array.isArray(arr) ? arr[(seed + offset) % arr.length] : arr;
+  }
+  return '';
+}
+
+function formatParagrafos(texto) {
+  if (!texto) return '';
+  const t = Array.isArray(texto) ? texto.join(' ') : texto;
+  return `<p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-3">${t}</p>`;
+}
+
+function cardSecao(num, titulo, conteudo) {
+  return `<div class="card bg-white dark:bg-gray-900 rounded-2xl shadow-sm p-5 sm:p-8 mb-6 fade-in">
+    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+      <span class="w-8 h-8 rounded-full bg-[#1a1a2e] text-white text-sm font-bold flex items-center justify-center">${num}</span>
+      <h3 class="text-lg font-bold">${titulo}</h3>
+    </div>${conteudo}</div>`;
+}
+
+function gerarSumario(nome, hoje, dominante, dual) {
+  return `<div class="text-center mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
+    <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">Perfil de Personalidade</p>
+    <h2 class="text-2xl font-bold">Big Five (OCEAN)</h2>
+    <p class="text-gray-500 mt-1">${nome} · ${hoje}</p>
+    <div class="flex flex-wrap justify-center gap-2 mt-4">
+      <span class="px-4 py-1.5 rounded-full text-white text-sm font-bold" style="background:${CORES[dominante.primario]}">
+        ${DISPLAY_LABELS[dominante.primario]}
+      </span>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-4 max-w-xl mx-auto text-xs">
+      ${FATORES_DISPLAY.map(f => `<div class="p-2 rounded-lg bg-gray-50 dark:bg-gray-800">
+        <span class="font-bold" style="color:${CORES[f]}">${f}</span>
+        <span class="text-gray-500 ml-1">${dual.natural.display[f].banda}</span>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function gerarAutoImagem(perfilCtx, seed, blocoLabel) {
+  const { internal, display } = perfilCtx;
+  const textos = FACTORES_INTERNOS.map((f, i) =>
+    formatParagrafos(pickFactorTemplate(f, 'auto_imagem', seed, internal, display, i))
+  ).join('');
+  return cardSecao(2, `Autoimagem — Perfil ${blocoLabel}`, `
+    <p class="text-xs text-gray-400 mb-3 uppercase">Comportamento ${blocoLabel.toLowerCase()}</p>${textos}`);
+}
+
+function gerarPalavrasDescritivas(dual, seed) {
+  const palavras = [];
+  FATORES_DISPLAY.forEach((f, i) => {
+    const cod = f === 'SE' ? 'N' : f;
+    const intens = dual.natural.display[f].ui > 2 ? 'alto' : 'baixo';
+    const list = PALAVRAS_POR_FATOR?.[cod]?.[intens] || [];
+    palavras.push(...list.slice(0, 2));
+  });
+  const unicas = [...new Set(palavras)].slice(0, 16);
+  return cardSecao(3, 'Palavras Descritivas', `
+    <div class="flex flex-wrap gap-2">${unicas.map(p =>
+      `<span class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm">${p}</span>`).join('')}</div>`);
+}
+
+function gerarMotivacao(dual, seed) {
+  const textos = FACTORES_INTERNOS.slice(0, 3).map((f, i) =>
+    formatParagrafos(pickFactorTemplate(f, 'trabalho', seed, dual.natural.internal, dual.natural.display, i))
+  ).join('');
+  return cardSecao(4, 'Motivação e Energia', textos);
+}
+
+function gerarPontosFortes(dual, seed) {
+  const top = determinarPerfilDominante(dual.natural.display);
+  const items = [top.primario, top.secundario].map(f => {
+    const cod = f === 'SE' ? 'N' : f;
+    const tpl = DEVOLUTIVA_TEMPLATES?.fatores?.[cod]?.pontos_fortes || [];
+    return tpl.slice(0, 2);
+  }).flat();
+  return cardSecao(5, 'Pontos Fortes', `
+    <ul class="list-disc pl-5 text-sm text-gray-600 dark:text-gray-300 space-y-1">
+      ${[...new Set(items)].map(i => `<li>${i}</li>`).join('')}
+    </ul>`);
+}
+
+function gerarDesafios(dual, seed) {
+  const bottom = dual.natural.display[determinarPerfilDominante(dual.natural.display).ordenacao[4]];
+  const cod = 'N';
+  const tpl = DEVOLUTIVA_TEMPLATES?.fatores?.[cod]?.desafios || ['Atenção a reações emocionais'];
+  return cardSecao(6, 'Desafios e Pontos de Atenção', `
+    <ul class="list-disc pl-5 text-sm text-gray-600 dark:text-gray-300 space-y-1">
+      ${FACTORES_INTERNOS.map(f => {
+        const d = DEVOLUTIVA_TEMPLATES?.fatores?.[f]?.desafios || [];
+        return d.slice(0, 1).map(x => `<li>${x}</li>`).join('');
+      }).join('')}
+    </ul>`);
+}
+
+function gerarRelacionamentos(dual, seed) {
+  const textos = ['E', 'A', 'O'].map((f, i) =>
+    formatParagrafos(pickFactorTemplate(f, 'relacoes', seed, dual.natural.internal, dual.natural.display, i))
+  ).join('');
+  return cardSecao(7, 'Relacionamentos', textos);
+}
+
+function gerarCarreira(dual, seed) {
+  const textos = ['C', 'E', 'O'].map((f, i) =>
+    formatParagrafos(pickFactorTemplate(f, 'trabalho', seed, dual.adapted.internal, dual.adapted.display, i))
+  ).join('');
+  return cardSecao(8, 'Carreira e Trabalho', textos);
+}
+
+function gerarSobPressao(dual, seed) {
+  const texto = pickFactorTemplate('N', 'sob_pressao', seed, dual.natural.internal, dual.natural.display);
+  return cardSecao(9, 'Sob Pressão e Estresse', formatParagrafos(texto));
+}
+
+function gerarPercepcaoAdaptada(dual) {
+  const alertas = analisarDiscrepanciaDisplay(dual);
+  const tpl = DEVOLUTIVA_TEMPLATES?.discrepancia || {};
+  let html = alertas.length
+    ? `<ul class="space-y-2">${alertas.map(a => `<li class="text-sm text-amber-700 dark:text-amber-400">⚠ ${a.texto}</li>`).join('')}</ul>`
+    : `<p class="text-sm text-gray-500">Sem discrepâncias significativas entre perfis natural e adaptado.</p>`;
+  if (alertas.some(a => a.tipo === 'supressao')) {
+    html += formatParagrafos((tpl.supressao || [])[0]);
+  }
+  if (alertas.some(a => a.tipo === 'hiperadaptacao')) {
+    html += formatParagrafos((tpl.hiperadaptacao || [])[0]);
+  }
+  return cardSecao(10, 'Percepção Adaptada', html);
+}
+
+function gerarCrescimento(dual, seed) {
+  const textos = FACTORES_INTERNOS.map((f, i) =>
+    formatParagrafos(pickFactorTemplate(f, 'crescimento', seed, dual.natural.internal, dual.natural.display, i))
+  ).join('');
+  return cardSecao(11, 'Crescimento e Desenvolvimento', textos);
+}
+
+function gerarSintese(disclaimer) {
+  return cardSecao(12, 'Síntese e Próximos Passos', `
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Este relatório oferece um panorama do seu perfil de personalidade nos cinco grandes domínios.
+      Use estas informações como ponto de partida para autoconhecimento e desenvolvimento.
+    </p>
+    <p class="text-xs text-gray-400 italic">${disclaimer}</p>`);
+}
+
+function renderizarRelatorio(nome, dual, apiResult) {
+  const hoje = new Date().toLocaleDateString('pt-BR');
+  const dominante = determinarPerfilDominante(dual.natural.display);
+  const seed = hashScores(dual.natural.display);
+  const disclaimer = DEVOLUTIVA_TEMPLATES?.disclaimer || '';
+
+  let html = gerarSumario(nome, hoje, dominante, dual);
+  html += gerarGraficosOCEAN(dual);
+  html += gerarAutoImagem(dual.natural, seed, 'Natural');
+  html += gerarPalavrasDescritivas(dual, seed);
+  html += gerarMotivacao(dual, seed);
+  html += gerarPontosFortes(dual, seed);
+  html += gerarDesafios(dual, seed);
+  html += gerarRelacionamentos(dual, seed);
+  html += gerarCarreira(dual, seed);
+  html += gerarSobPressao(dual, seed);
+  html += gerarPercepcaoAdaptada(dual);
+  html += gerarCrescimento(dual, seed);
+
+  if (apiResult?.interpretation) {
+    html += cardSecao('API', 'Interpretação Complementar', formatParagrafos(apiResult.interpretation));
+  }
+
+  html += gerarSintese(disclaimer);
+  html += `<div class="flex flex-wrap justify-center gap-3 mt-6 no-print">
+    <button onclick="exportarPDF()" class="bg-gray-200 px-6 py-2 rounded-full text-sm font-semibold">Exportar PDF</button>
+    <button onclick="refazer()" class="bg-[#1a1a2e] text-white px-6 py-2 rounded-full text-sm font-semibold">Refazer Teste</button>
+  </div>`;
+  return html;
+}
+
+async function calcularERenderizar(nome, dualPrecomputed, apiDataPre) {
+  const respostas = respostasLikertFromState();
+  if (respostas.length < TOTAL_POR_BLOCO * 2 && !dualPrecomputed) {
+    alert('Respostas incompletas. Complete todas as 60 afirmações.');
+    return;
+  }
+  const dual = dualPrecomputed || calcularScoresDual(respostas);
+  let apiResult = apiDataPre || null;
+
+  if (FLAGS.enableAPI && !apiResult) {
+    apiResult = await inferirViaAPI(dual);
+    await salvarRespostasBatch(dual);
+  }
+
+  const container = document.getElementById('resultadoContainer');
+  container.innerHTML = renderizarRelatorio(nome, dual, apiResult);
+  document.getElementById('resultado').style.display = 'block';
+  setTimeout(() => initGraficosOCEAN(dual), 100);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+// --- features.js ---
+// ===== FEATURES: Dark mode, Share, PDF, PWA, API =====
+
+function initDarkMode() {
+  const saved = localStorage.getItem('ocean-theme');
+  if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+  }
+}
+
+function toggleDarkMode() {
+  document.documentElement.classList.toggle('dark');
+  localStorage.setItem('ocean-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+}
+
+async function salvarRespostasBatch(dual) {
+  if (!API_BASE) return;
+  try {
+    await fetch(`${API_BASE}/responses`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        session_id: state.sessionId,
+        instrument_version: INSTRUMENT_VERSION,
+        responses: state.shuffled.map(q => ({
+          question_id: q.id,
+          block: q.bloco,
+          factor: ITEM_MAP[q.id].fator,
+          likert_value: state.likert[q.id],
+        })),
+      }),
+    });
+  } catch (_) { /* offline ok */ }
+}
+
+async function inferirViaAPI(dual) {
+  if (!API_BASE) return null;
+  try {
+    const t_scores = {
+      natural: extractTScores(dual.natural.internal),
+      adapted: extractTScores(dual.adapted.internal),
+    };
+    const resp = await fetch(`${API_BASE}/infer`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ t_scores, share: true }),
+    });
+    if (!resp.ok) return null;
+    return await resp.json();
+  } catch (_) { return null; }
+}
+
+function gerarLinkCompartilhamento(hash) {
+  if (!hash) return '';
+  return `${window.location.origin}${window.location.pathname}?r=${hash}`;
+}
+
+async function copiarLink(hash) {
+  const url = gerarLinkCompartilhamento(hash);
+  if (!url) { alert('Link não disponível (modo offline).'); return; }
+  try {
+    await navigator.clipboard.writeText(url);
+    alert('Link copiado!');
+  } catch (_) {
+    prompt('Copie o link:', url);
+  }
+}
+
+function exportarPDF() {
+  window.print();
+}
+
+async function carregarResultadoCompartilhado() {
+  const params = new URLSearchParams(window.location.search);
+  const hash = params.get('r');
+  if (!hash || !API_BASE) return false;
+  try {
+    const resp = await fetch(`${API_BASE}/result/${hash}`);
+    if (!resp.ok) return false;
+    const data = await resp.json();
+    const dual = {
+      natural: {
+        internal: Object.fromEntries(FACTORES_INTERNOS.map(f => [f, {
+          tScore: data.t_scores?.natural?.[f] ?? 50,
+          ui: data.display_scores?.natural?.[toDisplayFactor(f)] ?? 0,
+          banda: classificarBandaT(data.t_scores?.natural?.[f] ?? 50),
+          mean: 3, percentil: 50,
+        }])),
+        display: Object.fromEntries(FATORES_DISPLAY.map(f => {
+          const cod = f === 'SE' ? 'N' : f;
+          return [f, {
+            ui: data.display_scores?.natural?.[f] ?? 0,
+            banda: classificarBandaDisplay(cod, data.t_scores?.natural?.[cod] ?? 50),
+            tScore: f === 'SE' ? 100 - (data.t_scores?.natural?.N ?? 50) : (data.t_scores?.natural?.[f] ?? 50),
+            mean: 3, percentil: 50, displayFactor: f,
+          }];
+        })),
+      },
+      adapted: {
+        internal: Object.fromEntries(FACTORES_INTERNOS.map(f => [f, {
+          tScore: data.t_scores?.adapted?.[f] ?? 50,
+          ui: data.display_scores?.adapted?.[toDisplayFactor(f)] ?? 0,
+          banda: classificarBandaT(data.t_scores?.adapted?.[f] ?? 50),
+          mean: 3, percentil: 50,
+        }])),
+        display: Object.fromEntries(FATORES_DISPLAY.map(f => {
+          const cod = f === 'SE' ? 'N' : f;
+          return [f, {
+            ui: data.display_scores?.adapted?.[f] ?? 0,
+            banda: classificarBandaDisplay(cod, data.t_scores?.adapted?.[cod] ?? 50),
+            tScore: f === 'SE' ? 100 - (data.t_scores?.adapted?.N ?? 50) : (data.t_scores?.adapted?.[f] ?? 50),
+            mean: 3, percentil: 50, displayFactor: f,
+          }];
+        })),
+      },
+      discrepancy: {},
+    };
+    FATORES_DISPLAY.forEach(f => {
+      dual.discrepancy[f] = Math.round(
+        (dual.adapted.display[f].ui - dual.natural.display[f].ui) * 10
+      ) / 10;
+    });
+    document.getElementById('home').style.display = 'none';
+    await calcularERenderizar('Resultado Compartilhado', dual, data.inference);
+    return true;
+  } catch (_) { return false; }
+}
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initDarkMode();
+  carregarResultadoCompartilhado();
+});
+// --- app.js ---
+// ===== APP — Quiz Likert OCEAN =====
+
+const state = {
+  passo: 0,
+  likert: {},
+  shuffled: [],
+  pausaVista: false,
+  sessionId: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36),
+};
+
+const TOTAL_QUESTOES = TOTAL_POR_BLOCO * 2;
+const PAUSA_EM = TOTAL_POR_BLOCO;
+
+const LIKERT_LABELS = [
+  { val: 1, short: '1', label: 'Discordo totalmente' },
+  { val: 2, short: '2', label: 'Discordo' },
+  { val: 3, short: '3', label: 'Neutro' },
+  { val: 4, short: '4', label: 'Concordo' },
+  { val: 5, short: '5', label: 'Concordo totalmente' },
+];
+
+function shuffleArray(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function prepararQuestao(q) {
+  return { ...q };
+}
+
+function perguntasEmbaralhadas() {
+  const natural = shuffleArray(PERGUNTAS_NATURAL.map((q, i) => prepararQuestao(q, i)));
+  const adaptado = shuffleArray(PERGUNTAS_ADAPTADO.map((q, i) => prepararQuestao(q, i)));
+  const slots = shuffleArray([...Array(TOTAL_QUESTOES).keys()]);
+  const natSlots = slots.slice(0, TOTAL_POR_BLOCO).sort((a, b) => a - b);
+  const adpSlots = slots.slice(TOTAL_POR_BLOCO).sort((a, b) => a - b);
+  const merged = new Array(TOTAL_QUESTOES);
+  natural.forEach((q, i) => { merged[natSlots[i]] = q; });
+  adaptado.forEach((q, i) => { merged[adpSlots[i]] = q; });
+  return merged;
+}
+
+function shufflePerguntas() {
+  state.shuffled = perguntasEmbaralhadas();
+}
+
+function iniciar() {
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  state.passo = 0;
+  state.likert = {};
+  state.pausaVista = false;
+  shufflePerguntas();
+  atualizarPausaCopy();
+  mostrarPergunta();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function atualizarPausaCopy() {
+  const el = document.getElementById('pausaCopy');
+  if (el) {
+    el.textContent = `Você completou ${TOTAL_POR_BLOCO} de ${TOTAL_QUESTOES} afirmações. Faça uma pausa breve se precisar — suas respostas anteriores estão salvas.`;
+  }
+}
+
+function mostrarPergunta() {
+  const idx = state.passo;
+  if (idx >= TOTAL_QUESTOES) {
+    mostrarFormNome();
+    return;
+  }
+
+  const q = state.shuffled[idx];
+  document.getElementById('progressText').textContent = `${idx + 1} de ${TOTAL_QUESTOES}`;
+  document.getElementById('progressBar').style.width = `${((idx + 1) / TOTAL_QUESTOES) * 100}%`;
+
+  const container = document.getElementById('quizContainer');
+  const selected = state.likert[q.id];
+
+  const likertHtml = LIKERT_LABELS.map(opt => {
+    const isSel = selected === opt.val;
+    return `<button role="radio" aria-checked="${isSel}" data-val="${opt.val}"
+      class="likert-btn flex-1 py-3 px-1 rounded-xl border-2 transition-all text-center
+      ${isSel ? 'border-[#1a1a2e] bg-[#1a1a2e] text-white' : 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800'}">
+      <span class="font-bold text-lg">${opt.short}</span><br>
+      <span class="text-xs opacity-80">${opt.label}</span>
+    </button>`;
+  }).join('');
+
+  container.innerHTML = `
+    <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-sm p-5 sm:p-8 fade-in card">
+      <p class="text-base sm:text-lg font-semibold mb-6 leading-relaxed">${q.texto}</p>
+      <p class="text-sm text-gray-500 mb-4">Indique o quanto esta afirmação descreve você.</p>
+      <div class="likert-scale flex justify-between gap-1" role="radiogroup" aria-label="Escala Likert">
+        ${likertHtml}
+      </div>
+    </div>
+    <div class="flex justify-center gap-3 mt-4">
+      ${idx > 0 ? '<button onclick="voltar()" class="bg-gray-200 text-gray-700 px-6 py-2.5 rounded-full font-semibold">Voltar</button>' : ''}
+      <button onclick="avancar()" class="bg-[#1a1a2e] text-white px-8 py-2.5 rounded-full font-semibold shadow">
+        ${idx < TOTAL_QUESTOES - 1 ? 'Próxima →' : 'Concluir →'}
+      </button>
+    </div>`;
+
+  container.querySelectorAll('.likert-btn').forEach(btn => {
+    btn.onclick = function() {
+      state.likert[q.id] = parseInt(this.dataset.val, 10);
+      mostrarPergunta();
+    };
+  });
+}
+
+function mostrarPausaBloco() {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('pausaBloco').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function continuarAposPausa() {
+  state.pausaVista = true;
+  document.getElementById('pausaBloco').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  mostrarPergunta();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function voltar() {
+  if (state.passo > 0) {
+    if (state.passo === PAUSA_EM && state.pausaVista) {
+      state.pausaVista = false;
+      document.getElementById('pausaBloco').style.display = 'none';
+      document.getElementById('quiz').style.display = 'block';
+    }
+    state.passo--;
+    mostrarPergunta();
+  }
+}
+
+function avancar() {
+  const q = state.shuffled[state.passo];
+  const v = validarRespostaLikert(q.id);
+  if (!v.ok) { alert(v.msg); return; }
+  state.passo++;
+  if (state.passo === PAUSA_EM && !state.pausaVista) {
+    mostrarPausaBloco();
+    return;
+  }
+  mostrarPergunta();
+}
+
+function mostrarFormNome() {
+  document.getElementById('progressBar').style.width = '100%';
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('nameForm').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function gerarRelatorio() {
+  const nome = document.getElementById('userName').value.trim();
+  if (!nome) {
+    document.getElementById('nameError').classList.remove('hidden');
+    return;
+  }
+  document.getElementById('nameError').classList.add('hidden');
+  document.getElementById('nameForm').style.display = 'none';
+  calcularERenderizar(nome);
+}
+
+function refazer() {
+  document.getElementById('resultado').style.display = 'none';
+  document.getElementById('home').style.display = 'block';
+  ['_chartRadar', '_chartBars'].forEach(k => {
+    if (window[k]) { window[k].destroy(); window[k] = null; }
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
