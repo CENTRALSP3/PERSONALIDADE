@@ -1,7 +1,7 @@
 // ===== CONSTANTES OCEAN — TESTEPERSONALIDADE v1.0.0 =====
 
 const INSTRUMENT_VERSION = '1.0.0';
-const API_BASE = 'https://personalidade-96h5h7dd4-price3.vercel.app';  // Latest Vercel API (personalidade-api)
+const API_BASE = 'https://personalidade-api.vercel.app';  // Latest Vercel API (personalidade-api)
 const HUB_URL = 'https://centralsp3.github.io/central/';
 const URL_DISC = 'https://centralsp3.github.io/TESTEDISC/';
 const URL_PERSONALIDADE = 'https://centralsp3.github.io/PERSONALIDADE/';
@@ -208,3 +208,4 @@ Object.keys(FACETS).forEach(domain => {
     FACET_TO_DOMAIN[f.code] = domain;
   });
 });
+
