@@ -4,5 +4,5 @@ const PERGUNTAS_ADAPTADO = [{id:'a01',texto:"No trabalho, busco abordagens criat
 const PERGUNTAS_ALL = [...PERGUNTAS_NATURAL, ...PERGUNTAS_ADAPTADO];
 const ITEM_MAP = Object.fromEntries(PERGUNTAS_ALL.map(q => [q.id, {
   id: q.id, fator: q.fator, bloco: q.bloco, reversed: q.reversed, ipip_source: q.ipip_source,
-}));
+} ]));
 const TOTAL_POR_BLOCO = 30;
